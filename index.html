@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa Market B2B – Proveedor para Restaurantes de Sushi en Zamora</title>
+<meta name="description" content="Casa Market: proveedor B2B de bebidas japonesas, Soju Jinro, Sake y insumos asiáticos para restaurantes de sushi en Zamora, Michoacán.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f0f0f0;
+    --gold: #b8962e;
+    --green: #25D366;
+    --card: #141414;
+    --border: rgba(255,255,255,0.08);
+  }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.8rem, 10vw, 5.5rem);
+    letter-spacing: 0.06em;
+    line-height: 1;
+    color: var(--white);
+  }
+
+  .logo span { color: var(--gold); }
+
+  .tagline {
+    margin-top: 12px;
+    font-size: clamp(0.8rem, 3vw, 1rem);
+    font-weight: 300;
+    color: rgba(240,240,240,0.45);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .divider {
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+    margin: 32px auto;
+    opacity: 0.5;
+  }
+
+  .intro {
+    max-width: 480px;
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(240,240,240,0.6);
+    line-height: 1.7;
+    margin-bottom: 48px;
+  }
+
+  .intro strong { color: var(--white); font-weight: 500; }
+
+  /* CATALOG CARDS */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+    width: 100%;
+    max-width: 680px;
+    margin-bottom: 24px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 24px;
+    text-decoration: none;
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    transition: border-color 0.25s, transform 0.25s;
+    text-align: left;
+  }
+
+  .card:hover {
+    border-color: var(--gold);
+    transform: translateY(-3px);
+  }
+
+  .card-icon {
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  .card-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.05em;
+    line-height: 1.1;
+  }
+
+  .card-desc {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: rgba(240,240,240,0.45);
+    line-height: 1.6;
+  }
+
+  .card-arrow {
+    margin-top: auto;
+    font-size: 0.8rem;
+    color: rgba(240,240,240,0.3);
+    letter-spacing: 0.1em;
+  }
+
+  /* WhatsApp CTA */
+  .wa-cta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--green);
+    color: #fff;
+    text-decoration: none;
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 12px 0;
+    transition: transform 0.2s, opacity 0.2s;
+    width: 100%;
+    max-width: 420px;
+    justify-content: center;
+  }
+
+  .wa-cta:hover { transform: scale(1.03); opacity: 0.95; }
+
+  .wa-cta svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+  .products-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 32px 0 20px;
+    max-width: 520px;
+  }
+
+  .pill {
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    color: rgba(240,240,240,0.5);
+  }
+
+  .pill.gold { border-color: rgba(184,150,46,0.4); color: var(--gold); }
+
+  footer {
+    margin-top: 48px;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: rgba(240,240,240,0.15);
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <div class="logo">Casa <span>Market</span></div>
+  <div class="tagline">Proveedor B2B · Zamora, Michoacán</div>
+
+  <div class="divider"></div>
+
+  <p class="intro">
+    Somos el proveedor local de <strong>bebidas japonesas, Soju Jinro, Sake y insumos asiáticos</strong> para restaurantes de sushi en Zamora. Precios directos, entrega rápida, sin intermediarios.
+  </p>
+
+  <div class="cards">
+    <a class="card" href="catalogo_b2b_japones_elegante.html">
+      <div class="card-icon">🏯</div>
+      <div class="card-label">Catálogo · Versión elegante</div>
+      <div class="card-title">Estilo japonés premium</div>
+      <div class="card-desc">Diseño refinado ideal para presentaciones y reuniones con clientes.</div>
+      <div class="card-arrow">Ver catálogo →</div>
+    </a>
+    <a class="card" href="catalogo_b2b_moderno_tiktok.html">
+      <div class="card-icon">🔥</div>
+      <div class="card-label">Catálogo · Versión moderna</div>
+      <div class="card-title">Estilo urbano dinámico</div>
+      <div class="card-desc">Diseño bold con datos reales de ventas. Perfecto para Instagram y WhatsApp.</div>
+      <div class="card-arrow">Ver catálogo →</div>
+    </a>
+  </div>
+
+  <a class="wa-cta" href="https://wa.me/52TUNUMERO?text=Hola%2C+vi+el+cat%C3%A1logo+B2B+de+Casa+Market+y+me+interesa+hacer+un+pedido+para+mi+restaurante.+%C2%BFPodr%C3%ADan+enviarme+sus+precios+especiales%3F" target="_blank">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.862L.054 23.45a.5.5 0 00.607.606l5.647-1.464A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.667-.502-5.2-1.378l-.373-.216-3.863 1.002 1.024-3.772-.234-.384A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Hacer pedido por WhatsApp
+  </a>
+
+  <div class="products-preview">
+    <span class="pill gold">🍺 Sapporo Japonesa</span>
+    <span class="pill gold">🍸 Jinro Soju 6 sabores</span>
+    <span class="pill gold">🍶 Sake Premium</span>
+    <span class="pill">🌶️ Sriracha</span>
+    <span class="pill">🐍 Salsa Anguila</span>
+    <span class="pill">🎌 Ramune</span>
+    <span class="pill">🥛 Calpico</span>
+    <span class="pill">🔥 Samyang</span>
+  </div>
+
+  <footer>casa market · zamora, michoacán · productos asiáticos premium</footer>
+
+</body>
+</html>

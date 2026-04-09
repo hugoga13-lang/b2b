@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa Market B2B – Versión Fuego 🔥</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f0f0f0;
+    --neon: #00ff88;
+    --hot: #ff2d55;
+    --gold: #ffd60a;
+    --blue: #0af;
+    --dark: #111;
+    --card-bg: #161616;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* GLITCH HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 40px 24px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 50%, rgba(0,255,136,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 30% at 80% 30%, rgba(255,45,85,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 60% 80%, rgba(0,170,255,0.06) 0%, transparent 70%);
+  }
+
+  .grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .badge-new {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--neon);
+    color: var(--black);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 8px 16px;
+    letter-spacing: 0.15em;
+    margin-bottom: 24px;
+    animation: pulse-badge 2s infinite;
+    position: relative;
+    z-index: 2;
+  }
+
+  @keyframes pulse-badge {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0,255,136,0.4); }
+    50% { box-shadow: 0 0 0 12px rgba(0,255,136,0); }
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 14vw, 11rem);
+    line-height: 0.85;
+    color: var(--white);
+    position: relative;
+    z-index: 2;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-title .highlight { color: var(--neon); }
+  .hero-title .highlight-hot { color: var(--hot); }
+  .hero-title .highlight-gold { color: var(--gold); }
+
+  .hero-sub {
+    margin-top: 24px;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: rgba(240,240,240,0.55);
+    max-width: 560px;
+    line-height: 1.6;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-sub strong { color: var(--white); font-weight: 500; }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 28px;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .tag {
+    padding: 6px 14px;
+    border: 1px solid rgba(255,255,255,0.12);
+    font-size: 0.75rem;
+    font-family: 'Space Mono', monospace;
+    color: rgba(240,240,240,0.6);
+    letter-spacing: 0.05em;
+  }
+
+  .tag.hot { border-color: var(--hot); color: var(--hot); }
+  .tag.neon { border-color: var(--neon); color: var(--neon); }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: rgba(255,255,255,0.2);
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* TICKER */
+  .ticker {
+    background: var(--neon);
+    color: var(--black);
+    padding: 12px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .ticker-inner {
+    display: inline-flex;
+    gap: 0;
+    animation: ticker 20s linear infinite;
+  }
+
+  .ticker-item {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    padding: 0 40px;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* STATS */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .stat-item {
+    background: var(--dark);
+    padding: 32px 24px;
+    text-align: center;
+    transition: background 0.3s;
+  }
+
+  .stat-item:hover { background: #1a1a1a; }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    line-height: 1;
+    color: var(--neon);
+  }
+
+  .stat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: rgba(240,240,240,0.35);
+    margin-top: 8px;
+  }
+
+  /* SECTION */
+  .section {
+    padding: 80px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    color: var(--neon);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 0.9;
+    margin-bottom: 48px;
+  }
+
+  /* PRODUCT BENTO GRID */
+  .bento {
+    display: grid;
+    gap: 8px;
+  }
+
+  .bento-4 { grid-template-columns: repeat(4, 1fr); }
+  .bento-3 { grid-template-columns: repeat(3, 1fr); }
+  .bento-2-1 { grid-template-columns: 2fr 1fr; }
+
+  .card {
+    background: var(--card-bg);
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, background 0.3s;
+    cursor: default;
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    background: #1c1c1c;
+    border-color: rgba(255,255,255,0.08);
+  }
+
+  .card.featured {
+    background: linear-gradient(135deg, #1a1a1a 0%, #0f1a12 100%);
+    border-color: rgba(0,255,136,0.2);
+  }
+
+  .card.hot-card {
+    background: linear-gradient(135deg, #1a0a0f 0%, #1a0000 100%);
+    border-color: rgba(255,45,85,0.25);
+  }
+
+  .card.gold-card {
+    background: linear-gradient(135deg, #1a1500 0%, #0f0d00 100%);
+    border-color: rgba(255,214,10,0.25);
+  }
+
+  .card-emoji {
+    font-size: 2.2rem;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .card-category {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: rgba(240,240,240,0.35);
+    margin-bottom: 8px;
+  }
+
+  .card-name {
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--white);
+  }
+
+  .card-detail {
+    font-size: 0.8rem;
+    color: rgba(240,240,240,0.4);
+    margin-top: 6px;
+  }
+
+  .card-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .card-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .card-price .pesos { font-size: 1.1rem; }
+
+  .card-price.neon { color: var(--neon); }
+  .card-price.hot { color: var(--hot); }
+  .card-price.gold { color: var(--gold); }
+
+  .pill {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    font-weight: 700;
+  }
+
+  .pill-neon { background: rgba(0,255,136,0.12); color: var(--neon); border: 1px solid rgba(0,255,136,0.3); }
+  .pill-hot { background: rgba(255,45,85,0.12); color: var(--hot); border: 1px solid rgba(255,45,85,0.3); }
+  .pill-gold { background: rgba(255,214,10,0.12); color: var(--gold); border: 1px solid rgba(255,214,10,0.3); }
+  .pill-white { background: rgba(255,255,255,0.06); color: rgba(240,240,240,0.5); border: 1px solid rgba(255,255,255,0.1); }
+
+  /* SOJU FEATURE */
+  .soju-feature {
+    background: linear-gradient(135deg, #0f1a0f 0%, #050d0d 50%, #1a050a 100%);
+    border: 1px solid rgba(0,255,136,0.1);
+    padding: 60px 40px;
+    margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .soju-feature::before {
+    content: 'SOJU';
+    position: absolute;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 25vw;
+    color: rgba(0,255,136,0.02);
+    right: -2vw;
+    top: 50%;
+    transform: translateY(-50%);
+    line-height: 1;
+  }
+
+  .soju-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .soju-intro h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    line-height: 0.9;
+    color: var(--white);
+  }
+
+  .soju-intro h3 .accent { color: var(--neon); }
+
+  .soju-intro p {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: rgba(240,240,240,0.5);
+    line-height: 1.7;
+  }
+
+  .soju-intro .big-stat {
+    margin-top: 28px;
+    display: flex;
+    gap: 32px;
+  }
+
+  .soju-intro .big-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--neon);
+    line-height: 1;
+  }
+
+  .soju-intro .big-desc {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(240,240,240,0.35);
+    margin-top: 4px;
+  }
+
+  .soju-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .soju-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 16px 20px;
+    transition: all 0.3s;
+  }
+
+  .soju-row:hover {
+    background: rgba(0,255,136,0.05);
+    border-color: rgba(0,255,136,0.2);
+  }
+
+  .soju-row .rank {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(240,240,240,0.2);
+    width: 28px;
+  }
+
+  .soju-row .name { font-size: 0.9rem; font-weight: 400; flex: 1; }
+
+  .soju-row .sold {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(0,255,136,0.6);
+    text-align: right;
+    margin-right: 16px;
+  }
+
+  .soju-row .price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    color: var(--neon);
+  }
+
+  /* SAKE SECTION */
+  .sake-section {
+    background: var(--dark);
+    padding: 60px 40px;
+    margin: 40px 0;
+    border: 1px solid rgba(255,214,10,0.08);
+  }
+
+  .sake-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 40px;
+  }
+
+  /* STRATEGY SECTION */
+  .strategy-section {
+    padding: 80px 40px;
+    background: #0d0d0d;
+  }
+
+  .strategy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 48px;
+  }
+
+  .strategy-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 32px 28px;
+  }
+
+  .step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5rem;
+    line-height: 1;
+    color: rgba(255,255,255,0.05);
+    margin-bottom: -20px;
+  }
+
+  .step-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .step-text {
+    font-size: 0.85rem;
+    color: rgba(240,240,240,0.45);
+    line-height: 1.7;
+  }
+
+  /* CTA */
+  .cta-section {
+    padding: 100px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,255,136,0.06) 0%, transparent 70%);
+  }
+
+  .cta-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 8vw, 8rem);
+    line-height: 0.9;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cta-title .line2 { color: var(--neon); }
+
+  .cta-sub {
+    margin-top: 24px;
+    font-size: 1rem;
+    color: rgba(240,240,240,0.45);
+    position: relative;
+    z-index: 2;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+  }
+
+  .btn-neon {
+    padding: 16px 40px;
+    background: var(--neon);
+    color: var(--black);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: transform 0.2s;
+  }
+
+  .btn-neon:hover { transform: scale(1.03); }
+
+  .btn-ghost {
+    padding: 16px 40px;
+    background: transparent;
+    color: var(--white);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    border: 1px solid rgba(255,255,255,0.15);
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #050505;
+    padding: 32px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .footer-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.1em;
+  }
+
+  .footer-brand span { color: var(--neon); }
+
+  .footer-info {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: rgba(240,240,240,0.2);
+    text-align: right;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .bento-4, .bento-3 { grid-template-columns: repeat(2, 1fr); }
+    .soju-grid { grid-template-columns: 1fr; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .strategy-grid, .sake-cards { grid-template-columns: 1fr; }
+    .section { padding: 60px 20px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; }
+    .footer-info { text-align: center; }
+  }
+
+  @media (max-width: 600px) {
+    .bento-4, .bento-3 { grid-template-columns: 1fr; }
+  }
+
+  /* ENTRY ANIMATIONS */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="grid-lines"></div>
+  <div class="badge-new">⚡ CATÁLOGO B2B 2026 · ZAMORA, MICH.</div>
+  <h1 class="hero-title">
+    <div class="highlight">CASA</div>
+    <div>MARKET</div>
+    <div class="highlight-hot">B2B</div>
+  </h1>
+  <p class="hero-sub">
+    Tu proveedor de <strong>bebidas japonesas + insumos asiáticos</strong> en Zamora. Inventario real, precios sin intermediarios.
+  </p>
+  <div class="hero-tags">
+    <span class="tag hot">🍺 CERVEZA JAPONESA</span>
+    <span class="tag neon">🍶 SAKE & SOJU</span>
+    <span class="tag">🥤 BEBIDAS IMPORT</span>
+    <span class="tag">🫙 INSUMOS SUSHI</span>
+    <span class="tag hot">📍 ZAMORA, MICH.</span>
+  </div>
+  <div class="scroll-hint">SCROLL DOWN ↓</div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">🍺 SAPPORO · ASAHI · JINRO SOJU · SAKE PREMIUM · SRIRACHA · RAMUNE · MISO · STELLA ARTOIS · BLUE MOON · SAMYANG</span>
+    <span class="ticker-item">🍺 SAPPORO · ASAHI · JINRO SOJU · SAKE PREMIUM · SRIRACHA · RAMUNE · MISO · STELLA ARTOIS · BLUE MOON · SAMYANG</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">251</div>
+    <div class="stat-label">SAPPOROS<br>VENDIDAS</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">83</div>
+    <div class="stat-label">JINRO SOJU<br>GREEN GRAPE</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">81</div>
+    <div class="stat-label">SRIRACHAS<br>VENDIDAS</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">+40</div>
+    <div class="stat-label">SKUS<br>EN STOCK HOY</div>
+  </div>
+</div>
+
+<!-- CERVEZA JAPONESA -->
+<div class="section">
+  <div class="section-label">01 / CERVEZA JAPONESA</div>
+  <h2 class="section-title fade-in">CERVEZA<br><span style="color:var(--neon)">JAPONESA</span><br>& PREMIUM</h2>
+
+  <div class="bento bento-4">
+    <div class="card featured fade-in">
+      <span class="card-emoji">🍺</span>
+      <div class="card-category">JAPONESA · TOP SELLER</div>
+      <div class="card-name">Sapporo Premium Beer</div>
+      <div class="card-detail">355 ML · Lata · 251 vendidas historico</div>
+      <div class="card-bottom">
+        <div class="card-price neon"><span class="pesos">$</span>99</div>
+        <span class="pill pill-neon">🥇 #1 JAPONESA</span>
+      </div>
+    </div>
+    <div class="card featured fade-in">
+      <span class="card-emoji">🍺</span>
+      <div class="card-category">JAPONESA · 473ML</div>
+      <div class="card-name">Sapporo 473 ML</div>
+      <div class="card-detail">473 ML · Lata grande · 33 pzas en stock</div>
+      <div class="card-bottom">
+        <div class="card-price neon"><span class="pesos">$</span>89</div>
+        <span class="pill pill-neon">EN STOCK</span>
+      </div>
+    </div>
+    <div class="card fade-in">
+      <span class="card-emoji">🇯🇵</span>
+      <div class="card-category">JAPONESA · ASAHI</div>
+      <div class="card-name">Asahi Super Dry</div>
+      <div class="card-detail">330 ML · Lata · 7 pzas</div>
+      <div class="card-bottom">
+        <div class="card-price"><span class="pesos">$</span>75</div>
+        <span class="pill pill-white">AUTÉNTICA</span>
+      </div>
+    </div>
+    <div class="card fade-in">
+      <span class="card-emoji">🌙</span>
+      <div class="card-category">PREMIUM · BLUE MOON</div>
+      <div class="card-name">Blue Moon Belgian White</div>
+      <div class="card-detail">355 ML · Trigo belga</div>
+      <div class="card-bottom">
+        <div class="card-price"><span class="pesos">$</span>85</div>
+        <span class="pill pill-white">CRAFT</span>
+      </div>
+    </div>
+    <div class="card fade-in">
+      <span class="card-emoji">⭐</span>
+      <div class="card-category">EUROPEA · STELLA</div>
+      <div class="card-name">Stella Artois</div>
+      <div class="card-detail">473 ML · 33 pzas en stock</div>
+      <div class="card-bottom">
+        <div class="card-price"><span class="pesos">$</span>55</div>
+        <span class="pill pill-neon">GRAN STOCK</span>
+      </div>
+    </div>
+    <div class="card fade-in">
+      <span class="card-emoji">🍺</span>
+      <div class="card-category">RESERVE · SAPPORO</div>
+      <div class="card-name">Sapporo Reserve Beer</div>
+      <div class="card-detail">355 ML · Botella · 16 pzas</div>
+      <div class="card-bottom">
+        <div class="card-price"><span class="pesos">$</span>99</div>
+        <span class="pill pill-white">PREMIUM</span>
+      </div>
+    </div>
+    <div class="card fade-in">
+      <span class="card-emoji">🎸</span>
+      <div class="card-category">ARTESANAL · COLIMA</div>
+      <div class="card-name">Colimita Ticus Porter</div>
+      <div class="card-detail">355 ML · Porter oscura</div>
+      <div class="card-bottom">
+        <div class="card-price"><span class="pesos">$</span>78</div>
+        <span class="pill pill-white">CRAFT MX</span>
+      </div>
+    </div>
+    <div class="card gold-card fade-in">
+      <span class="card-emoji">🏆</span>
+      <div class="card-category">EXCLUSIVA · ALEMANA</div>
+      <div class="card-name">Paulaner Oktoberfest</div>
+      <div class="card-detail">500 ML · Edición especial</div>
+      <div class="card-bottom">
+        <div class="card-price gold"><span class="pesos">$</span>145</div>
+        <span class="pill pill-gold">EXCLUSIVA</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SOJU FEATURE -->
+<div class="soju-feature">
+  <div class="soju-grid">
+    <div class="soju-intro">
+      <h3>JINRO<br><span class="accent">SOJU</span><br>EL SHOT<br>QUE VENDE</h3>
+      <p>El licor más vendido del mundo. Perfecto para la carta de tu sushi bar. Tus clientes lo piden, nosotros lo tenemos.</p>
+      <div class="big-stat">
+        <div>
+          <div class="big-num">83</div>
+          <div class="big-desc">GREEN GRAPE<br>VENDIDOS</div>
+        </div>
+        <div>
+          <div class="big-num">6</div>
+          <div class="big-desc">SABORES<br>DISTINTOS</div>
+        </div>
+      </div>
+    </div>
+    <div class="soju-list">
+      <div class="soju-row">
+        <span class="rank">#1</span>
+        <span class="name">Jinro Soju Green Grape</span>
+        <span class="sold">83 vendidos</span>
+        <span class="price">$110</span>
+      </div>
+      <div class="soju-row">
+        <span class="rank">#2</span>
+        <span class="name">Jinro Soju Strawberry</span>
+        <span class="sold">60 vendidos</span>
+        <span class="price">$110</span>
+      </div>
+      <div class="soju-row">
+        <span class="rank">#3</span>
+        <span class="name">Jinro Soju Peach</span>
+        <span class="sold">57 vendidos</span>
+        <span class="price">$99</span>
+      </div>
+      <div class="soju-row">
+        <span class="rank">#4</span>
+        <span class="name">Jinro Soju Plum</span>
+        <span class="sold">61 vendidos</span>
+        <span class="price">$99</span>
+      </div>
+      <div class="soju-row">
+        <span class="rank">#5</span>
+        <span class="name">Jinro Soju Original</span>
+        <span class="sold">31 vendidos</span>
+        <span class="price">$110</span>
+      </div>
+      <div class="soju-row">
+        <span class="rank">#6</span>
+        <span class="name">Jinro Soju Grapefruit</span>
+        <span class="sold">24 vendidos</span>
+        <span class="price">$110</span>
+      </div>
+      <div style="height:12px;"></div>
+      <div style="font-family:'Space Mono',monospace;font-size:0.6rem;color:rgba(240,240,240,0.25);letter-spacing:0.15em;padding:0 4px;">
+        + LOTTE SOON SOJU EN 4 SABORES · $95–$110 · TAMBIÉN DISPONIBLE
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SAKE -->
+<div class="sake-section">
+  <div style="max-width:1400px;margin:0 auto;">
+    <div class="section-label">03 / SAKE PREMIUM</div>
+    <h2 class="section-title fade-in" style="color:var(--gold)">SAKE<br>JAPONÉS<br>AUTÉNTICO</h2>
+    <div class="sake-cards">
+      <div class="card gold-card fade-in">
+        <span class="card-emoji">🍶</span>
+        <div class="card-category">SAKE · JUNMAISHU</div>
+        <div class="card-name">Takashimizu Junmaishu 300ml</div>
+        <div class="card-detail">300 ML · Sake tradicional · 2 pzas</div>
+        <div class="card-bottom">
+          <div class="card-price gold"><span class="pesos">$</span>299</div>
+          <span class="pill pill-gold">EN STOCK</span>
+        </div>
+      </div>
+      <div class="card gold-card fade-in">
+        <span class="card-emoji">🍶</span>
+        <div class="card-category">SAKE · KAGATOBI</div>
+        <div class="card-name">Kagatobi Sake 720ml</div>
+        <div class="card-detail">720 ML · Premium · 3 vendidos</div>
+        <div class="card-bottom">
+          <div class="card-price gold"><span class="pesos">$</span>827</div>
+          <span class="pill pill-gold">PREMIUM</span>
+        </div>
+      </div>
+      <div class="card gold-card fade-in">
+        <span class="card-emoji">🍶</span>
+        <div class="card-category">SAKE · GRAN FORMATO</div>
+        <div class="card-name">Kagatobi Sake 1800ml</div>
+        <div class="card-detail">1.8 L · Para bares · Alta rotación</div>
+        <div class="card-bottom">
+          <div class="card-price gold"><span class="pesos">$</span>1,100</div>
+          <span class="pill pill-gold">BAR SIZE</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INSUMOS & BEBIDAS -->
+<div class="section">
+  <div class="section-label">04 / INSUMOS + BEBIDAS</div>
+  <h2 class="section-title fade-in">INSUMOS<br><span style="color:var(--hot)">SUSHI</span><br>& BEBIDAS</h2>
+
+  <div class="bento bento-3">
+    <div class="card hot-card fade-in">
+      <span class="card-emoji">🌶️</span>
+      <div class="card-category">SALSA · TOP VENTAS</div>
+      <div class="card-name">Sriracha Hot Chili 481g</div>
+      <div class="card-detail">Huy Fong · 81 vendidas histórico</div>
+      <div class="card-bottom">
+        <div class="card-price hot"><span class="pesos">$</span>150</div>
+        <span class="pill pill-hot">81 VENDIDAS</span>
+      </div>
+    </div>
+    <div class="card hot-card fade-in">
+      <span class="card-emoji">🐍</span>
+      <div class="card-category">INSUMO · SUSHI</div>
+      <div class="card-name">Salsa de Anguila 250ml</div>
+      <div class="card-detail">Para rolls · 19 vendidas</div>
+      <div class="card-bottom">
+        <div class="card-price hot"><span class="pesos">$</span>88</div>
+        <span class="pill pill-hot">SUSHI MUST</span>
+      </div>
+    </div>
+    <div class="card fade-in">
+      <span class="card-emoji">🔥</span>
+      <div class="card-category">COREANA · 2X SPICY</div>
+      <div class="card-name">Samyang Hot Sauce 2X</div>
+      <div class="card-detail">200g · Buldak doble picante</div>
+      <div class="card-bottom">
+        <div class="card-price"><span class="pesos">$</span>180</div>
+        <span class="pill pill-hot">VIRAL</span>
+      </div>
+    </div>
+    <div class="card fade-in">
+      <span class="card-emoji">🍱</span>
+      <div class="card-category">INSUMO · JAPONÉS</div>
+      <div class="card-name">Marukome Miso Rojo 1KG</div>
+      <div class="card-detail">Pasta miso para sopas · Auténtico</div>
+      <div class="card-bottom">
+        <div class="card-price"><span class="pesos">$</span>180</div>
+        <span class="pill pill-white">INSUMO</span>
+      </div>
+    </div>
+    <div class="card featured fade-in">
+      <span class="card-emoji">🎌</span>
+      <div class="card-category">BEBIDA · JAPONESA</div>
+      <div class="card-name">Ramune Yuzu / Piña / Original</div>
+      <div class="card-detail">Soda japonesa · Botella canica · Instagrameable</div>
+      <div class="card-bottom">
+        <div class="card-price neon"><span class="pesos">$</span>65</div>
+        <span class="pill pill-neon">📸 VIRAL</span>
+      </div>
+    </div>
+    <div class="card fade-in">
+      <span class="card-emoji">🥛</span>
+      <div class="card-category">BEBIDA · JAPONESA</div>
+      <div class="card-name">Calpico Milk 1L</div>
+      <div class="card-detail">Bebida láctea japonesa</div>
+      <div class="card-bottom">
+        <div class="card-price"><span class="pesos">$</span>155</div>
+        <span class="pill pill-white">JAPÓN</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2 class="cta-title">
+    <div>PRIMERO EN</div>
+    <div class="line2">ZAMORA</div>
+    <div>CON ESTO.</div>
+  </h2>
+  <p class="cta-sub">Sin intermediarios. Inventario real. Precios B2B directo.</p>
+  <div class="cta-buttons">
+    <button class="btn-neon">📱 Hacer pedido por WhatsApp</button>
+    <button class="btn-ghost">Ver catálogo completo →</button>
+  </div>
+  <div style="margin-top:40px; font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.2em; color:rgba(240,240,240,0.2);">
+    CASA MARKET · ZAMORA, MICHOACÁN · PROVEEDOR B2B ASIÁTICO
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">CASA <span>MARKET</span></div>
+  <div class="footer-info">
+    CATÁLOGO B2B 2026<br>
+    RESTAURANTES DE SUSHI · ZAMORA, MICH.
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+<!-- WhatsApp Floating Button -->
+<style>
+.wa-float{position:fixed;bottom:28px;right:28px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
+.wa-btn{display:flex;align-items:center;gap:10px;background:#25D366;color:#fff;text-decoration:none;padding:14px 22px;border-radius:50px;font-family:sans-serif;font-size:15px;font-weight:600;box-shadow:0 4px 20px rgba(37,211,102,0.4);transition:transform 0.2s;}
+.wa-btn:hover{transform:scale(1.05);}
+.wa-btn svg{width:22px;height:22px;flex-shrink:0;}
+.wa-label{background:rgba(0,0,0,0.75);color:#fff;font-family:sans-serif;font-size:12px;padding:6px 12px;border-radius:8px;white-space:nowrap;}
+</style>
+<div class="wa-float">
+  <div class="wa-label">Pedido rapido por WhatsApp</div>
+  <a class="wa-btn" href="https://wa.me/52TUNUMERO?text=Hola%2C+vi+el+catalogo+B2B+de+Casa+Market+y+me+interesa+hacer+un+pedido+para+mi+restaurante." target="_blank">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.862L.054 23.45a.5.5 0 00.607.606l5.647-1.464A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.667-.502-5.2-1.378l-.373-.216-3.863 1.002 1.024-3.772-.234-.384A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Hacer pedido
+  </a>
+</div>
+</body>
+</html>
