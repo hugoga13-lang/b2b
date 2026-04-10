@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa Market B2B – Catálogo Cervezas</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --dark: #111;
+    --card: #161616;
+    --card2: #1a1a1a;
+    --white: #f0f0f0;
+    --muted: rgba(240,240,240,0.45);
+    --border: rgba(255,255,255,0.07);
+    --neon: #00ff88;
+    --gold: #ffd60a;
+    --hot: #ff2d55;
+    --amber: #ff9500;
+    --blue: #0af;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; }
+
+  /* TOP NAV */
+  .topbar {
+    background: var(--dark);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 16px; }
+  .back-link {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .back-link:hover { color: var(--white); }
+  .topbar-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.08em;
+    color: var(--white);
+  }
+  .topbar-brand span { color: var(--gold); }
+  .topbar-cat {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    background: rgba(255,149,0,0.1);
+    border: 1px solid rgba(255,149,0,0.25);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 70px 40px 50px;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: end;
+  }
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--amber);
+    margin-bottom: 12px;
+  }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 10vw, 8rem);
+    line-height: 0.88;
+    letter-spacing: 0.02em;
+  }
+  .hero-title .line2 { color: var(--amber); }
+  .hero-desc {
+    margin-top: 20px;
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 520px;
+  }
+  .hero-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: right;
+  }
+  .hero-stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--amber);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* PRICE BANNER */
+  .price-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    background: rgba(255,214,10,0.06);
+    border: 1px solid rgba(255,214,10,0.2);
+    border-radius: 10px;
+    padding: 12px 20px;
+    margin-bottom: 28px;
+  }
+  .price-banner-left {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: rgba(240,240,240,0.65);
+    letter-spacing: 0.04em;
+  }
+  .price-banner-left strong { color: var(--white); }
+  .price-banner-left .disc { color: var(--gold); }
+  .price-banner a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--gold);
+    text-decoration: none;
+    border: 1px solid rgba(255,214,10,0.3);
+    padding: 6px 14px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .price-banner a:hover { background: rgba(255,214,10,0.08); }
+
+  /* FILTER TABS */
+  .filter-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .ftab {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    padding: 7px 14px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--muted);
+    cursor: pointer;
+    background: transparent;
+    transition: all 0.2s;
+  }
+  .ftab:hover, .ftab.active {
+    border-color: var(--amber);
+    color: var(--amber);
+    background: rgba(255,149,0,0.07);
+  }
+
+  /* SECTION */
+  .section {
+    padding: 0 40px 70px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .sec-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sec-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.05em;
+    line-height: 1;
+  }
+  .sec-count {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    margin-left: auto;
+  }
+  .sec-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+  .badge-amber { background: rgba(255,149,0,0.12); color: var(--amber); border: 1px solid rgba(255,149,0,0.3); }
+  .badge-neon  { background: rgba(0,255,136,0.08); color: var(--neon);  border: 1px solid rgba(0,255,136,0.25); }
+  .badge-blue  { background: rgba(0,170,255,0.08); color: var(--blue);  border: 1px solid rgba(0,170,255,0.25); }
+  .badge-hot   { background: rgba(255,45,85,0.08);  color: var(--hot);   border: 1px solid rgba(255,45,85,0.25); }
+  .badge-gray  { background: rgba(255,255,255,0.05);color: var(--muted); border: 1px solid var(--border); }
+
+  /* PRODUCT GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 6px;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+    transition: border-color 0.25s, transform 0.2s;
+  }
+  .card:hover { border-color: rgba(255,149,0,0.35); transform: translateY(-2px); }
+
+  .card-origin {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+  }
+  .card-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--white);
+  }
+  .card-detail {
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .card-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .card-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.9rem;
+    color: var(--white);
+    line-height: 1;
+  }
+  .card-price sup { font-size: 1rem; }
+  .card-price.amber { color: var(--amber); }
+  .card-price.neon  { color: var(--neon); }
+  .card-price.blue  { color: var(--blue); }
+
+  .pill {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
+    padding: 4px 9px;
+    border-radius: 5px;
+  }
+  .pill-stock { background: rgba(0,255,136,0.1); color: var(--neon); }
+  .pill-low   { background: rgba(255,149,0,0.1);  color: var(--amber); }
+  .pill-out   { background: rgba(255,255,255,0.05); color: rgba(240,240,240,0.3); }
+
+  /* DIVIDER between in-stock and out */
+  .divider-label {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 40px 0 24px;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+  }
+  .divider-label::before, .divider-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* WA FLOAT */
+  .wa-float { position: fixed; bottom: 24px; right: 24px; z-index: 999; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+  .wa-tip { background: rgba(0,0,0,0.8); color: #fff; font-family: 'Space Mono', monospace; font-size: 0.62rem; padding: 5px 10px; border-radius: 6px; white-space: nowrap; }
+  .wa-btn { display: flex; align-items: center; gap: 9px; background: #25D366; color: #fff; text-decoration: none; padding: 13px 20px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500; box-shadow: 0 4px 20px rgba(37,211,102,0.35); transition: transform 0.2s; }
+  .wa-btn:hover { transform: scale(1.04); }
+  .wa-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+  /* FOOTER */
+  footer {
+    background: #050505;
+    border-top: 1px solid var(--border);
+    padding: 28px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-brand { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.08em; }
+  .footer-brand span { color: var(--gold); }
+  .footer-info { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; color: rgba(240,240,240,0.18); text-align: right; }
+
+  @media (max-width: 700px) {
+    .topbar, .hero, .section { padding-left: 16px; padding-right: 16px; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-stats { flex-direction: row; text-align: left; }
+    .grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+    footer { flex-direction: column; align-items: flex-start; }
+    .footer-info { text-align: left; }
+  }
+
+  .fade-in { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a class="back-link" href="index.html">← Inicio</a>
+    <div class="topbar-brand">Casa <span>Market</span></div>
+  </div>
+  <span class="topbar-cat">🍺 CERVEZAS</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">CATÁLOGO B2B · CATEGORÍA 01</div>
+    <h1 class="hero-title">
+      <div>CATÁLOGO</div>
+      <div class="line2">CERVEZAS</div>
+    </h1>
+    <p class="hero-desc">Japonesas, alemanas, americanas, artesanales y más. Encuentra la presentación exacta que necesitas para tu negocio. Precios directos sin intermediarios, entrega en Zamora, Mich.</p>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="hero-stat-num">19</div>
+      <div class="hero-stat-label">EN STOCK HOY</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION: EN STOCK -->
+<div class="section">
+
+  <!-- FILTER TABS -->
+  <div class="filter-row">
+    <button class="ftab active" onclick="filterAll()">Todos</button>
+    <button class="ftab" onclick="filterGroup('japonesa')">🇯🇵 Japonesa</button>
+    <button class="ftab" onclick="filterGroup('americana')">🇺🇸 Americana</button>
+    <button class="ftab" onclick="filterGroup('alemana')">🇩🇪 Alemana</button>
+    <button class="ftab" onclick="filterGroup('artesanal')">🍻 Artesanal</button>
+    <button class="ftab" onclick="filterGroup('europea')">🌍 Europea</button>
+    <button class="ftab" onclick="filterGroup('kombucha')">🌿 Kombucha</button>
+  </div>
+
+  <!-- PRICE BANNER -->
+  <div class="price-banner">
+    <div class="price-banner-left">
+      <span style="font-size:16px;">🏷️</span>
+      Precio por <strong>&nbsp;1 pieza&nbsp;</strong> · Compra por caja: <strong class="disc">&nbsp;10% de descuento</strong>
+    </div>
+    <a href="https://wa.me/52TUNUMERO?text=Hola%2C+quiero+cotizar+un+pedido+por+caja+de+cervezas+de+Casa+Market." target="_blank">Cotizar por caja →</a>
+  </div>
+
+  <!-- IN STOCK -->
+  <div class="sec-header fade-in">
+    <span class="sec-title">Todas las cervezas</span>
+    <span class="sec-badge badge-amber">CATÁLOGO COMPLETO</span>
+    <span class="sec-count">133 productos</span>
+  </div>
+
+  <div class="grid" >
+
+    <div class="card fade-in" data-group="japonesa">
+      <div class="card-origin">🇯🇵 JAPONESA · SAPPORO</div>
+      <div class="card-name">Sapporo 473 ML</div>
+      <div class="card-detail">473 ML · Lata</div>
+      <div class="card-bottom">
+        <div class="card-price amber"><sup>$</sup>89</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+
+    <div class="card fade-in" data-group="japonesa">
+      <div class="card-origin">🇯🇵 JAPONESA · SAPPORO</div>
+      <div class="card-name">Sapporo Reserve Beer</div>
+      <div class="card-detail">355 ML · Botella</div>
+      <div class="card-bottom">
+        <div class="card-price amber"><sup>$</sup>99</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+
+    <div class="card fade-in" data-group="japonesa">
+      <div class="card-origin">🇯🇵 JAPONESA · SAPPORO</div>
+      <div class="card-name">Sapporo Premium Beer</div>
+      <div class="card-detail">355 ML · Lata</div>
+      <div class="card-bottom">
+        <div class="card-price amber"><sup>$</sup>99</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+
+    <div class="card fade-in" data-group="japonesa">
+      <div class="card-origin">🇯🇵 JAPONESA · ASAHI</div>
+      <div class="card-name">Asahi Super Dry</div>
+      <div class="card-detail">330 ML · Lata</div>
+      <div class="card-bottom">
+        <div class="card-price amber"><sup>$</sup>75</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+
+    <div class="card fade-in" data-group="europea">
+      <div class="card-origin">🇧🇪 EUROPEA · STELLA ARTOIS</div>
+      <div class="card-name">Stella Artois</div>
+      <div class="card-detail">473 ML · Lata</div>
+      <div class="card-bottom">
+        <div class="card-price neon"><sup>$</sup>55</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · COORS</div>
+      <div class="card-name">Coors Light Lata</div>
+      <div class="card-detail">355 ML · Lata</div>
+      <div class="card-bottom">
+        <div class="card-price neon"><sup>$</sup>25</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MILLER</div>
+      <div class="card-name">Miller Lite Latón</div>
+      <div class="card-detail">710 ML · Latón</div>
+      <div class="card-bottom">
+        <div class="card-price"><sup>$</sup>45</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · BUD LIGHT</div>
+      <div class="card-name">Bud Light Latón</div>
+      <div class="card-detail">710 ML · Latón</div>
+      <div class="card-bottom">
+        <div class="card-price"><sup>$</sup>55</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MILLER</div>
+      <div class="card-name">Miller High Life 940 ML</div>
+      <div class="card-detail">940 ML · Botella</div>
+      <div class="card-bottom">
+        <div class="card-price"><sup>$</sup>60</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MILLER</div>
+      <div class="card-name">Miller High Life Latón</div>
+      <div class="card-detail">710 ML · Latón</div>
+      <div class="card-bottom">
+        <div class="card-price"><sup>$</sup>45</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MILLER</div>
+      <div class="card-name">Miller High Life 355 ML</div>
+      <div class="card-detail">355 ML · Lata</div>
+      <div class="card-bottom">
+        <div class="card-price"><sup>$</sup>28</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MILLER</div>
+      <div class="card-name">Miller Genuine 355 ML</div>
+      <div class="card-detail">355 ML · Lata</div>
+      <div class="card-bottom">
+        <div class="card-price"><sup>$</sup>72</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MILLER</div>
+      <div class="card-name">Miller Extra Light</div>
+      <div class="card-detail">355 ML · Lata</div>
+      <div class="card-bottom">
+        <div class="card-price"><sup>$</sup>72</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MILLER</div>
+      <div class="card-name">Miller High Life 473 ML</div>
+      <div class="card-detail">473 ML · Lata</div>
+      <div class="card-bottom">
+        <div class="card-price"><sup>$</sup>32</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+
+    <div class="card fade-in" data-group="artesanal">
+      <div class="card-origin">🇲🇽 ARTESANAL · COLIMITA</div>
+      <div class="card-name">Colimita Ticus Porter</div>
+      <div class="card-detail">355 ML · Porter oscura</div>
+      <div class="card-bottom">
+        <div class="card-price"><sup>$</sup>78</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+
+    <div class="card fade-in" data-group="europea">
+      <div class="card-origin">🇺🇸 CRAFT · BLUE MOON</div>
+      <div class="card-name">Blue Moon Belgian White</div>
+      <div class="card-detail">355 ML · Trigo belga</div>
+      <div class="card-bottom">
+        <div class="card-price"><sup>$</sup>85</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+
+    <div class="card fade-in" data-group="alemana">
+      <div class="card-origin">🇩🇪 ALEMANA · PAULANER</div>
+      <div class="card-name">Paulaner Oktoberfest Bier</div>
+      <div class="card-detail">500 ML · Edición especial</div>
+      <div class="card-bottom">
+        <div class="card-price blue"><sup>$</sup>145</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+
+    <div class="card fade-in" data-group="artesanal">
+      <div class="card-origin">🇲🇽 ARTESANAL · COLIMITA</div>
+      <div class="card-name">Colimita Páramo Pale Ale</div>
+      <div class="card-detail">355 ML · Pale Ale</div>
+      <div class="card-bottom">
+        <div class="card-price"><sup>$</sup>78</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+
+    <div class="card fade-in" data-group="kombucha">
+      <div class="card-origin">🌿 KOMBUCHA · PURA</div>
+      <div class="card-name">Pura Kombucha Jengibre</div>
+      <div class="card-detail">355 ML · Sin alcohol</div>
+      <div class="card-bottom">
+        <div class="card-price"><sup>$</sup>66</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+
+  
+
+    <!-- SAPPORO FAMILY -->
+    <div class="card fade-in" data-group="japonesa"><div class="card-origin">🇯🇵 JAPONESA · SAPPORO</div>
+      <div class="card-name">Sapporo Light Botella 355 ML</div>
+      <div class="card-detail">355 ML · Botella</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>89</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="japonesa"><div class="card-origin">🇯🇵 JAPONESA · SAPPORO</div>
+      <div class="card-name">Sapporo Pure 355 ML</div>
+      <div class="card-detail">355 ML · Lata light</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>78</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="japonesa"><div class="card-origin">🇯🇵 JAPONESA · SAPPORO</div>
+      <div class="card-name">Sapporo Lata 650 ML</div>
+      <div class="card-detail">650 ML · Lata grande</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>132</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+
+    <!-- GUINNESS -->
+    <div class="card fade-in" data-group="europea"><div class="card-origin">🇮🇪 EUROPEA · GUINNESS</div>
+      <div class="card-name">Guinness Draught Stout</div>
+      <div class="card-detail">440 ML · Stout irlandesa</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>110</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="europea"><div class="card-origin">🇮🇪 EUROPEA · GUINNESS</div>
+      <div class="card-name">Guinness Draught Stout Ltd. Ed.</div>
+      <div class="card-detail">440 ML · Edición limitada</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>125</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="europea"><div class="card-origin">🇮🇪 EUROPEA · GUINNESS</div>
+      <div class="card-name">Guinness Original 325 ML</div>
+      <div class="card-detail">325 ML · Botella</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>75</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+
+    <!-- PILSNER / CHECAS -->
+    <div class="card fade-in" data-group="europea"><div class="card-origin">🇨🇿 EUROPEA · PILSNER URQUELL</div>
+      <div class="card-name">Pilsner Urquell 330 ML</div>
+      <div class="card-detail">330 ML · Botella</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>89</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="europea"><div class="card-origin">🇨🇿 EUROPEA · PILSNER URQUELL</div>
+      <div class="card-name">Pilsner Urquell Lata 500 ML</div>
+      <div class="card-detail">500 ML · Lata</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>89</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="europea"><div class="card-origin">🇨🇿 EUROPEA · KOZEL</div>
+      <div class="card-name">Kozel Dark Botella</div>
+      <div class="card-detail">500 ML · Dark lager checa</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>105</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="europea"><div class="card-origin">🇳🇱 EUROPEA · GROLSCH</div>
+      <div class="card-name">Grolsch Pilsner</div>
+      <div class="card-detail">450 ML · Botella swing-top</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>99</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+
+    <!-- PAULANER FAMILY -->
+    <div class="card fade-in" data-group="alemana"><div class="card-origin">🇩🇪 ALEMANA · PAULANER</div>
+      <div class="card-name">Paulaner Weissbier 500 ML</div>
+      <div class="card-detail">500 ML · Trigo alemana</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>145</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="alemana"><div class="card-origin">🇩🇪 ALEMANA · PAULANER</div>
+      <div class="card-name">Paulaner Weissbier Dunkel</div>
+      <div class="card-detail">500 ML · Trigo oscura</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>145</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="alemana"><div class="card-origin">🇩🇪 ALEMANA · PAULANER</div>
+      <div class="card-name">Paulaner Münchner Hell</div>
+      <div class="card-detail">500 ML · Lager dorada</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>145</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+
+    <!-- ERDINGER FAMILY -->
+    <div class="card fade-in" data-group="alemana"><div class="card-origin">🇩🇪 ALEMANA · ERDINGER</div>
+      <div class="card-name">Erdinger Weissbier</div>
+      <div class="card-detail">500 ML · Trigo clásica</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>145</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="alemana"><div class="card-origin">🇩🇪 ALEMANA · ERDINGER</div>
+      <div class="card-name">Erdinger Dunkel</div>
+      <div class="card-detail">500 ML · Oscura</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>145</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="alemana"><div class="card-origin">🇩🇪 ALEMANA · ERDINGER</div>
+      <div class="card-name">Erdinger Pikantus</div>
+      <div class="card-detail">500 ML · Trigo fuerte</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>145</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="alemana"><div class="card-origin">🇩🇪 ALEMANA · ERDINGER</div>
+      <div class="card-name">Erdinger Brauhaus Helles</div>
+      <div class="card-detail">330 ML · Lager dorada</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>145</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="alemana"><div class="card-origin">🇩🇪 ALEMANA · ERDINGER</div>
+      <div class="card-name">Erdinger Alkoholfrei</div>
+      <div class="card-detail">500 ML · Sin alcohol</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>145</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+
+    <!-- FRANZISKANER / HACKER -->
+    <div class="card fade-in" data-group="alemana"><div class="card-origin">🇩🇪 ALEMANA · FRANZISKANER</div>
+      <div class="card-name">Franziskaner Weissbier</div>
+      <div class="card-detail">500 ML · Trigo alemana</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>145</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="alemana"><div class="card-origin">🇩🇪 ALEMANA · HACKER-PSCHORR</div>
+      <div class="card-name">Hacker-Pschorr Weissbier</div>
+      <div class="card-detail">500 ML · Trigo premium</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>99</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+
+    <!-- AMERICANA OUT -->
+    <div class="card fade-in" data-group="americana"><div class="card-origin">🇺🇸 AMERICANA · BUD LIGHT</div>
+      <div class="card-name">Bud Light Lata 355 ML</div>
+      <div class="card-detail">355 ML · Lata</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>29</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="americana"><div class="card-origin">🇺🇸 AMERICANA · BUDWEISER</div>
+      <div class="card-name">Budweiser 355 ML</div>
+      <div class="card-detail">355 ML · Lata / Botella</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>29</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="americana"><div class="card-origin">🇺🇸 AMERICANA · COORS</div>
+      <div class="card-name">Coors Golden Banquet</div>
+      <div class="card-detail">355 ML · Botella</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>75</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="americana"><div class="card-origin">🇺🇸 AMERICANA · MICHELOB</div>
+      <div class="card-name">Michelob Ultra</div>
+      <div class="card-detail">Lata 355 ML / Botella / 710 ML</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>25</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="americana"><div class="card-origin">🇺🇸 AMERICANA · MICHELOB</div>
+      <div class="card-name">Michelob Ultra Pure Gold</div>
+      <div class="card-detail">355 ML · Orgánica</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>75</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="americana"><div class="card-origin">🇺🇸 AMERICANA · SAMUEL ADAMS</div>
+      <div class="card-name">Samuel Adams Boston Lager</div>
+      <div class="card-detail">355 ML · Boston lager</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>75</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="americana"><div class="card-origin">🇺🇸 AMERICANA · SAMUEL SMITH'S</div>
+      <div class="card-name">Samuel Smith's Oatmeal Stout</div>
+      <div class="card-detail">355 ML · Stout de avena</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>115</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="americana"><div class="card-origin">🇺🇸 AMERICANA · SAMUEL SMITH'S</div>
+      <div class="card-name">Samuel Smith's Strawberry Organic</div>
+      <div class="card-detail">355 ML · Orgánica fresa</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>115</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="americana"><div class="card-origin">🇺🇸 AMERICANA · SHINER</div>
+      <div class="card-name">Shiner Bock 355 ML</div>
+      <div class="card-detail">355 ML · Bock tejano</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>75</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="americana"><div class="card-origin">🇺🇸 AMERICANA · SHINER</div>
+      <div class="card-name">Shiner Ruby Redbird</div>
+      <div class="card-detail">355 ML · Jengibre y toronja</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>75</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="americana"><div class="card-origin">🇺🇸 AMERICANA · GOOSE ISLAND</div>
+      <div class="card-name">Goose Island 312</div>
+      <div class="card-detail">355 ML · Wheat ale Chicago</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>65</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="americana"><div class="card-origin">🇺🇸 AMERICANA · ANGRY ORCHARD</div>
+      <div class="card-name">Angry Orchard Apple Hard Cider</div>
+      <div class="card-detail">355 ML · Sidra de manzana</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>77</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+
+    <!-- EUROPEA OUT -->
+    <div class="card fade-in" data-group="europea"><div class="card-origin">🇧🇪 EUROPEA · STELLA ARTOIS</div>
+      <div class="card-name">Stella Artois 900 ML</div>
+      <div class="card-detail">900 ML · Botella grande</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>60</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="europea"><div class="card-origin">🇧🇪 EUROPEA · STELLA ARTOIS</div>
+      <div class="card-name">Stella Artois Bote 355 ML</div>
+      <div class="card-detail">355 ML · Botella</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>35</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="europea"><div class="card-origin">🇧🇪 EUROPEA · HOEGAARDEN</div>
+      <div class="card-name">Hoegaarden Witbier</div>
+      <div class="card-detail">330 ML · Blanca belga</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>45</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="europea"><div class="card-origin">🇳🇱 EUROPEA · HEINEKEN</div>
+      <div class="card-name">Heineken 355 ML</div>
+      <div class="card-detail">355 ML · Botella / Latón / Sin alcohol</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>25</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="europea"><div class="card-origin">🇮🇹 EUROPEA · PERONI</div>
+      <div class="card-name">Peroni Nastro Azzurro</div>
+      <div class="card-detail">330 ML · Lager italiana</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>85</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="europea"><div class="card-origin">🇲🇾 ASIÁTICA · CHANG</div>
+      <div class="card-name">Chang Beer Lager</div>
+      <div class="card-detail">500 ML · Tailandesa</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>89</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="japonesa"><div class="card-origin">🇨🇳 ASIÁTICA · TSINGTAO</div>
+      <div class="card-name">Tsingtao 330 ML</div>
+      <div class="card-detail">330 ML · Lager china</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>50</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="japonesa"><div class="card-origin">🇯🇵 JAPONESA · LUCKY BUDDHA</div>
+      <div class="card-name">Lucky Buddha Beer 330 ML</div>
+      <div class="card-detail">330 ML · Botella buda</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>89</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="europea"><div class="card-origin">🇦🇷 AMERICANA · QUILMES</div>
+      <div class="card-name">Quilmes Cerveza Argentina</div>
+      <div class="card-detail">340 ML · Botella</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>66</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+
+    <!-- ARTESANAL OUT -->
+    <div class="card fade-in" data-group="artesanal"><div class="card-origin">🇲🇽 ARTESANAL · COLIMITA</div>
+      <div class="card-name">Colimita Lager 355 ML</div>
+      <div class="card-detail">355 ML · Lager</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>78</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="artesanal"><div class="card-origin">🇲🇽 ARTESANAL · COLIMITA</div>
+      <div class="card-name">Colimita Lager Lata</div>
+      <div class="card-detail">355 ML · Lata</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>55</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="artesanal"><div class="card-origin">🇲🇽 ARTESANAL · COLIMITA</div>
+      <div class="card-name">Colimita Marabasco Trigo</div>
+      <div class="card-detail">355 ML · Trigo artesanal</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>78</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="artesanal"><div class="card-origin">🇲🇽 ARTESANAL · COLIMITA</div>
+      <div class="card-name">Colimita Cabañuela</div>
+      <div class="card-detail">355 ML · Edición especial</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>59</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="artesanal"><div class="card-origin">🇲🇽 ARTESANAL · COLIMITA</div>
+      <div class="card-name">Colimita Piedra Lisa IPA</div>
+      <div class="card-detail">355 ML · IPA</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>78</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="artesanal"><div class="card-origin">🇲🇽 ARTESANAL · COLIMITA</div>
+      <div class="card-name">Colimita Río Lumbre</div>
+      <div class="card-detail">355 ML · Edición especial</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>78</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="artesanal"><div class="card-origin">🇲🇽 ARTESANAL · COLIMITA</div>
+      <div class="card-name">Colimita Ocho 355 ML</div>
+      <div class="card-detail">355 ML · Edición especial</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>78</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="artesanal"><div class="card-origin">🇲🇽 ARTESANAL · COLIMITA</div>
+      <div class="card-name">Colimita Cayaco 95% Calorías</div>
+      <div class="card-detail">355 ML · Light artesanal</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>78</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="artesanal"><div class="card-origin">🇲🇽 ARTESANAL · LA BRU</div>
+      <div class="card-name">La Bru IPA</div>
+      <div class="card-detail">355 ML · IPA artesanal</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>58</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="artesanal"><div class="card-origin">🇲🇽 ARTESANAL · LA BRU</div>
+      <div class="card-name">La Bru Porter</div>
+      <div class="card-detail">355 ML · Porter oscura</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>57</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="artesanal"><div class="card-origin">🇲🇽 ARTESANAL · LA BRU</div>
+      <div class="card-name">La Bru Stout</div>
+      <div class="card-detail">355 ML · Stout artesanal</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>57</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="artesanal"><div class="card-origin">🇲🇽 ARTESANAL · LA BRU</div>
+      <div class="card-name">La Bru Maíz Azul</div>
+      <div class="card-detail">355 ML · Maíz azul mexicano</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>57</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="artesanal"><div class="card-origin">🇲🇽 ARTESANAL · MINERVA</div>
+      <div class="card-name">Minerva Pale Ale / IPA / Stout / Viena</div>
+      <div class="card-detail">355 ML · Varias</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>35–78</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="artesanal"><div class="card-origin">🇲🇽 ARTESANAL · ZORRA</div>
+      <div class="card-name">Zorra Berry Summer Ale</div>
+      <div class="card-detail">355 ML · Ale de frutos rojos</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>85</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="artesanal"><div class="card-origin">🇲🇽 ARTESANAL · ZORRA</div>
+      <div class="card-name">Zorra Imperial Peanut Stout</div>
+      <div class="card-detail">355 ML · Stout cacahuate</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>85</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+
+    <!-- KOMBUCHA OUT -->
+    <div class="card fade-in" data-group="kombucha"><div class="card-origin">🌿 KOMBUCHA · PURA</div>
+      <div class="card-name">Pura Kombucha Maracuyá</div>
+      <div class="card-detail">355 ML · Sin alcohol</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>66</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+    <div class="card fade-in" data-group="kombucha"><div class="card-origin">🌿 KOMBUCHA · PURA</div>
+      <div class="card-name">Pura Kombucha Matcha</div>
+      <div class="card-detail">355 ML · Sin alcohol</div>
+      <div class="card-bottom"><div class="card-price"><sup>$</sup>66</div><span class="pill pill-stock">Disponible</span></div>
+    </div>
+
+  </div><!-- /grid -->
+
+</div><!-- /section -->
+
+<!-- WA FLOAT -->
+<div class="wa-float">
+  <div class="wa-tip">Pedido rápido por WhatsApp</div>
+  <a class="wa-btn" href="https://wa.me/52TUNUMERO?text=Hola%2C+vi+el+cat%C3%A1logo+de+cervezas+de+Casa+Market+y+me+interesa+hacer+un+pedido." target="_blank">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.862L.054 23.45a.5.5 0 00.607.606l5.647-1.464A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.667-.502-5.2-1.378l-.373-.216-3.863 1.002 1.024-3.772-.234-.384A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Hacer pedido
+  </a>
+</div>
+
+<footer>
+  <div class="footer-brand">Casa <span>Market</span></div>
+  <div class="footer-info">CATÁLOGO CERVEZAS · B2B 2026<br>ZAMORA, MICHOACÁN</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  function filterAll() {
+    document.querySelectorAll('.card').forEach(c => c.style.display = '');
+    document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+
+  function filterGroup(g) {
+    document.querySelectorAll('.card').forEach(c => {
+      c.style.display = (c.dataset.group === g) ? '' : 'none';
+    });
+    document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
