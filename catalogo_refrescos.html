@@ -1,0 +1,2913 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa Market B2B – Refrescos y Bebidas Importadas</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#0a0a0a;--dark:#111;--card:#161616;--white:#f0f0f0;--muted:rgba(240,240,240,0.45);--border:rgba(255,255,255,0.07);--accent:#0af;--neon:#00ff88;--gold:#ffd60a;--hot:#ff2d55;--blue:#0af;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;}
+  .topbar{background:var(--dark);border-bottom:1px solid var(--border);padding:12px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+  .back-link{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.15em;color:var(--muted);text-decoration:none;}
+  .back-link:hover{color:var(--white);}
+  .topbar-brand{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.08em;}
+  .topbar-brand span{color:var(--gold);}
+  .topbar-cat{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.2em;color:var(--accent);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);padding:4px 12px;border-radius:20px;}
+  .hero{padding:70px 40px 50px;max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end;}
+  .hero-eyebrow{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.3em;color:var(--accent);margin-bottom:12px;}
+  .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,10vw,8rem);line-height:.88;}
+  .hero-title .line2{color:var(--accent);}
+  .hero-desc{margin-top:20px;font-size:.95rem;font-weight:300;color:var(--muted);line-height:1.7;max-width:520px;}
+  .hero-stat-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--accent);line-height:1;}
+  .hero-stat-label{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.15em;color:var(--muted);margin-top:2px;}
+  .price-banner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;background:rgba(255,214,10,.06);border:1px solid rgba(255,214,10,.2);border-radius:10px;padding:12px 20px;margin-bottom:28px;}
+  .price-banner-left{display:flex;align-items:center;gap:10px;font-family:'Space Mono',monospace;font-size:.7rem;color:rgba(240,240,240,.65);}
+  .price-banner-left strong{color:var(--white);}
+  .price-banner-left .disc{color:var(--gold);}
+  .price-banner a{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--gold);text-decoration:none;border:1px solid rgba(255,214,10,.3);padding:6px 14px;border-radius:6px;white-space:nowrap;}
+  .filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:32px;}
+  .ftab{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.12em;padding:7px 14px;border:1px solid var(--border);border-radius:20px;color:var(--muted);cursor:pointer;background:transparent;transition:all .2s;}
+  .ftab:hover,.ftab.active{border-color:var(--accent);color:var(--accent);background:rgba(255,255,255,.04);}
+  .section{padding:0 40px 70px;max-width:1400px;margin:0 auto;}
+  .sec-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+  .sec-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.05em;line-height:1;}
+  .sec-count{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.15em;margin-left:auto;}
+  .sec-badge{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.1em;padding:4px 10px;border-radius:20px;}
+  .badge-amber{background:rgba(255,149,0,.12);color:#ff9500;border:1px solid rgba(255,149,0,.3);}
+  .badge-neon{background:rgba(0,255,136,.08);color:var(--neon);border:1px solid rgba(0,255,136,.25);}
+  .badge-blue{background:rgba(0,170,255,.08);color:var(--blue);border:1px solid rgba(0,170,255,.25);}
+  .badge-hot{background:rgba(255,45,85,.08);color:var(--hot);border:1px solid rgba(255,45,85,.25);}
+  .badge-gold{background:rgba(255,214,10,.08);color:var(--gold);border:1px solid rgba(255,214,10,.25);}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px;}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px 18px;display:flex;flex-direction:column;gap:6px;transition:border-color .25s,transform .2s;}
+  .card:hover{border-color:rgba(255,255,255,.18);transform:translateY(-2px);}
+  .card-origin{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.2em;color:var(--muted);}
+  .card-name{font-size:.95rem;font-weight:500;line-height:1.35;color:var(--white);}
+  .card-detail{font-size:.78rem;color:var(--muted);font-weight:300;}
+  .card-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,.05);}
+  .card-price{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;color:var(--accent);line-height:1;}
+  .pill{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.08em;padding:4px 9px;border-radius:5px;}
+  .pill-stock{background:rgba(0,255,136,.1);color:var(--neon);}
+  .pill-gold{background:rgba(255,214,10,.1);color:var(--gold);}
+  .pill-hot{background:rgba(255,45,85,.1);color:var(--hot);}
+  .pill-blue{background:rgba(0,170,255,.1);color:var(--blue);}
+  .pill-amber{background:rgba(255,149,0,.1);color:#ff9500;}
+  .wa-float{position:fixed;bottom:24px;right:24px;z-index:999;display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+  .wa-tip{background:rgba(0,0,0,.8);color:#fff;font-family:'Space Mono',monospace;font-size:.62rem;padding:5px 10px;border-radius:6px;white-space:nowrap;}
+  .wa-btn{display:flex;align-items:center;gap:9px;background:#25D366;color:#fff;text-decoration:none;padding:13px 20px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;transition:transform .2s;}
+  .wa-btn:hover{transform:scale(1.04);}
+  .wa-btn svg{width:20px;height:20px;flex-shrink:0;}
+  footer{background:#050505;border-top:1px solid var(--border);padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .footer-brand{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.08em;}
+  .footer-brand span{color:var(--gold);}
+  .footer-info{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.15em;color:rgba(240,240,240,.18);text-align:right;}
+  @media(max-width:700px){.topbar,.hero,.section{padding-left:16px;padding-right:16px;}.hero{grid-template-columns:1fr;}.grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));}.footer-info{text-align:left;}}
+  .fade-in{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div style="display:flex;align-items:center;gap:16px;">
+    <a class="back-link" href="index.html">← Inicio</a>
+    <div class="topbar-brand">Casa <span>Market</span></div>
+  </div>
+  <span class="topbar-cat">🥤 REFRESCOS</span>
+</div>
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">CATÁLOGO B2B · CATEGORÍA 03</div>
+    <h1 class="hero-title"><div>REFRESCOS &</div><div class="line2">BEBIDAS IMP.</div></h1>
+    <p class="hero-desc">Sodas americanas, bebidas asiáticas, Gut &amp; Healthy drinks, aguas premium sparkling, sports &amp; energy drinks y jugos importados como Capri Sun y Kool-Aid.</p>
+  </div>
+  <div>
+    Q4</div>
+    <div class="hero-stat-label">PRODUCTOS</div>
+  </div>
+</div>
+<div class="section">
+  <div class="filter-row">
+    <button class="ftab active" onclick="filterAll();tabClick(this)">Todos</button>
+    <button class="ftab" onclick="filterGroup('americana');tabClick(this)">🥤 Sodas Americanas</button>
+    <button class="ftab" onclick="filterGroup('asiatica');tabClick(this)">🎌 Asiáticas</button>
+    <button class="ftab" onclick="filterGroup('healthy');tabClick(this)">🌿 Gut & Healthy</button>
+    <button class="ftab" onclick="filterGroup('sparkling');tabClick(this)">💧 Aguas Premium</button>
+    <button class="ftab" onclick="filterGroup('energy');tabClick(this)">⚡ Energizantes</button>
+    <button class="ftab" onclick="filterGroup('rehidratante');tabClick(this)">🏃 Rehidratantes</button>
+    <button class="ftab" onclick="filterGroup('proteina');tabClick(this)">💪 Proteína</button>
+    <button class="ftab" onclick="filterGroup('jugos');tabClick(this)">🧃 Jugos Importados</button>
+  </div>
+  <div class="price-banner">
+    <div class="price-banner-left">
+      <span style="font-size:16px;">🏷️</span>
+      Precio por <strong>&nbsp;1 pieza&nbsp;</strong> · Compra por caja: <strong class="disc">&nbsp;10% de descuento</strong>
+    </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">🥤 Sodas Americanas</span>
+    <span class="sec-badge badge-hot">COCA-COLA · PEPSI · MTN DEW · DR PEPPER Y MÁS</span>
+    <span class="sec-count">110 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew Kickstart Sparking Juice Strawberry Lemona</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · PEPSI</div>
+      <div class="card-name">Pepsi Nitro</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew Kickstart Sparking Juice Fruit Punch</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · PEPSI</div>
+      <div class="card-name">Pepsi Nitro Vainilla</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · BANG</div>
+      <div class="card-name">Bang Start Blast</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · BANG</div>
+      <div class="card-name">Bang Sour Heads</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇦🇺 AUSTRALIANA · BUNDABERG</div>
+      <div class="card-name">Bundaberg</div>
+      <div class="card-bottom">
+        <div class="card-price">$58</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · COCA-COLA</div>
+      <div class="card-name">Coca Cola Vainilla</div>
+      <div class="card-bottom">
+        <div class="card-price">$45</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇪🇸 IMPORTADA · CHUPA CHUPS</div>
+      <div class="card-name">Chupa Chups Orange Soda</div>
+      <div class="card-bottom">
+        <div class="card-price">$45</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · COCA-COLA</div>
+      <div class="card-name">Coca Cola Vainilla Zero Sugar</div>
+      <div class="card-bottom">
+        <div class="card-price">$45</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇪🇸 IMPORTADA · CHUPA CHUPS</div>
+      <div class="card-name">Chupa Chups Melon & Cream</div>
+      <div class="card-bottom">
+        <div class="card-price">$43</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇪🇸 IMPORTADA · CHUPA CHUPS</div>
+      <div class="card-name">Chupa Cups Fresa</div>
+      <div class="card-bottom">
+        <div class="card-price">$43</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇪🇸 IMPORTADA · CHUPA CHUPS</div>
+      <div class="card-name">Chupa Chups Grape</div>
+      <div class="card-bottom">
+        <div class="card-price">$43</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇪🇸 IMPORTADA · CHUPA CHUPS</div>
+      <div class="card-name">Chupa Chups Strawberry & Cream</div>
+      <div class="card-bottom">
+        <div class="card-price">$43</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇪🇸 IMPORTADA · CHUPA CHUPS</div>
+      <div class="card-name">Chupa Chups Sour Blue</div>
+      <div class="card-bottom">
+        <div class="card-price">$43</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇪🇸 IMPORTADA · CHUPA CHUPS</div>
+      <div class="card-name">Chupa Chups  Zero Sugar Lemon & Lime</div>
+      <div class="card-bottom">
+        <div class="card-price">$43</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · COCA-COLA</div>
+      <div class="card-name">Coca Cola Zero Sugar Holidar Creamy Vainilla</div>
+      <div class="card-bottom">
+        <div class="card-price">$40</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Cocacola Orange Cream Zero Sugar 355Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$40</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · FANTA</div>
+      <div class="card-name">Fanta Grape Fruit</div>
+      <div class="card-bottom">
+        <div class="card-price">$40</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · COCA-COLA</div>
+      <div class="card-name">Coca Cola Orange Cream 355Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$40</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · FANTA</div>
+      <div class="card-name">Fanta Strawberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$40</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · COCA-COLA</div>
+      <div class="card-name">Coke Dreamworld Zero Sugar</div>
+      <div class="card-bottom">
+        <div class="card-price">$40</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew Star Spangled Splash</div>
+      <div class="card-bottom">
+        <div class="card-price">$40</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew Freedom Fusion</div>
+      <div class="card-bottom">
+        <div class="card-price">$40</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MUG</div>
+      <div class="card-name">Mug Diet Root Beer</div>
+      <div class="card-bottom">
+        <div class="card-price">$40</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · COCA-COLA</div>
+      <div class="card-name">Coca Cola Cherry Zero Sugar 355Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$40</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · COCA-COLA</div>
+      <div class="card-name">Coca Cola Holiday Creamy Vainilla</div>
+      <div class="card-bottom">
+        <div class="card-price">$40</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · COCA-COLA</div>
+      <div class="card-name">Coca Cola Cherry 355 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$40</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · BIG RED</div>
+      <div class="card-name">Big Red</div>
+      <div class="card-bottom">
+        <div class="card-price">$40</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · FANTA</div>
+      <div class="card-name">Fanta Orange</div>
+      <div class="card-bottom">
+        <div class="card-price">$40</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · FANTA</div>
+      <div class="card-name">Fanta Pineapple</div>
+      <div class="card-bottom">
+        <div class="card-price">$40</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MUG</div>
+      <div class="card-name">Mug Root Beer</div>
+      <div class="card-bottom">
+        <div class="card-price">$40</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew Frost Bite</div>
+      <div class="card-bottom">
+        <div class="card-price">$40</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew Major Melon</div>
+      <div class="card-bottom">
+        <div class="card-price">$40</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · PEPSI</div>
+      <div class="card-name">Pepsi Wild Cherry</div>
+      <div class="card-bottom">
+        <div class="card-price">$38</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · PEPSI</div>
+      <div class="card-name">Pepsi Wild Cherry Zero Sugar</div>
+      <div class="card-bottom">
+        <div class="card-price">$38</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · PEPSI</div>
+      <div class="card-name">Pepsi  Wild Cherry And Cream</div>
+      <div class="card-bottom">
+        <div class="card-price">$38</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · PEPSI</div>
+      <div class="card-name">Pepsi Cherry Mini</div>
+      <div class="card-bottom">
+        <div class="card-price">$36</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · COCA-COLA</div>
+      <div class="card-name">Coca Cola Spiced</div>
+      <div class="card-bottom">
+        <div class="card-price">$36</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · COCA-COLA</div>
+      <div class="card-name">Coca Cola Cherry Mini</div>
+      <div class="card-bottom">
+        <div class="card-price">$36</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew Baja Gold</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtndew Summer Freeze</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · PEPSI</div>
+      <div class="card-name">Pepsi Mango Lata</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew Voo</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew Zero Sugar</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew Diet</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew Splash</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew Red Code</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew Punch</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew Spark</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew Zero Sugar Baja 355Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · PEPSI</div>
+      <div class="card-name">Pepsi Diet Wild Cherry</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew Baja Blast</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · COCA-COLA</div>
+      <div class="card-name">Coca Cola Cherry Vainilla Zero Sugar</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · COCA-COLA</div>
+      <div class="card-name">Coca Cola Cherry Vainilla</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇪🇸 IMPORTADA · CHUPA CHUPS</div>
+      <div class="card-name">Chupa Chups Sour Strawberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇪🇸 IMPORTADA · CHUPA CHUPS</div>
+      <div class="card-name">Chupa Chups Rasberry & Cream</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · BRISK</div>
+      <div class="card-name">Brisk Fruit Punch</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · CANADA DRY</div>
+      <div class="card-name">Canada Dry Ginger Ale Blackberry 355 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇪🇸 IMPORTADA · CHUPA CHUPS</div>
+      <div class="card-name">Chupa Chups Mango</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · DR PEPPER</div>
+      <div class="card-name">Dr Pepper Diet</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · DR PEPPER</div>
+      <div class="card-name">Dr Pepper 355 Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · DR PEPPER</div>
+      <div class="card-name">Dr Pepper Blackberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · DR PEPPER</div>
+      <div class="card-name">Dr Pepper Blackberry Zero Sugar</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · DR PEPPER</div>
+      <div class="card-name">Dr Pepper & Cream Soda</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · DR PEPPER</div>
+      <div class="card-name">Dr Pepper Strawberries Cream Soda Zero Sugar</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · DR PEPPER</div>
+      <div class="card-name">Dr Pepper Zero Sugar</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · CANADA DRY</div>
+      <div class="card-name">Canada Dry Ginger Ale 355 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · COCA-COLA</div>
+      <div class="card-name">Coke Original Taste</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · SUNKIST</div>
+      <div class="card-name">Sunkist Berry Lemonade</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · CANADA DRY</div>
+      <div class="card-name">Canada Dry Ginger Ale Cranberry 355 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · 7UP</div>
+      <div class="card-name">7Up Tropical 355Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · BRISK</div>
+      <div class="card-name">Brisk Strawberry Melon</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew Game Fuel Citrus Cherry</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · PEPSI</div>
+      <div class="card-name">Pepsi Zero Sugar</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · SPRITE/SIERRA MIST</div>
+      <div class="card-name">Sprite Winter</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew S A</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · COCA-COLA</div>
+      <div class="card-name">Coke Diet</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · SUNKIST</div>
+      <div class="card-name">Sunkist Orange Diet</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · A&W</div>
+      <div class="card-name">Aw Root Beer</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · CRUSH</div>
+      <div class="card-name">Crush Strawberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · COCA-COLA</div>
+      <div class="card-name">Coca Cola Zero Sugar</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · COCA-COLA</div>
+      <div class="card-name">Coke Diet Caffeine Free</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · CRUSH</div>
+      <div class="card-name">Crush Orange</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · BRISK</div>
+      <div class="card-name">Brisk Iced Tea</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · 7UP</div>
+      <div class="card-name">7Up Zero Sugar</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · SPRITE/SIERRA MIST</div>
+      <div class="card-name">Sierra Mist Lata</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · DR PEPPER</div>
+      <div class="card-name">Dr Pepper Cherry 355 Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · CRUSH</div>
+      <div class="card-name">Crush Toronja Lata</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · PEPSI</div>
+      <div class="card-name">Pepsi Mango Zero Sugar</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · PEPSI</div>
+      <div class="card-name">Pepsi Diet</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · PEPSI</div>
+      <div class="card-name">Pepsi Blue</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · PEPSI</div>
+      <div class="card-name">Pepsi Cream Soda Cola</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew Pitch Black</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew Mistery Flavor</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew Major Melon Zero Sugar 355Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · PEPSI</div>
+      <div class="card-name">Pepsi Black Cherry</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew Citrus Flavor</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew Spark Zero Sugar</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · PEPSI</div>
+      <div class="card-name">Pepsi</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · MTN DEW</div>
+      <div class="card-name">Mtn Dew Fruit Cake</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · A&W</div>
+      <div class="card-name">Aw Mini</div>
+      <div class="card-bottom">
+        <div class="card-price">$28</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Perrie Ginger Lime 330Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$28</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · SUNKIST</div>
+      <div class="card-name">Sunkist Mini</div>
+      <div class="card-bottom">
+        <div class="card-price">$28</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">S. Pellegrimno 250 Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$22</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · 7UP</div>
+      <div class="card-name">7Up Mini</div>
+      <div class="card-bottom">
+        <div class="card-price">$20</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · SPRITE/SIERRA MIST</div>
+      <div class="card-name">Sprite Mini</div>
+      <div class="card-bottom">
+        <div class="card-price">$20</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · FANTA</div>
+      <div class="card-name">Fanta Mini</div>
+      <div class="card-bottom">
+        <div class="card-price">$20</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="americana">
+      <div class="card-origin">🇺🇸 AMERICANA · CRUSH</div>
+      <div class="card-name">Orange Crush 600Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$19</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">🎌 Bebidas Asiáticas</span>
+    <span class="sec-badge badge-neon">RAMUNE · CALPICO · BUBBLE TEA · POCARI</span>
+    <span class="sec-count">26 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🧋 BUBBLE TEA</div>
+      <div class="card-name">Bubble Taro Zoma</div>
+      <div class="card-bottom">
+        <div class="card-price">$350</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · POCARI</div>
+      <div class="card-name">Pocari 5Sobre 1L.</div>
+      <div class="card-bottom">
+        <div class="card-price">$185</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🧋 BUBBLE TEA</div>
+      <div class="card-name">Boba Emperador Black Tea</div>
+      <div class="card-bottom">
+        <div class="card-price">$165</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🧋 BUBBLE TEA</div>
+      <div class="card-name">Boba Emperador Taro</div>
+      <div class="card-bottom">
+        <div class="card-price">$160</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · CALPICO</div>
+      <div class="card-name">Calpico Toyo</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · CALPICO</div>
+      <div class="card-name">Calpico Niltk 1Lt</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🧋 BUBBLE TEA</div>
+      <div class="card-name">Hillway Strawberry Bubble Tea 225</div>
+      <div class="card-bottom">
+        <div class="card-price">$145</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🍈 ASIÁTICA · LICHI</div>
+      <div class="card-name">Jack Pot Lichi En Jarabe 656G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$145</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🧋 BUBBLE TEA</div>
+      <div class="card-name">Hillway Bubble Tea Mango 230</div>
+      <div class="card-bottom">
+        <div class="card-price">$145</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🧋 BUBBLE TEA</div>
+      <div class="card-name">Hillway Bubble Tea 260G</div>
+      <div class="card-bottom">
+        <div class="card-price">$145</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🍵 TEA LATTE</div>
+      <div class="card-name">Emperor Love Tea Latte 80G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$125</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🥥 ASIÁTICA · COCO</div>
+      <div class="card-name">Aroy-D Coconut Milk 400 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$125</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🥥 ASIÁTICA · COCO</div>
+      <div class="card-name">Chaokoh Coconut Milk 400 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Felice Soda Japonesa Sabor Yogurt</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🧋 BUBBLE TEA</div>
+      <div class="card-name">Joyba Bubble Tea Mango</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🧋 BUBBLE TEA</div>
+      <div class="card-name">Joyba Bubble Tea Strawberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Sangaria Nata De Coco</div>
+      <div class="card-bottom">
+        <div class="card-price">$67</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · RAMUNE</div>
+      <div class="card-name">Ramune Melon</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · RAMUNE</div>
+      <div class="card-name">Ramune Mora Azul</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · RAMUNE</div>
+      <div class="card-name">Ramune Fresa</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · RAMUNE</div>
+      <div class="card-name">Ramune Yuzu</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · RAMUNE</div>
+      <div class="card-name">Ramune Piña</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · RAMUNE</div>
+      <div class="card-name">Ramune Lichi</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · RAMUNE</div>
+      <div class="card-name">Ramune Original</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · RAMUNE</div>
+      <div class="card-name">Ramune Orange</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · POCARI SWEAT</div>
+      <div class="card-name">Pocari Sweat</div>
+      <div class="card-bottom">
+        <div class="card-price">$20</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">🌿 Gut & Healthy Drinks</span>
+    <span class="sec-badge badge-neon">POPPI · OLIPOP · KOMBUCHA · PREBIÓTICAS</span>
+    <span class="sec-count">13 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="healthy">
+      <div class="card-origin">🍵 FERMENTADA · KOMBUCHA</div>
+      <div class="card-name">Kombucha Raspberry Lemonade</div>
+      <div class="card-bottom">
+        <div class="card-price">$95</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="healthy">
+      <div class="card-origin">🍵 FERMENTADA · KOMBUCHA</div>
+      <div class="card-name">Kombucha Mixed Berry</div>
+      <div class="card-bottom">
+        <div class="card-price">$95</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="healthy">
+      <div class="card-origin">🌿 PREBIÓTICA · OLIPOP</div>
+      <div class="card-name">Olipop Cream Soda</div>
+      <div class="card-bottom">
+        <div class="card-price">$70</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="healthy">
+      <div class="card-origin">🌿 PREBIÓTICA · OLIPOP</div>
+      <div class="card-name">Olipop Strawberry Vainilla</div>
+      <div class="card-bottom">
+        <div class="card-price">$70</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="healthy">
+      <div class="card-origin">🌿 PREBIÓTICA · OLIPOP</div>
+      <div class="card-name">Olipop Classic Grape</div>
+      <div class="card-bottom">
+        <div class="card-price">$70</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="healthy">
+      <div class="card-origin">🌿 PREBIÓTICA · POPPI</div>
+      <div class="card-name">Poppi Punch Pop Prebiotic Soda 355 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="healthy">
+      <div class="card-origin">🌿 PREBIÓTICA · POPPI</div>
+      <div class="card-name">Poppi Lemon Lime</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="healthy">
+      <div class="card-origin">🌿 PREBIÓTICA · POPPI</div>
+      <div class="card-name">Poppi Raspberry Rose</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="healthy">
+      <div class="card-origin">🌿 PREBIÓTICA · POPPI</div>
+      <div class="card-name">Poppi Cherry Limeade</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="healthy">
+      <div class="card-origin">🌿 PREBIÓTICA · POPPI</div>
+      <div class="card-name">Poppi Doc Pop</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="healthy">
+      <div class="card-origin">🌿 PREBIÓTICA · POPPI</div>
+      <div class="card-name">Poppi Wild Berry</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="healthy">
+      <div class="card-origin">🌿 PREBIÓTICA · POPPI</div>
+      <div class="card-name">Poppi Strawberry Lemon</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="healthy">
+      <div class="card-origin">🌿 PREBIÓTICA · POPPI</div>
+      <div class="card-name">Poppi Orange</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">💧 Aguas Premium & Sparkling</span>
+    <span class="sec-badge badge-blue">PERRIER · SAN PELLEGRINO · WATERLOO · TOPO CHICO</span>
+    <span class="sec-count">28 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇫🇷 FRANCESA · PERRIER</div>
+      <div class="card-name">Perrier Murakami 750Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇲🇽 NACIONAL · TOPO CHICO</div>
+      <div class="card-name">Topochico 750Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇫🇷 FRANCESA · EVIAN</div>
+      <div class="card-name">Evian 1Lt</div>
+      <div class="card-bottom">
+        <div class="card-price">$55</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇮🇹 ITALIANA · SAN PELLEGRINO</div>
+      <div class="card-name">Sanpellegrino Ginger Beer</div>
+      <div class="card-bottom">
+        <div class="card-price">$50</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇺🇸 AMERICANA · WATERLOO</div>
+      <div class="card-name">Waterloo Sparkling Water Tropical Fruit</div>
+      <div class="card-bottom">
+        <div class="card-price">$50</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇺🇸 AMERICANA · WATERLOO</div>
+      <div class="card-name">Waterloo Sparkling Water Guava Berry</div>
+      <div class="card-bottom">
+        <div class="card-price">$50</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇺🇸 AMERICANA · WATERLOO</div>
+      <div class="card-name">Waterloo Sparkling Water Rubi Red Tangerine</div>
+      <div class="card-bottom">
+        <div class="card-price">$50</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇫🇷 FRANCESA · PERRIER</div>
+      <div class="card-name">Perrier 330 Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$39</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇲🇽 NACIONAL · GARCI CRESPO</div>
+      <div class="card-name">Garci Crespo Agua Mineral 650Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$38</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇫🇷 FRANCESA · PERRIER</div>
+      <div class="card-name">Perrier X Murakami 500 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇮🇹 ITALIANA · ACQUA PANNA</div>
+      <div class="card-name">Acqua Panna 505Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Tonicol 600Ml Nuevo</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇺🇸 AMERICANA · LA CROIX</div>
+      <div class="card-name">La Croix Pamplemousse</div>
+      <div class="card-bottom">
+        <div class="card-price">$30</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇮🇹 ITALIANA · SAN PELLEGRINO</div>
+      <div class="card-name">Sanpellegrino Jugo De Granada 330 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$30</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇮🇹 ITALIANA · SAN PELLEGRINO</div>
+      <div class="card-name">San Pellegrino Clementina Verde</div>
+      <div class="card-bottom">
+        <div class="card-price">$30</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇮🇹 ITALIANA · SAN PELLEGRINO</div>
+      <div class="card-name">Sanpellegrino Jugo De Naranja 330 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$30</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇮🇹 ITALIANA · SAN PELLEGRINO</div>
+      <div class="card-name">Sanpellegrino Limonata 330 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$30</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇮🇹 ITALIANA · SAN PELLEGRINO</div>
+      <div class="card-name">Sanpellegrino Aranciata Rossa 330 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$30</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇺🇸 AMERICANA · LA CROIX</div>
+      <div class="card-name">La Croix Berry</div>
+      <div class="card-bottom">
+        <div class="card-price">$30</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇫🇷 FRANCESA · PERRIER</div>
+      <div class="card-name">Perrier Juice Fresa Kiwi 250 Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$28</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇫🇷 FRANCESA · PERRIER</div>
+      <div class="card-name">Perrier Juice Piña Mango</div>
+      <div class="card-bottom">
+        <div class="card-price">$28</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇫🇷 FRANCESA · PERRIER</div>
+      <div class="card-name">Perrier Juice Dur Cer 250 Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$28</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇲🇽 NACIONAL · GARCI CRESPO</div>
+      <div class="card-name">Garci Crespo Bot 275 Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$25</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇫🇷 FRANCESA · EVIAN</div>
+      <div class="card-name">Evian Agua Mineral 500 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$24</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇲🇽 NACIONAL · TOPO CHICO</div>
+      <div class="card-name">Topo Chico 600Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$22</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🌎 IMPORTADA · SCHWEPPES</div>
+      <div class="card-name">Schweppes Ginger Ale</div>
+      <div class="card-bottom">
+        <div class="card-price">$18</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🇲🇽 NACIONAL · TOPO CHICO</div>
+      <div class="card-name">Topochico Cristal</div>
+      <div class="card-bottom">
+        <div class="card-price">$14</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sparkling">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Peñafiel Vidrio 296Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$10</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">⚡ Bebidas Energizantes</span>
+    <span class="sec-badge badge-gold">ALANI · CELSIUS · GHOST · MONSTER · BANG · BLOOM · NOS</span>
+    <span class="sec-count">45 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">☕ ENERGY · STARBUCKS</div>
+      <div class="card-name">Starbucks Doubleshot Energy Caramel Coffee Can</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">☕ ENERGY · STARBUCKS</div>
+      <div class="card-name">Starbucks Double Shot Vainilla</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">☕ ENERGY · STARBUCKS</div>
+      <div class="card-name">Starbucks Double Shot Mocha Energy</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · MONSTER</div>
+      <div class="card-name">Monster Ultra Red</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · GHOST</div>
+      <div class="card-name">Ghost Energy Blue Rasberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · MONSTER</div>
+      <div class="card-name">Monster Ultra Fantasy Ruby Red</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · MONSTER</div>
+      <div class="card-name">Monster Ultra Paradise</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · MONSTER</div>
+      <div class="card-name">Monster Zero Ultra</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · GHOST</div>
+      <div class="card-name">Ghost Energy Orange Cream 473Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · MONSTER</div>
+      <div class="card-name">Monster Ultra Sunrise</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · MONSTER</div>
+      <div class="card-name">Monster Ultra Vice Guava</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · GHOST</div>
+      <div class="card-name">Ghost Energy Redberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · MONSTER</div>
+      <div class="card-name">Monster Ultra Blue Hawaiian</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · MONSTER</div>
+      <div class="card-name">Monster Ultra Blue</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · GHOST</div>
+      <div class="card-name">Ghost Energy Citrus</div>
+      <div class="card-bottom">
+        <div class="card-price">$101</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · GHOST</div>
+      <div class="card-name">Ghost Energy Tropical Mango</div>
+      <div class="card-bottom">
+        <div class="card-price">$101</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · ALANI NU</div>
+      <div class="card-name">Alani Cherry Twist</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · ALANI NU</div>
+      <div class="card-name">Alani Cheery Slush</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · CELSIUS</div>
+      <div class="card-name">Celsius Tropical Vibe</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · CELSIUS</div>
+      <div class="card-name">Celsius Retro Vibe</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · CELSIUS</div>
+      <div class="card-name">Celsius Peach Vibe</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · ALANI NU</div>
+      <div class="card-name">Alani Pink Slish</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · ALANI NU</div>
+      <div class="card-name">Alani Orange Kiss</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · MONSTER</div>
+      <div class="card-name">Monster Java Mean Bean</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · MONSTER</div>
+      <div class="card-name">Monster Java Loca Moca</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · ALANI NU</div>
+      <div class="card-name">Alani Cosmic Stardust</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · ALANI NU</div>
+      <div class="card-name">Alani Peach</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · ALANI NU</div>
+      <div class="card-name">Alani Breezeberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · BANG</div>
+      <div class="card-name">Bang Blue & Yellow Limoncello</div>
+      <div class="card-bottom">
+        <div class="card-price">$89</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · BLOOM</div>
+      <div class="card-name">Bloom Raspberry Lemon</div>
+      <div class="card-bottom">
+        <div class="card-price">$89</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · BLOOM</div>
+      <div class="card-name">Bloom Strawberry Watermelon</div>
+      <div class="card-bottom">
+        <div class="card-price">$89</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · BANG</div>
+      <div class="card-name">Bang Swirly Pop</div>
+      <div class="card-bottom">
+        <div class="card-price">$89</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · BANG</div>
+      <div class="card-name">Bang Wyldin Watermelon</div>
+      <div class="card-bottom">
+        <div class="card-price">$89</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · BANG</div>
+      <div class="card-name">Bang Nectarine Blueberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$89</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · BLOOM</div>
+      <div class="card-name">Bloom Peach Mango</div>
+      <div class="card-bottom">
+        <div class="card-price">$89</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · MONSTER</div>
+      <div class="card-name">Monster Energy Taurine</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · NOS</div>
+      <div class="card-name">Nos Energy (16Oz / 24Pk)</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · BANG</div>
+      <div class="card-name">Bang Blue Razz</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · BANG</div>
+      <div class="card-name">Bang Rainbow Unicorn</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · BANG</div>
+      <div class="card-name">Bang Cherry Blade Lemonade</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · BANG</div>
+      <div class="card-name">Bang Cotton Candy</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · BANG</div>
+      <div class="card-name">Bang Purple Haze</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · BANG</div>
+      <div class="card-name">Bang Peach Mango</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · MONSTER</div>
+      <div class="card-name">Monster Ultra Violet</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">⚡ ENERGY · MONSTER</div>
+      <div class="card-name">Monster Energy 473Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">🏃 Bebidas Rehidratantes</span>
+    <span class="sec-badge badge-amber">GATORADE · PRIME HYDRATION · POWERADE</span>
+    <span class="sec-count">40 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">💧 REHIDRATANTE · PRIME</div>
+      <div class="card-name">Prime Hd Strawberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$90</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">💧 REHIDRATANTE · PRIME</div>
+      <div class="card-name">Prime Hd Lemonade</div>
+      <div class="card-bottom">
+        <div class="card-price">$90</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">💧 REHIDRATANTE · PRIME</div>
+      <div class="card-name">Prime Hd Blue Raspberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$90</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">💧 REHIDRATANTE · PRIME</div>
+      <div class="card-name">Prime Ed Iced Pop</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">💧 REHIDRATANTE · PRIME</div>
+      <div class="card-name">Prime Ed Original</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">💧 REHIDRATANTE · PRIME</div>
+      <div class="card-name">Prime Ed Strawberry Watermelon</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">🏃 REHIDRATANTE · GATORADE</div>
+      <div class="card-name">Gatorade Zero Fruit Punch</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">💧 REHIDRATANTE · PRIME</div>
+      <div class="card-name">Prime Strawberry Watermelon 9.3G</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">💧 REHIDRATANTE · PRIME</div>
+      <div class="card-name">Prime X 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">💧 REHIDRATANTE · PRIME</div>
+      <div class="card-name">Prime Lemonade 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">💧 REHIDRATANTE · PRIME</div>
+      <div class="card-name">Prime Ice Pop 9.7G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">💧 REHIDRATANTE · PRIME</div>
+      <div class="card-name">Prime Hd Strawberry Banana</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">💧 REHIDRATANTE · PRIME</div>
+      <div class="card-name">Prime Ice Pop 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">💧 REHIDRATANTE · PRIME</div>
+      <div class="card-name">Prime Lemonade</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">💧 REHIDRATANTE · PRIME</div>
+      <div class="card-name">Prime Frambuesa 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">💧 REHIDRATANTE · PRIME</div>
+      <div class="card-name">Prime Powder Stick Tropical Punch</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">💧 REHIDRATANTE · PRIME</div>
+      <div class="card-name">Prime Limonada 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">💧 REHIDRATANTE · PRIME</div>
+      <div class="card-name">Prime Powder Stick Lemon Lime</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">💧 REHIDRATANTE · PRIME</div>
+      <div class="card-name">Prime Powder Stick Blue Raspberry 9.8G</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">💧 REHIDRATANTE · PRIME</div>
+      <div class="card-name">Prime Meta Moon 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">💧 REHIDRATANTE · PRIME</div>
+      <div class="card-name">Prime Glowberry 16.9Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">🏃 REHIDRATANTE · GATORADE</div>
+      <div class="card-name">Gatorade Zero Frost Glacier Lemon Lime</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">🏃 REHIDRATANTE · GATORADE</div>
+      <div class="card-name">Gatorade Zero Frost Glacier Cherry</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">🏃 REHIDRATANTE · GATORADE</div>
+      <div class="card-name">Gatorade Frost Glacier Cherry</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">💧 REHIDRATANTE · PRIME</div>
+      <div class="card-name">Prime Ice Pop 355 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$55</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">💧 REHIDRATANTE · PRIME</div>
+      <div class="card-name">Prime Cherry Freeze 355Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$55</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">💧 REHIDRATANTE · PRIME</div>
+      <div class="card-name">Prime Berry Freeze 355 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$55</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">🏃 REHIDRATANTE · GATORADE</div>
+      <div class="card-name">Gatorade Frost Arctic Blitz</div>
+      <div class="card-bottom">
+        <div class="card-price">$50</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">🏃 REHIDRATANTE · GATORADE</div>
+      <div class="card-name">Gatorade Frost Glacer Freeze</div>
+      <div class="card-bottom">
+        <div class="card-price">$50</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">🏃 REHIDRATANTE · GATORADE</div>
+      <div class="card-name">Gatorade Zero Sugar Glacier Freeze</div>
+      <div class="card-bottom">
+        <div class="card-price">$39</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">🏃 REHIDRATANTE · GATORADE</div>
+      <div class="card-name">Gatorade Zero Sugar Naranja</div>
+      <div class="card-bottom">
+        <div class="card-price">$39</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">🏃 REHIDRATANTE · GATORADE</div>
+      <div class="card-name">Gatorade Fruit Punch 355Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$39</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">🏃 REHIDRATANTE · GATORADE</div>
+      <div class="card-name">Gatorade Lemon 355Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$39</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">🏃 REHIDRATANTE · GATORADE</div>
+      <div class="card-name">Gatorade Orange 355Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$39</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">🏃 REHIDRATANTE · GATORADE</div>
+      <div class="card-name">Gatorade Cool Blue 355Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$39</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">🏃 REHIDRATANTE · GATORADE</div>
+      <div class="card-name">Gatorade Frost Cool 355Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$39</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">🏃 REHIDRATANTE · GATORADE</div>
+      <div class="card-name">Gatorade Zero Sugar Grape</div>
+      <div class="card-bottom">
+        <div class="card-price">$39</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">🏃 REHIDRATANTE · GATORADE</div>
+      <div class="card-name">Gatorade Zero Wantermelon Splash 355Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">🏃 REHIDRATANTE · GATORADE</div>
+      <div class="card-name">Gatorade Zero Glacier Cherry 355Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="rehidratante">
+      <div class="card-origin">🏃 REHIDRATANTE · GATORADE</div>
+      <div class="card-name">Gatorade Zero Apple Burst 355Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">💪 Bebidas de Proteína</span>
+    <span class="sec-badge badge-blue">PREMIER PROTEIN · FAIRLIFE · SIX STAR</span>
+    <span class="sec-count">9 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="proteina">
+      <div class="card-origin">💪 PROTEÍNA · FAIRLIFE</div>
+      <div class="card-name">Fairlife Protein Shake 26Gr</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="proteina">
+      <div class="card-origin">💪 PROTEÍNA · FAIRLIFE</div>
+      <div class="card-name">Fair Life Core Power Elite 414 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="proteina">
+      <div class="card-origin">💪 PROTEÍNA · SIX STAR</div>
+      <div class="card-name">Sixstar Protein Froot Loops</div>
+      <div class="card-bottom">
+        <div class="card-price">$119</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="proteina">
+      <div class="card-origin">💪 PROTEÍNA · PREMIER</div>
+      <div class="card-name">Premier Protein Chocolate</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="proteina">
+      <div class="card-origin">💪 PROTEÍNA · PREMIER</div>
+      <div class="card-name">Premier Protein  Vainilla</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="proteina">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Premier Pumpkin 15 Ct</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="proteina">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Premier Indulgence White Chocolate Raspberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="proteina">
+      <div class="card-origin">💪 PROTEÍNA · PREMIER</div>
+      <div class="card-name">Premier Protein  Cafe Latte</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="proteina">
+      <div class="card-origin">💪 PROTEÍNA · FAIRLIFE</div>
+      <div class="card-name">Fair Life Chocolate 340Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">🧃 Jugos & Bebidas Importadas</span>
+    <span class="sec-badge badge-amber">CAPRI SUN · KOOL-AID · ARIZONA · WELCH'S · OCEAN SPRAY</span>
+    <span class="sec-count">69 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · COUNTRY TIME</div>
+      <div class="card-name">Country Time Lemonade 5Lb</div>
+      <div class="card-bottom">
+        <div class="card-price">$360</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · KOOL-AID</div>
+      <div class="card-name">Kool Aid 5Lb</div>
+      <div class="card-bottom">
+        <div class="card-price">$355</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · COUNTRY TIME</div>
+      <div class="card-name">Country Time Pink Lemonade 5Lb</div>
+      <div class="card-bottom">
+        <div class="card-price">$350</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · SIMPLY</div>
+      <div class="card-name">Simply Orange 1.36L.</div>
+      <div class="card-bottom">
+        <div class="card-price">$270</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · SIMPLY</div>
+      <div class="card-name">Simply Oj No Pulp 2Pk - 52Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$270</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · CAPRI SUN</div>
+      <div class="card-name">Caprisun  Fruit Punch 2.84 L.</div>
+      <div class="card-bottom">
+        <div class="card-price">$175</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · CAPRI SUN</div>
+      <div class="card-name">Caja Capri Apple Zero</div>
+      <div class="card-bottom">
+        <div class="card-price">$150</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · CAPRI SUN</div>
+      <div class="card-name">Caja Caprisun Strawberry Kiwi</div>
+      <div class="card-bottom">
+        <div class="card-price">$150</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · CAPRI SUN</div>
+      <div class="card-name">Caja Capri Fruit Punch Zero Added Sugar</div>
+      <div class="card-bottom">
+        <div class="card-price">$150</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · CAPRI SUN</div>
+      <div class="card-name">Caja Capri Pacific Cooler</div>
+      <div class="card-bottom">
+        <div class="card-price">$150</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · SPARKLING JUICE</div>
+      <div class="card-name">Sparkling White Grape Juice</div>
+      <div class="card-bottom">
+        <div class="card-price">$150</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · CAPRI SUN</div>
+      <div class="card-name">Caja Capri Berry</div>
+      <div class="card-bottom">
+        <div class="card-price">$150</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · CAPRI SUN</div>
+      <div class="card-name">Caja Capri Fruit Punch All Natural</div>
+      <div class="card-bottom">
+        <div class="card-price">$150</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · COUNTRY TIME</div>
+      <div class="card-name">Country Time Pick Lemonade</div>
+      <div class="card-bottom">
+        <div class="card-price">$150</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · COUNTRY TIME</div>
+      <div class="card-name">Country Time Lemonade 538G</div>
+      <div class="card-bottom">
+        <div class="card-price">$150</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · SPARKLING JUICE</div>
+      <div class="card-name">Sparkling Red Grape Juice</div>
+      <div class="card-bottom">
+        <div class="card-price">$150</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · KOOL-AID</div>
+      <div class="card-name">Kool Aid Cherry 538G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$145</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · KOOL-AID</div>
+      <div class="card-name">Kool Aid Tropical Punch 538 G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$145</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · KOOL-AID</div>
+      <div class="card-name">Kool Aid Grape 538G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$145</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · COUNTRY TIME</div>
+      <div class="card-name">Country Time Lemonade Strawberry 1.1Lb</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · KOOL-AID</div>
+      <div class="card-name">Caja Kool Aid Tropical</div>
+      <div class="card-bottom">
+        <div class="card-price">$130</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · CAPRI SUN</div>
+      <div class="card-name">Caja Light Capri Grape</div>
+      <div class="card-bottom">
+        <div class="card-price">$130</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · CAPRI SUN</div>
+      <div class="card-name">Caja Light Capri Strawberry Kiwi</div>
+      <div class="card-bottom">
+        <div class="card-price">$130</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · KOOL-AID</div>
+      <div class="card-name">Kool Aid Zero Sugar</div>
+      <div class="card-bottom">
+        <div class="card-price">$130</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · CAPRI SUN</div>
+      <div class="card-name">Caja Light Capri Wild Cherry</div>
+      <div class="card-bottom">
+        <div class="card-price">$130</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · KOOL-AID</div>
+      <div class="card-name">Caja Kool Aid Cherry</div>
+      <div class="card-bottom">
+        <div class="card-price">$130</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · KOOL-AID</div>
+      <div class="card-name">Caja Kool Aid Grape</div>
+      <div class="card-bottom">
+        <div class="card-price">$130</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · CAPRI SUN</div>
+      <div class="card-name">Caja Light Capri Tropical Punch</div>
+      <div class="card-bottom">
+        <div class="card-price">$130</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · PURE LEAF</div>
+      <div class="card-name">Pure Leaf Sweet Tea</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · PURE LEAF</div>
+      <div class="card-name">Pure Leaf Raspberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · PURE LEAF</div>
+      <div class="card-name">Pure Leaf Lemon</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · LIPTON</div>
+      <div class="card-name">Lipton Raspberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · ARIZONA</div>
+      <div class="card-name">Arizona Mango</div>
+      <div class="card-bottom">
+        <div class="card-price">$50</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · ARIZONA</div>
+      <div class="card-name">Arizona Fruit Punch</div>
+      <div class="card-bottom">
+        <div class="card-price">$50</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · ARIZONA</div>
+      <div class="card-name">Arizona Watermelon</div>
+      <div class="card-bottom">
+        <div class="card-price">$50</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · ARIZONA</div>
+      <div class="card-name">Arizona Green Te</div>
+      <div class="card-bottom">
+        <div class="card-price">$50</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · GOLD PEAK</div>
+      <div class="card-name">Gold Peak Sweet Tea 18 / 16.9Oz Bottle</div>
+      <div class="card-bottom">
+        <div class="card-price">$46</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Cantabile Bebida Sabor Uva</div>
+      <div class="card-bottom">
+        <div class="card-price">$45</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Cantabile Bebida Sabor Cafe Americano</div>
+      <div class="card-bottom">
+        <div class="card-price">$45</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · OCEAN SPRAY</div>
+      <div class="card-name">Ocean Spray Juice Cran X Raspberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$45</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · OCEAN SPRAY</div>
+      <div class="card-name">Ocean Spray Juice White Cranberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$45</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · OCEAN SPRAY</div>
+      <div class="card-name">Ocean Spray Juice Cran X Powegranate</div>
+      <div class="card-bottom">
+        <div class="card-price">$45</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Cantabile Bebida Sabor Fresa</div>
+      <div class="card-bottom">
+        <div class="card-price">$45</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · ICEE</div>
+      <div class="card-name">Icee Slush Blue Rasberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$40</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · ICEE</div>
+      <div class="card-name">Icee Slush Cherry Frost</div>
+      <div class="card-bottom">
+        <div class="card-price">$40</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · WELCH'S</div>
+      <div class="card-name">Welch'S Fruit Punch</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · WELCH'S</div>
+      <div class="card-name">Welch'S Grape</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · WELCH'S</div>
+      <div class="card-name">Welch'S Orange</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · WELCH'S</div>
+      <div class="card-name">Welchs Apple Juici</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · WELCH'S</div>
+      <div class="card-name">Welchs Concord Grape</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · WELCH'S</div>
+      <div class="card-name">Welchs Orange Pineapple</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · APPLE & EVE</div>
+      <div class="card-name">Apple&Eve Berry</div>
+      <div class="card-bottom">
+        <div class="card-price">$29</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · APPLE & EVE</div>
+      <div class="card-name">Apple&Eve Fruit Punch</div>
+      <div class="card-bottom">
+        <div class="card-price">$29</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · APPLE & EVE</div>
+      <div class="card-name">Apple&Eve Apple</div>
+      <div class="card-bottom">
+        <div class="card-price">$29</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · SNAPPLE</div>
+      <div class="card-name">Snapple Limon</div>
+      <div class="card-bottom">
+        <div class="card-price">$20</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · SNAPPLE</div>
+      <div class="card-name">Snapple Frambuesa 473Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$20</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · SNAPPLE</div>
+      <div class="card-name">Snapple Diet Durazno</div>
+      <div class="card-bottom">
+        <div class="card-price">$20</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · KOOL-AID</div>
+      <div class="card-name">Kool Aid 177Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$20</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · SNAPPLE</div>
+      <div class="card-name">Snapple Durazno</div>
+      <div class="card-bottom">
+        <div class="card-price">$20</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · SNAPPLE</div>
+      <div class="card-name">Snapple Diet  Limon</div>
+      <div class="card-bottom">
+        <div class="card-price">$20</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · SNAPPLE</div>
+      <div class="card-name">Snapple Diet  Frambuesa</div>
+      <div class="card-bottom">
+        <div class="card-price">$20</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🏃 REHIDRATANTE · POWERADE</div>
+      <div class="card-name">Powerade Frutas 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$20</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🏃 REHIDRATANTE · POWERADE</div>
+      <div class="card-name">Powerade Moras 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$20</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · ARIZONA</div>
+      <div class="card-name">Arizona Sandia</div>
+      <div class="card-bottom">
+        <div class="card-price">$17</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · ARIZONA</div>
+      <div class="card-name">Arizona Mucho Mango</div>
+      <div class="card-bottom">
+        <div class="card-price">$17</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · ARIZONA</div>
+      <div class="card-name">Arizona Te Negro</div>
+      <div class="card-bottom">
+        <div class="card-price">$17</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · ARIZONA</div>
+      <div class="card-name">Arizona Ponche De Frutas</div>
+      <div class="card-bottom">
+        <div class="card-price">$17</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇺🇸 AMERICANA · ARIZONA</div>
+      <div class="card-name">Arizona Te Verde</div>
+      <div class="card-bottom">
+        <div class="card-price">$17</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="jugos">
+      <div class="card-origin">🇲🇽 NACIONAL · JAZTEA</div>
+      <div class="card-name">Jaztea Original 500 Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$16</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="wa-float">
+  <div class="wa-tip">Pedido rápido por WhatsApp</div>
+  <a class="wa-btn" href="https://wa.me/52TUNUMERO?text=Hola%2C+vi+el+cat%C3%A1logo+de+Casa+Market+y+me+interesa+hacer+un+pedido." target="_blank">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.862L.054 23.45a.5.5 0 00.607.606l5.647-1.464A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.667-.502-5.2-1.378l-.373-.216-3.863 1.002 1.024-3.772-.234-.384A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Hacer pedido
+  </a>
+</div>
+<footer>
+  <div class="footer-brand">Casa <span>Market</span></div>
+  <div class="footer-info">CATÁLOGO REFRESCOS &amp; BEBIDAS IMPORTADAS · B2B 2026<br>ZAMORA, MICHOACÁN</div>
+</footer>
+<script>
+  const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.05});
+  document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+  function filterAll(){document.querySelectorAll('.card').forEach(c=>c.style.display='');}
+  function filterGroup(g){document.querySelectorAll('.card').forEach(c=>{c.style.display=c.dataset.group===g?'':'none';});}
+  function tabClick(el){document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('active'));el.classList.add('active');}
+</script>
+</body>
+</html>

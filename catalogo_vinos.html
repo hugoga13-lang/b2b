@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa Market B2B - VINOS Y SAKE</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#0a0a0a;--dark:#111;--card:#161616;--white:#f0f0f0;--muted:rgba(240,240,240,0.45);--border:rgba(255,255,255,0.07);--accent:#ffd60a;--neon:#00ff88;--gold:#ffd60a;--hot:#ff2d55;--blue:#0af;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--black);color:var(--white);font-family:"DM Sans",sans-serif;}
+  .topbar{background:var(--dark);border-bottom:1px solid var(--border);padding:12px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+  .back-link{font-family:"Space Mono",monospace;font-size:.65rem;letter-spacing:.15em;color:var(--muted);text-decoration:none;}
+  .back-link:hover{color:var(--white);}
+  .topbar-brand{font-family:"Bebas Neue",sans-serif;font-size:1.3rem;letter-spacing:.08em;}
+  .topbar-brand span{color:var(--gold);}
+  .topbar-cat{font-family:"Space Mono",monospace;font-size:.6rem;letter-spacing:.2em;color:var(--accent);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);padding:4px 12px;border-radius:20px;}
+  .hero{padding:70px 40px 50px;max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end;}
+  .hero-eyebrow{font-family:"Space Mono",monospace;font-size:.65rem;letter-spacing:.3em;color:var(--accent);margin-bottom:12px;}
+  .hero-title{font-family:"Bebas Neue",sans-serif;font-size:clamp(4rem,10vw,8rem);line-height:.88;}
+  .hero-title .line2{color:var(--accent);}
+  .hero-desc{margin-top:20px;font-size:.95rem;font-weight:300;color:var(--muted);line-height:1.7;max-width:520px;}
+  .hero-stat-num{font-family:"Bebas Neue",sans-serif;font-size:3rem;color:var(--accent);line-height:1;}
+  .hero-stat-label{font-family:"Space Mono",monospace;font-size:.6rem;letter-spacing:.15em;color:var(--muted);margin-top:2px;}
+  .price-banner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;background:rgba(255,214,10,.06);border:1px solid rgba(255,214,10,.2);border-radius:10px;padding:12px 20px;margin-bottom:28px;}
+  .price-banner-left{display:flex;align-items:center;gap:10px;font-family:"Space Mono",monospace;font-size:.7rem;color:rgba(240,240,240,.65);}
+  .price-banner-left strong{color:var(--white);}
+  .price-banner-left .disc{color:var(--gold);}
+  .price-banner a{font-family:"Space Mono",monospace;font-size:.65rem;color:var(--gold);text-decoration:none;border:1px solid rgba(255,214,10,.3);padding:6px 14px;border-radius:6px;white-space:nowrap;}
+  .filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:32px;}
+  .ftab{font-family:"Space Mono",monospace;font-size:.62rem;letter-spacing:.12em;padding:7px 14px;border:1px solid var(--border);border-radius:20px;color:var(--muted);cursor:pointer;background:transparent;transition:all .2s;}
+  .ftab:hover,.ftab.active{border-color:var(--accent);color:var(--accent);background:rgba(255,255,255,.04);}
+  .section{padding:0 40px 70px;max-width:1400px;margin:0 auto;}
+  .sec-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+  .sec-title{font-family:"Bebas Neue",sans-serif;font-size:2rem;letter-spacing:.05em;line-height:1;}
+  .sec-count{font-family:"Space Mono",monospace;font-size:.6rem;color:var(--muted);letter-spacing:.15em;margin-left:auto;}
+  .sec-badge{font-family:"Space Mono",monospace;font-size:.6rem;letter-spacing:.1em;padding:4px 10px;border-radius:20px;}
+  .badge-amber{background:rgba(255,149,0,.12);color:#ff9500;border:1px solid rgba(255,149,0,.3);}
+  .badge-neon{background:rgba(0,255,136,.08);color:var(--neon);border:1px solid rgba(0,255,136,.25);}
+  .badge-blue{background:rgba(0,170,255,.08);color:var(--blue);border:1px solid rgba(0,170,255,.25);}
+  .badge-hot{background:rgba(255,45,85,.08);color:var(--hot);border:1px solid rgba(255,45,85,.25);}
+  .badge-gold{background:rgba(255,214,10,.08);color:var(--gold);border:1px solid rgba(255,214,10,.25);}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px;}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px 18px;display:flex;flex-direction:column;gap:6px;transition:border-color .25s,transform .2s;}
+  .card:hover{border-color:rgba(255,255,255,.18);transform:translateY(-2px);}
+  .card-origin{font-family:"Space Mono",monospace;font-size:.58rem;letter-spacing:.2em;color:var(--muted);}
+  .card-name{font-size:.95rem;font-weight:500;line-height:1.35;color:var(--white);}
+  .card-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,.05);}
+  .card-price{font-family:"Bebas Neue",sans-serif;font-size:1.9rem;color:var(--accent);line-height:1;}
+  .pill{font-family:"Space Mono",monospace;font-size:.55rem;letter-spacing:.08em;padding:4px 9px;border-radius:5px;}
+  .pill-stock{background:rgba(0,255,136,.1);color:var(--neon);}
+  .pill-gold{background:rgba(255,214,10,.1);color:var(--gold);}
+  .pill-hot{background:rgba(255,45,85,.1);color:var(--hot);}
+  .pill-blue{background:rgba(0,170,255,.1);color:var(--blue);}
+  .pill-amber{background:rgba(255,149,0,.1);color:#ff9500;}
+  .wa-float{position:fixed;bottom:24px;right:24px;z-index:999;display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+  .wa-tip{background:rgba(0,0,0,.8);color:#fff;font-family:"Space Mono",monospace;font-size:.62rem;padding:5px 10px;border-radius:6px;white-space:nowrap;}
+  .wa-btn{display:flex;align-items:center;gap:9px;background:#25D366;color:#fff;text-decoration:none;padding:13px 20px;border-radius:50px;font-family:"DM Sans",sans-serif;font-size:.9rem;font-weight:500;transition:transform .2s;}
+  .wa-btn:hover{transform:scale(1.04);}
+  .wa-btn svg{width:20px;height:20px;flex-shrink:0;}
+  footer{background:#050505;border-top:1px solid var(--border);padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .footer-brand{font-family:"Bebas Neue",sans-serif;font-size:1.4rem;letter-spacing:.08em;}
+  .footer-brand span{color:var(--gold);}
+  .footer-info{font-family:"Space Mono",monospace;font-size:.6rem;letter-spacing:.15em;color:rgba(240,240,240,.18);text-align:right;}
+  @media(max-width:700px){.topbar,.hero,.section{padding-left:16px;padding-right:16px;}.hero{grid-template-columns:1fr;}.grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));}.footer-info{text-align:left;}}
+  .fade-in{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div style="display:flex;align-items:center;gap:16px;">
+    <a class="back-link" href="index.html">&larr; Inicio</a>
+    <div class="topbar-brand">Casa <span>Market</span></div>
+  </div>
+  <span class="topbar-cat">VINOS</span>
+</div>
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">CATALOGO B2B - CATEGORIA 06</div>
+    <h1 class="hero-title"><div>VINOS</div><div class="line2">Y SAKE</div></h1>
+    <p class="hero-desc">Sake japones premium, Stella Rosa, Barefoot, vinos espumosos, tintos y licores importados.</p>
+  </div>
+  <div>
+    <div class="hero-stat-num">107</div>
+    <div class="hero-stat-label">PRODUCTOS</div>
+  </div>
+</div>
+<div class="section">
+  <div class="filter-row">
+    <button class="ftab active" onclick="filterAll();tabClick(this)">Todos</button>
+    <button class="ftab" onclick="filterGroup("sake");tabClick(this)">Sake Premium</button>
+    <button class="ftab" onclick="filterGroup("stellarosa");tabClick(this)">Stella Rosa</button>
+    <button class="ftab" onclick="filterGroup("barefoot");tabClick(this)">Barefoot</button>
+    <button class="ftab" onclick="filterGroup("espumoso");tabClick(this)">Espumosos</button>
+    <button class="ftab" onclick="filterGroup("tintos");tabClick(this)">Tintos y Blancos</button>
+    <button class="ftab" onclick="filterGroup("licores");tabClick(this)">Licores</button>
+  </div>
+  <div class="price-banner">
+    <div class="price-banner-left">
+      <span style="font-size:16px;">&#127991;</span>
+      Precio por <strong>&nbsp;1 pieza&nbsp;</strong> &middot; Compra por caja: <strong class="disc">&nbsp;10% de descuento</strong>
+    </div>
+    <a href="https://wa.me/52TUNUMERO?text=Hola%2C+quiero+cotizar+un+pedido+por+caja+de+Casa+Market." target="_blank">Cotizar por caja &rarr;</a>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">Sake Japones Premium</span>
+    <span class="sec-badge badge-gold">KAGATOBI - SAWANOTSURU - TAKASHIMIZU - RYOKO</span>
+    <span class="sec-count">18 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="sake">
+      <div class="card-origin">JAPONES - SAKE</div>
+      <div class="card-name">Sake Takashimizu 1800Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$1,450</div>
+        <span class="pill pill-gold">Premium</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sake">
+      <div class="card-origin">JAPONES - SAKE</div>
+      <div class="card-name">Sawanotsuru Sake 1.8Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$1,200</div>
+        <span class="pill pill-gold">Premium</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sake">
+      <div class="card-origin">JAPONES - SAKE</div>
+      <div class="card-name">Takashimizu 1.8Tl</div>
+      <div class="card-bottom">
+        <div class="card-price">$1,100</div>
+        <span class="pill pill-gold">Premium</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sake">
+      <div class="card-origin">JAPONES - SAKE</div>
+      <div class="card-name">Kagatobi Sake 1800Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$1,100</div>
+        <span class="pill pill-gold">Premium</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sake">
+      <div class="card-origin">JAPONES - SAKE</div>
+      <div class="card-name">Takashimizu Junmai 300Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$320</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sake">
+      <div class="card-origin">JAPONES - SAKE</div>
+      <div class="card-name">Sawanotsuru Sake 300Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$310</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sake">
+      <div class="card-origin">JAPONES - SAKE</div>
+      <div class="card-name">Ryoko Junmai Ginjo 300Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$300</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sake">
+      <div class="card-origin">JAPONES - SAKE</div>
+      <div class="card-name">Ryoko Ginjo Sake 300Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$300</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sake">
+      <div class="card-origin">JAPONES - SAKE</div>
+      <div class="card-name">Ryoko Junmai Daiginjo 300Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$300</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sake">
+      <div class="card-origin">JAPONES - SAKE</div>
+      <div class="card-name">Ryoko Honjoso Sake 300Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$300</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sake">
+      <div class="card-origin">JAPONES - SAKE</div>
+      <div class="card-name">Ryoko Nigori Sake 300Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$300</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sake">
+      <div class="card-origin">JAPONES - SAKE</div>
+      <div class="card-name">Ryoko Plum</div>
+      <div class="card-bottom">
+        <div class="card-price">$300</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sake">
+      <div class="card-origin">JAPONES - SAKE</div>
+      <div class="card-name">Kagatobi  Gokkan Junmai Sake 330Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$299</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sake">
+      <div class="card-origin">JAPONES - SAKE</div>
+      <div class="card-name">Takashimizu Junmaishu 300Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$299</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sake">
+      <div class="card-origin">JAPONES - SAKE</div>
+      <div class="card-name">Sawanotsoru Sake 300Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$220</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sake">
+      <div class="card-origin">JAPONES - SAKE</div>
+      <div class="card-name">Sawanotsuru Jumai Sake 180Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$220</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sake">
+      <div class="card-origin">JAPONES - SAKE</div>
+      <div class="card-name">Nakano Nigori Sake 330Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$182</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="sake">
+      <div class="card-origin">JAPONES - SAKE</div>
+      <div class="card-name">Shushu Sake 180Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$182</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">Stella Rosa</span>
+    <span class="sec-badge badge-neon">TODOS LOS SABORES - MOSCATO - BLUEBERRY - PINK</span>
+    <span class="sec-count">20 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="stellarosa">
+      <div class="card-origin">ITALIANA - STELLA ROSA</div>
+      <div class="card-name">Stella Rosa Stellabration Assortment  5 Pk</div>
+      <div class="card-bottom">
+        <div class="card-price">$820</div>
+        <span class="pill pill-gold">Premium</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="stellarosa">
+      <div class="card-origin">ITALIANA - STELLA ROSA</div>
+      <div class="card-name">Stella Rosa Gold V.S,</div>
+      <div class="card-bottom">
+        <div class="card-price">$750</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="stellarosa">
+      <div class="card-origin">ITALIANA - STELLA ROSA</div>
+      <div class="card-name">Stella Rosa Pride Edition</div>
+      <div class="card-bottom">
+        <div class="card-price">$680</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="stellarosa">
+      <div class="card-origin">ITALIANA - STELLA ROSA</div>
+      <div class="card-name">Stella Rosa Berry</div>
+      <div class="card-bottom">
+        <div class="card-price">$455</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="stellarosa">
+      <div class="card-origin">ITALIANA - STELLA ROSA</div>
+      <div class="card-name">Stella Rosa Pink</div>
+      <div class="card-bottom">
+        <div class="card-price">$455</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="stellarosa">
+      <div class="card-origin">ITALIANA - STELLA ROSA</div>
+      <div class="card-name">Stella Rosa Blueberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$455</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="stellarosa">
+      <div class="card-origin">ITALIANA - STELLA ROSA</div>
+      <div class="card-name">Stella Rosa Black</div>
+      <div class="card-bottom">
+        <div class="card-price">$455</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="stellarosa">
+      <div class="card-origin">ITALIANA - STELLA ROSA</div>
+      <div class="card-name">Stella Rosa Gold Honey</div>
+      <div class="card-bottom">
+        <div class="card-price">$455</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="stellarosa">
+      <div class="card-origin">ITALIANA - STELLA ROSA</div>
+      <div class="card-name">Stella Rosa Peach</div>
+      <div class="card-bottom">
+        <div class="card-price">$455</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="stellarosa">
+      <div class="card-origin">ITALIANA - STELLA ROSA</div>
+      <div class="card-name">Stella Rosa Pineapple</div>
+      <div class="card-bottom">
+        <div class="card-price">$455</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="stellarosa">
+      <div class="card-origin">ITALIANA - STELLA ROSA</div>
+      <div class="card-name">Stella Rosa Mango</div>
+      <div class="card-bottom">
+        <div class="card-price">$455</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="stellarosa">
+      <div class="card-origin">ITALIANA - STELLA ROSA</div>
+      <div class="card-name">Stella Rosa Moscato D'Asti</div>
+      <div class="card-bottom">
+        <div class="card-price">$455</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="stellarosa">
+      <div class="card-origin">ITALIANA - STELLA ROSA</div>
+      <div class="card-name">Stella Rosa Rose</div>
+      <div class="card-bottom">
+        <div class="card-price">$455</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="stellarosa">
+      <div class="card-origin">ITALIANA - STELLA ROSA</div>
+      <div class="card-name">Stella Rosa Red</div>
+      <div class="card-bottom">
+        <div class="card-price">$455</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="stellarosa">
+      <div class="card-origin">ITALIANA - STELLA ROSA</div>
+      <div class="card-name">Stella Rosa Watermelon</div>
+      <div class="card-bottom">
+        <div class="card-price">$455</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="stellarosa">
+      <div class="card-origin">ITALIANA - STELLA ROSA</div>
+      <div class="card-name">Stella Rosa Non Alcoholic Black 710Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$440</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="stellarosa">
+      <div class="card-origin">ITALIANA - STELLA ROSA</div>
+      <div class="card-name">Stella Rosa Non Alcoholic Rose 750 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$440</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="stellarosa">
+      <div class="card-origin">ITALIANA - STELLA ROSA</div>
+      <div class="card-name">Stella Rosa Cranberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$400</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="stellarosa">
+      <div class="card-origin">ITALIANA - STELLA ROSA</div>
+      <div class="card-name">Stella Rosa L Originale 750Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$380</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="stellarosa">
+      <div class="card-origin">ITALIANA - STELLA ROSA</div>
+      <div class="card-name">Stella Rosa Moscato</div>
+      <div class="card-bottom">
+        <div class="card-price">$340</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">Barefoot</span>
+    <span class="sec-badge badge-amber">MOSCATO - MERLOT - FRUITSCATO - RED</span>
+    <span class="sec-count">7 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="barefoot">
+      <div class="card-origin">AMERICANA - BAREFOOT</div>
+      <div class="card-name">Barefoot Bubbly Pink Moscato</div>
+      <div class="card-bottom">
+        <div class="card-price">$355</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="barefoot">
+      <div class="card-origin">AMERICANA - BAREFOOT</div>
+      <div class="card-name">Barefoot Pink Moscato</div>
+      <div class="card-bottom">
+        <div class="card-price">$280</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="barefoot">
+      <div class="card-origin">AMERICANA - BAREFOOT</div>
+      <div class="card-name">Barefoot Red Moscato</div>
+      <div class="card-bottom">
+        <div class="card-price">$280</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="barefoot">
+      <div class="card-origin">AMERICANA - BAREFOOT</div>
+      <div class="card-name">Barefoot Fruitscato Peach Rose</div>
+      <div class="card-bottom">
+        <div class="card-price">$275</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="barefoot">
+      <div class="card-origin">AMERICANA - BAREFOOT</div>
+      <div class="card-name">Barefoot Fruitscato Blueberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$269</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="barefoot">
+      <div class="card-origin">AMERICANA - BAREFOOT</div>
+      <div class="card-name">Barefoot Merlot</div>
+      <div class="card-bottom">
+        <div class="card-price">$269</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="barefoot">
+      <div class="card-origin">AMERICANA - BAREFOOT</div>
+      <div class="card-name">Barefoot Fruitscato Strawberry Rose Wine 750Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$269</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">Espumosos y Vinos Dulces</span>
+    <span class="sec-badge badge-blue">CHANDON - SPRITZ - LAGIOIOSA - GIACOBAZZI</span>
+    <span class="sec-count">12 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="espumoso">
+      <div class="card-origin">ARGENTINA - CHANDON</div>
+      <div class="card-name">Chandon Spritz Vino</div>
+      <div class="card-bottom">
+        <div class="card-price">$520</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="espumoso">
+      <div class="card-origin">ITALIANA - ESPUMOSO</div>
+      <div class="card-name">Spritz Del Conte</div>
+      <div class="card-bottom">
+        <div class="card-price">$350</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="espumoso">
+      <div class="card-origin">ITALIANA - ESPUMOSO</div>
+      <div class="card-name">Lagioiosa Fragolino 750Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$350</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="espumoso">
+      <div class="card-origin">ITALIANA - ESPUMOSO</div>
+      <div class="card-name">Giacobazzi Rose Moscato 750Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$285</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="espumoso">
+      <div class="card-origin">ITALIANA - ESPUMOSO</div>
+      <div class="card-name">Donelli Lambrusco Vino</div>
+      <div class="card-bottom">
+        <div class="card-price">$220</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="espumoso">
+      <div class="card-origin">ITALIANA - ESPUMOSO</div>
+      <div class="card-name">Giacobazzi Modena</div>
+      <div class="card-bottom">
+        <div class="card-price">$220</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="espumoso">
+      <div class="card-origin">ITALIANA - ESPUMOSO</div>
+      <div class="card-name">Cavicchioli Dolce</div>
+      <div class="card-bottom">
+        <div class="card-price">$170</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="espumoso">
+      <div class="card-origin">ITALIANA - ESPUMOSO</div>
+      <div class="card-name">Giacobazzi Modena Gioioso</div>
+      <div class="card-bottom">
+        <div class="card-price">$170</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="espumoso">
+      <div class="card-origin">ITALIANA - ESPUMOSO</div>
+      <div class="card-name">Giacobazzi Modena Moscato</div>
+      <div class="card-bottom">
+        <div class="card-price">$170</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="espumoso">
+      <div class="card-origin">ITALIANA - ESPUMOSO</div>
+      <div class="card-name">Giacobazzi Modena Lambrusco</div>
+      <div class="card-bottom">
+        <div class="card-price">$170</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="espumoso">
+      <div class="card-origin">ITALIANA - ESPUMOSO</div>
+      <div class="card-name">Spritz Opera Prima</div>
+      <div class="card-bottom">
+        <div class="card-price">$160</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="espumoso">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Welch'S Sparkling Water</div>
+      <div class="card-bottom">
+        <div class="card-price">$120</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">Vinos Tintos y Blancos</span>
+    <span class="sec-badge badge-amber">19 CRIMES - CASA MADERO - YELLOW TAIL - CUNE</span>
+    <span class="sec-count">47 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">AUSTRALIANA - 19 CRIMES</div>
+      <div class="card-name">19 Crimes Snoop Dog</div>
+      <div class="card-bottom">
+        <div class="card-price">$555</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">MEXICANA - CASA MADERO</div>
+      <div class="card-name">Casa Madero Cabernet Sauvignon</div>
+      <div class="card-bottom">
+        <div class="card-price">$520</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">MEXICANA - CASA MADERO</div>
+      <div class="card-name">Casa Madero Malbec</div>
+      <div class="card-bottom">
+        <div class="card-price">$520</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">MEXICANA - CASA MADERO</div>
+      <div class="card-name">Casa Madero Tinto 3V</div>
+      <div class="card-bottom">
+        <div class="card-price">$520</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">MEXICANA - CASA MADERO</div>
+      <div class="card-name">Casa Madero Shiraz</div>
+      <div class="card-bottom">
+        <div class="card-price">$520</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">MEXICANA - CASA MADERO</div>
+      <div class="card-name">Casa Madero Merlot</div>
+      <div class="card-bottom">
+        <div class="card-price">$520</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Corajito 750Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$470</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">AUSTRALIANA - 19 CRIMES</div>
+      <div class="card-name">19 Crimes Snoop Dog Cali Rose</div>
+      <div class="card-bottom">
+        <div class="card-price">$455</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Roscato Red Wine 750Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$455</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">The Wishbone</div>
+      <div class="card-bottom">
+        <div class="card-price">$455</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">MEXICANA - CASA MADERO</div>
+      <div class="card-name">Casa Madero 2V 2019</div>
+      <div class="card-bottom">
+        <div class="card-price">$430</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Santo Tomas 31.8 Vino Tinto</div>
+      <div class="card-bottom">
+        <div class="card-price">$420</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">AUSTRALIANA - 19 CRIMES</div>
+      <div class="card-name">19 Crimes Red Wine</div>
+      <div class="card-bottom">
+        <div class="card-price">$410</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Egg Nog 1.75L</div>
+      <div class="card-bottom">
+        <div class="card-price">$380</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Baron Maxime</div>
+      <div class="card-bottom">
+        <div class="card-price">$350</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">ESPANOLA - CUNE RIOJA</div>
+      <div class="card-name">Cune Rioja Crianza 2019</div>
+      <div class="card-bottom">
+        <div class="card-price">$350</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">ESPANOLA - CUNE RIOJA</div>
+      <div class="card-name">Cune Rioja Vino Tinto</div>
+      <div class="card-bottom">
+        <div class="card-price">$350</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Riunite Lambrusco 1.5Lt</div>
+      <div class="card-bottom">
+        <div class="card-price">$320</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Oliver Winery Cherry Moscato</div>
+      <div class="card-bottom">
+        <div class="card-price">$320</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Trisquel Aresti</div>
+      <div class="card-bottom">
+        <div class="card-price">$289</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Finca Las Moras Chardonnay</div>
+      <div class="card-bottom">
+        <div class="card-price">$286</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">El Jefe</div>
+      <div class="card-bottom">
+        <div class="card-price">$280</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">AUSTRALIANA - YELLOW TAIL</div>
+      <div class="card-name">Yellow Tail Shiraz</div>
+      <div class="card-bottom">
+        <div class="card-price">$280</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Indigo Eyes Pinot</div>
+      <div class="card-bottom">
+        <div class="card-price">$275</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Chilensis Carmenere</div>
+      <div class="card-bottom">
+        <div class="card-price">$270</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Sangria Kirkland 1.5 Lt</div>
+      <div class="card-bottom">
+        <div class="card-price">$259</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Viña Eguia Reserva 2017</div>
+      <div class="card-bottom">
+        <div class="card-price">$255</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Domaine Bousquet Cabernet</div>
+      <div class="card-bottom">
+        <div class="card-price">$250</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Beringer White Zinfandel</div>
+      <div class="card-bottom">
+        <div class="card-price">$240</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Recotte 2020 La Vieille Ferme</div>
+      <div class="card-bottom">
+        <div class="card-price">$233</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Finca Las Moras Cabernet Reserva 750Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$230</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Vino Tinto La Redonda</div>
+      <div class="card-bottom">
+        <div class="card-price">$230</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Vino Rosado La Redonda</div>
+      <div class="card-bottom">
+        <div class="card-price">$230</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">La Cetto Rosado</div>
+      <div class="card-bottom">
+        <div class="card-price">$210</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Vino Tinto Baron Maxime Merlot</div>
+      <div class="card-bottom">
+        <div class="card-price">$190</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">La Cetto Cabernet Sauvignon</div>
+      <div class="card-bottom">
+        <div class="card-price">$175</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Vino Blanco Domecq</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Vino Tinto Domeco  Xa 750 Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Finca Las Moras Malbec 750 Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$150</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Sidra Valle Redondo</div>
+      <div class="card-bottom">
+        <div class="card-price">$145</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Sidra  Rosa Poma Rosa</div>
+      <div class="card-bottom">
+        <div class="card-price">$145</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Sidra Rosa Valle Redondo</div>
+      <div class="card-bottom">
+        <div class="card-price">$145</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Merlot Italia Caetano 750 Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$140</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Vino Tinto 4 Soles</div>
+      <div class="card-bottom">
+        <div class="card-price">$140</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Vino Blanco Finca Las Moras Sauvigon</div>
+      <div class="card-bottom">
+        <div class="card-price">$140</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Sidra El Pomar</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="tintos">
+      <div class="card-origin">VINO IMPORTADO</div>
+      <div class="card-name">Vinotinto Conchaytoro Cabernet</div>
+      <div class="card-bottom">
+        <div class="card-price">$120</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">Licores Premium</span>
+    <span class="sec-badge badge-gold">BAILEYS - LICOR 43 - CHIVAS</span>
+    <span class="sec-count">3 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="licores">
+      <div class="card-origin">ESPANOL - LICOR 43</div>
+      <div class="card-name">Licor Del 43 700Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$420</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="licores">
+      <div class="card-origin">IRLANDES - BAILEYS</div>
+      <div class="card-name">Baileys Original 700Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$375</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="licores">
+      <div class="card-origin">ESCOCES - CHIVAS</div>
+      <div class="card-name">Chivas Regal Gold 200Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$180</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="wa-float">
+  <div class="wa-tip">Pedido rapido por WhatsApp</div>
+  <a class="wa-btn" href="https://wa.me/52TUNUMERO?text=Hola%2C+vi+el+catalogo+de+Casa+Market+y+me+interesa+hacer+un+pedido." target="_blank">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.862L.054 23.45a.5.5 0 00.607.606l5.647-1.464A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.667-.502-5.2-1.378l-.373-.216-3.863 1.002 1.024-3.772-.234-.384A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Hacer pedido
+  </a>
+</div>
+<footer>
+  <div class="footer-brand">Casa <span>Market</span></div>
+  <div class="footer-info">CATALOGO VINOS Y SAKE &middot; B2B 2026<br>ZAMORA, MICHOAC&Aacute;N</div>
+</footer>
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add("visible"); });
+  }, {threshold: 0.05});
+  document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+  function filterAll() {
+    document.querySelectorAll(".card").forEach(c => c.style.display = "");
+  }
+  function filterGroup(g) {
+    document.querySelectorAll(".card").forEach(c => {
+      c.style.display = (c.dataset.group === g) ? "" : "none";
+    });
+  }
+  function tabClick(el) {
+    document.querySelectorAll(".ftab").forEach(t => t.classList.remove("active"));
+    el.classList.add("active");
+  }
+</script>
+</body>
+</html>

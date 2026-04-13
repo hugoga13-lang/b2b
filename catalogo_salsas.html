@@ -1,0 +1,3455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa Market B2B – SALSAS & CONDIMENTOS</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#0a0a0a;--dark:#111;--card:#161616;--white:#f0f0f0;--muted:rgba(240,240,240,0.45);--border:rgba(255,255,255,0.07);--accent:#ff2d55;--neon:#00ff88;--gold:#ffd60a;--hot:#ff2d55;--blue:#0af;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;}
+  .topbar{background:var(--dark);border-bottom:1px solid var(--border);padding:12px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+  .back-link{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.15em;color:var(--muted);text-decoration:none;}
+  .back-link:hover{color:var(--white);}
+  .topbar-brand{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.08em;}
+  .topbar-brand span{color:var(--gold);}
+  .topbar-cat{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.2em;color:var(--accent);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);padding:4px 12px;border-radius:20px;}
+  .hero{padding:70px 40px 50px;max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end;}
+  .hero-eyebrow{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.3em;color:var(--accent);margin-bottom:12px;}
+  .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,10vw,8rem);line-height:.88;}
+  .hero-title .line2{color:var(--accent);}
+  .hero-desc{margin-top:20px;font-size:.95rem;font-weight:300;color:var(--muted);line-height:1.7;max-width:520px;}
+  .hero-stat-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--accent);line-height:1;}
+  .hero-stat-label{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.15em;color:var(--muted);margin-top:2px;}
+  .price-banner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;background:rgba(255,214,10,.06);border:1px solid rgba(255,214,10,.2);border-radius:10px;padding:12px 20px;margin-bottom:28px;}
+  .price-banner-left{display:flex;align-items:center;gap:10px;font-family:'Space Mono',monospace;font-size:.7rem;color:rgba(240,240,240,.65);}
+  .price-banner-left strong{color:var(--white);}
+  .price-banner-left .disc{color:var(--gold);}
+  .price-banner a{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--gold);text-decoration:none;border:1px solid rgba(255,214,10,.3);padding:6px 14px;border-radius:6px;white-space:nowrap;}
+  .filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:32px;}
+  .ftab{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.12em;padding:7px 14px;border:1px solid var(--border);border-radius:20px;color:var(--muted);cursor:pointer;background:transparent;transition:all .2s;}
+  .ftab:hover,.ftab.active{border-color:var(--accent);color:var(--accent);background:rgba(255,255,255,.04);}
+  .section{padding:0 40px 70px;max-width:1400px;margin:0 auto;}
+  .sec-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+  .sec-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.05em;line-height:1;}
+  .sec-count{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.15em;margin-left:auto;}
+  .sec-badge{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.1em;padding:4px 10px;border-radius:20px;}
+  .badge-amber{background:rgba(255,149,0,.12);color:#ff9500;border:1px solid rgba(255,149,0,.3);}
+  .badge-neon{background:rgba(0,255,136,.08);color:var(--neon);border:1px solid rgba(0,255,136,.25);}
+  .badge-blue{background:rgba(0,170,255,.08);color:var(--blue);border:1px solid rgba(0,170,255,.25);}
+  .badge-hot{background:rgba(255,45,85,.08);color:var(--hot);border:1px solid rgba(255,45,85,.25);}
+  .badge-gold{background:rgba(255,214,10,.08);color:var(--gold);border:1px solid rgba(255,214,10,.25);}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px;}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px 18px;display:flex;flex-direction:column;gap:6px;transition:border-color .25s,transform .2s;}
+  .card:hover{border-color:rgba(255,255,255,.18);transform:translateY(-2px);}
+  .card-origin{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.2em;color:var(--muted);}
+  .card-name{font-size:.95rem;font-weight:500;line-height:1.35;color:var(--white);}
+  .card-detail{font-size:.78rem;color:var(--muted);font-weight:300;}
+  .card-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,.05);}
+  .card-price{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;color:var(--accent);line-height:1;}
+  .pill{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.08em;padding:4px 9px;border-radius:5px;}
+  .pill-stock{background:rgba(0,255,136,.1);color:var(--neon);}
+  .pill-gold{background:rgba(255,214,10,.1);color:var(--gold);}
+  .pill-hot{background:rgba(255,45,85,.1);color:var(--hot);}
+  .pill-blue{background:rgba(0,170,255,.1);color:var(--blue);}
+  .pill-amber{background:rgba(255,149,0,.1);color:#ff9500;}
+  .wa-float{position:fixed;bottom:24px;right:24px;z-index:999;display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+  .wa-tip{background:rgba(0,0,0,.8);color:#fff;font-family:'Space Mono',monospace;font-size:.62rem;padding:5px 10px;border-radius:6px;white-space:nowrap;}
+  .wa-btn{display:flex;align-items:center;gap:9px;background:#25D366;color:#fff;text-decoration:none;padding:13px 20px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;transition:transform .2s;}
+  .wa-btn:hover{transform:scale(1.04);}
+  .wa-btn svg{width:20px;height:20px;flex-shrink:0;}
+  footer{background:#050505;border-top:1px solid var(--border);padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .footer-brand{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.08em;}
+  .footer-brand span{color:var(--gold);}
+  .footer-info{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.15em;color:rgba(240,240,240,.18);text-align:right;}
+  @media(max-width:700px){.topbar,.hero,.section{padding-left:16px;padding-right:16px;}.hero{grid-template-columns:1fr;}.grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));}.footer-info{text-align:left;}}
+  .fade-in{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div style="display:flex;align-items:center;gap:16px;">
+    <a class="back-link" href="index.html">← Inicio</a>
+    <div class="topbar-brand">Casa <span>Market</span></div>
+  </div>
+  <span class="topbar-cat">🌶️ SALSAS</span>
+</div>
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">CATÁLOGO B2B · CATEGORÍA 04</div>
+    <h1 class="hero-title"><div>SALSAS &</div><div class="line2">CONDIMENTOS</div></h1>
+    <p class="hero-desc">Salsas picantes, asiáticas, BBQ, aderezos, condimentos y salsas para cocina. Más de 400 productos importados para cualquier tipo de negocio.</p>
+  </div>
+  <div>
+    a0</div>
+    <div class="hero-stat-label">PRODUCTOS</div>
+  </div>
+</div>
+<div class="section">
+  <div class="filter-row">
+    <button class="ftab active" onclick="filterAll();tabClick(this)">Todos</button>
+    <button class="ftab" onclick="filterGroup('picante');tabClick(this)">🌶️ Picantes</button>
+    <button class="ftab" onclick="filterGroup('asiatica');tabClick(this)">🥢 Asiáticas</button>
+    <button class="ftab" onclick="filterGroup('bbq');tabClick(this)">🍗 BBQ & Wing</button>
+    <button class="ftab" onclick="filterGroup('aderezos');tabClick(this)">🥗 Aderezos & Dips</button>
+    <button class="ftab" onclick="filterGroup('condimentos');tabClick(this)">🧂 Condimentos</button>
+    <button class="ftab" onclick="filterGroup('pasta');tabClick(this)">🍅 Pasta & Cocina</button>
+  </div>
+  <div class="price-banner">
+    <div class="price-banner-left">
+      <span style="font-size:16px;">🏷️</span>
+      Precio por <strong>&nbsp;1 pieza&nbsp;</strong> · Compra por caja: <strong class="disc">&nbsp;10% de descuento</strong>
+    </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">🌶️ Salsas Picantes & Hot Sauce</span>
+    <span class="sec-badge badge-hot">SRIRACHA · TABASCO · SAMYANG · RED HOT · LA MAGRINA · TAPATIO</span>
+    <span class="sec-count">61 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · SRIRACHA</div>
+      <div class="card-name">Lee Kum Kee Mayo Sriracha 15Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$199</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Everything Bagel Sazonador</div>
+      <div class="card-bottom">
+        <div class="card-price">$195</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🔥 COREANA · SAMYANG</div>
+      <div class="card-name">Samyang Hot Sauce Carbonara 200G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$180</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🔥 COREANA · SAMYANG</div>
+      <div class="card-name">Samyang Hot Sauce Original 200G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$180</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🔥 COREANA · SAMYANG</div>
+      <div class="card-name">Samyang Hot Sauce 2X Spicy 200G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$180</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Salsa De Chile165G</div>
+      <div class="card-bottom">
+        <div class="card-price">$175</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · SRIRACHA</div>
+      <div class="card-name">Chick Fil A Sweet Spicy Sriracha 16Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$165</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ ARTESANAL · LA MAGRINA</div>
+      <div class="card-name">La Magrina Chile Aceite Oliva</div>
+      <div class="card-bottom">
+        <div class="card-price">$160</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · SRIRACHA</div>
+      <div class="card-name">Sriracha Hot 481G</div>
+      <div class="card-bottom">
+        <div class="card-price">$150</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · SRIRACHA</div>
+      <div class="card-name">Flying Goose Sriracha 730 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$145</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ ARTESANAL · LA MAGRINA</div>
+      <div class="card-name">La Magrina Crujientes De Jalapeño</div>
+      <div class="card-bottom">
+        <div class="card-price">$145</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · TAPATÍO</div>
+      <div class="card-name">Tapatio Salsa 296Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · LOUISIANA</div>
+      <div class="card-name">Lousiana Hot Sauce 354Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Emperor Love Taro Latte 100G</div>
+      <div class="card-bottom">
+        <div class="card-price">$125</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · SRIRACHA</div>
+      <div class="card-name">Salsa Tabasco Sriracha</div>
+      <div class="card-bottom">
+        <div class="card-price">$125</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · SRIRACHA</div>
+      <div class="card-name">Madame Sriracha 450Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$125</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · SRIRACHA</div>
+      <div class="card-name">Ketchup Sriracha 567G</div>
+      <div class="card-bottom">
+        <div class="card-price">$125</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · SRIRACHA</div>
+      <div class="card-name">Salsa Tabasco Sriracha Picante</div>
+      <div class="card-bottom">
+        <div class="card-price">$125</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Emperor Love Matcha 100G</div>
+      <div class="card-bottom">
+        <div class="card-price">$125</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · SRIRACHA</div>
+      <div class="card-name">Sriracha Mayo 226G</div>
+      <div class="card-bottom">
+        <div class="card-price">$122</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ ARTESANAL · LA MAGRINA</div>
+      <div class="card-name">La Magrina Chile Habanero</div>
+      <div class="card-bottom">
+        <div class="card-price">$120</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ ARTESANAL · LA MAGRINA</div>
+      <div class="card-name">La Magrina Chile Gourmet</div>
+      <div class="card-bottom">
+        <div class="card-price">$115</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ ARTESANAL · LA MAGRINA</div>
+      <div class="card-name">La Magrina Chile Verde</div>
+      <div class="card-bottom">
+        <div class="card-price">$115</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ ARTESANAL · LA MAGRINA</div>
+      <div class="card-name">La Magrina Chile Aceite</div>
+      <div class="card-bottom">
+        <div class="card-price">$115</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · SRIRACHA</div>
+      <div class="card-name">Sky Valley Sriracha 524G</div>
+      <div class="card-bottom">
+        <div class="card-price">$110</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · SRIRACHA</div>
+      <div class="card-name">Sriracha</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · TABASCO</div>
+      <div class="card-name">Tabasco Habanero 60Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🇰🇷 COREANA · GOCHUJANG</div>
+      <div class="card-name">Gochujang Pasta Chile 170G</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · TABASCO</div>
+      <div class="card-name">Tabasco Jalapeño 60Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · TABASCO</div>
+      <div class="card-name">Tabasco Garlic 60Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Zatarain'S Crab Boil - Liquid, 4 Fl Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · TABASCO</div>
+      <div class="card-name">Tabasco Sauce 60Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · TABASCO</div>
+      <div class="card-name">Tabasco Chipotle 60Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · SRIRACHA</div>
+      <div class="card-name">Sriracha Hot Chili Sauce 255G</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🇺🇸 AMERICANA · HEINZ</div>
+      <div class="card-name">Heinz Homestyle Roasted Turkey Gravy</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Lea & Peerins 296Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · SRIRACHA</div>
+      <div class="card-name">Kaporo Sriracha 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$98</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · TABASCO</div>
+      <div class="card-name">Tabasco Habanero 150Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$95</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🇺🇸 AMERICANA · TACO BELL</div>
+      <div class="card-name">Taco Bell Mild Salsa Con Queso Cheese Dip, 15 Oz J</div>
+      <div class="card-bottom">
+        <div class="card-price">$95</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🇺🇸 AMERICANA · TACO BELL</div>
+      <div class="card-name">Taco Bell Sauce Diablo</div>
+      <div class="card-bottom">
+        <div class="card-price">$88</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🇺🇸 AMERICANA · TACO BELL</div>
+      <div class="card-name">Taco Bell Mild Sauce</div>
+      <div class="card-bottom">
+        <div class="card-price">$88</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🇺🇸 AMERICANA · TACO BELL</div>
+      <div class="card-name">Taco Bell Sauce Fire</div>
+      <div class="card-bottom">
+        <div class="card-price">$88</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🇺🇸 AMERICANA · TACO BELL</div>
+      <div class="card-name">Taco Bell Hot Sauce</div>
+      <div class="card-bottom">
+        <div class="card-price">$88</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🇺🇸 AMERICANA · TACO BELL</div>
+      <div class="card-name">Taco Bell Mild Thick N' Chunky Salsa, 16 Oz Jar</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🇺🇸 AMERICANA · TACO BELL</div>
+      <div class="card-name">Taco Bell Salsa Verde</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Xiqueno Mole En Pasta 500 G</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · FRANK'S RED HOT</div>
+      <div class="card-name">Red Hot Xtra Hot</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · FRANK'S RED HOT</div>
+      <div class="card-name">Red Hot Original 354Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Tostado De Chile Chanitos</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🇺🇸 AMERICANA · TACO BELL</div>
+      <div class="card-name">Taco Bell Chipotle Sauce 354Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · FRANK'S RED HOT</div>
+      <div class="card-name">Red Hot Wing 354Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🍳 SPRAY · COCINA</div>
+      <div class="card-name">Ocean Spray Whole Cranberry Sauce, 14 Oz Can</div>
+      <div class="card-bottom">
+        <div class="card-price">$79</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE</div>
+      <div class="card-name">Kaporo Sweet Sauce 300Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Kokkoman Oyster 357G</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🇺🇸 AMERICANA · HEINZ</div>
+      <div class="card-name">Salsa Catsup Hot Heinz 397G</div>
+      <div class="card-bottom">
+        <div class="card-price">$52</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · TABASCO</div>
+      <div class="card-name">Tabasco 60 Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$49</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Salsa Picante Alitas Hunts 550G</div>
+      <div class="card-bottom">
+        <div class="card-price">$46</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Salsa Tipo Inglesa 145Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Habanero Loltun 150G</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Salsa Valentina</div>
+      <div class="card-bottom">
+        <div class="card-price">$14</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="picante">
+      <div class="card-origin">🌶️ HOT SAUCE · SRIRACHA</div>
+      <div class="card-name">Sriracha Sobre</div>
+      <div class="card-bottom">
+        <div class="card-price">$10</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">🥢 Salsas Asiáticas</span>
+    <span class="sec-badge badge-neon">KIKKOMAN · PANDA EXPRESS · LEE KUM KEE · MISO · CURRY · ANGUILA</span>
+    <span class="sec-count">81 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🇰🇷 COREANA · PASTA CHILE</div>
+      <div class="card-name">Hot Pepper Paste 1Kg Lev 3</div>
+      <div class="card-bottom">
+        <div class="card-price">$330</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🍱 JAPONESA · MISO</div>
+      <div class="card-name">Miso Organico Marukome 375G</div>
+      <div class="card-bottom">
+        <div class="card-price">$220</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🍛 JAPONESA · CURRY</div>
+      <div class="card-name">Golden Curry Hot</div>
+      <div class="card-bottom">
+        <div class="card-price">$220</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🍛 JAPONESA · CURRY</div>
+      <div class="card-name">Golden Curry Hot 220G</div>
+      <div class="card-bottom">
+        <div class="card-price">$220</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🍛 JAPONESA · CURRY</div>
+      <div class="card-name">Golden Curry Mild 220G</div>
+      <div class="card-bottom">
+        <div class="card-price">$220</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🍱 JAPONESA · MISO</div>
+      <div class="card-name">Miso Organico Marukome 375G</div>
+      <div class="card-bottom">
+        <div class="card-price">$220</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🍣 JAPONESA · SALSA ANGUILA</div>
+      <div class="card-name">Salsa De Anguila 1L.</div>
+      <div class="card-bottom">
+        <div class="card-price">$200</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🥢 ASIÁTICA · PANDA EXPRESS</div>
+      <div class="card-name">Panda Express Orange Sauce</div>
+      <div class="card-bottom">
+        <div class="card-price">$190</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🥢 ASIÁTICA · PANDA EXPRESS</div>
+      <div class="card-name">Panda Express Kung Pao Stir Fry Sauce,18.75</div>
+      <div class="card-bottom">
+        <div class="card-price">$190</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🥢 ASIÁTICA · PANDA EXPRESS</div>
+      <div class="card-name">Panda Express Mandarin-Teriyaki Sauce</div>
+      <div class="card-bottom">
+        <div class="card-price">$190</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🥢 ASIÁTICA · PANDA EXPRESS</div>
+      <div class="card-name">Panda Express Sweet & Sour Sauce 19.8 Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$190</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🥢 ASIÁTICA · PANDA EXPRESS</div>
+      <div class="card-name">Panda Express Sweet Chili, 20.75 Oz Liquid</div>
+      <div class="card-bottom">
+        <div class="card-price">$190</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🥢 ASIÁTICA · PANDA EXPRESS</div>
+      <div class="card-name">Panda Express Chow Mein Noodle Sauce,</div>
+      <div class="card-bottom">
+        <div class="card-price">$190</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🥢 ASIÁTICA · PANDA EXPRESS</div>
+      <div class="card-name">Panda Express Honey Sesame Sauce, 20.2 Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$190</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🍜 JAPONESA · RAMEN</div>
+      <div class="card-name">Ramen Soup Ebera 714G</div>
+      <div class="card-bottom">
+        <div class="card-price">$189</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🇰🇷 COREANA · PASTA CHILE</div>
+      <div class="card-name">Assi Hot Pepper Paste 300G</div>
+      <div class="card-bottom">
+        <div class="card-price">$185</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · OTAFUKU</div>
+      <div class="card-name">Otafuku Yakisoba Sauce 300G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$175</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Salsa Soya Miyasaka 850G</div>
+      <div class="card-bottom">
+        <div class="card-price">$175</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · OTAFUKU</div>
+      <div class="card-name">Otafuku Okonomi Sauce 300G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$175</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · KADOYA</div>
+      <div class="card-name">Kadoya Rayu Hot Sesame Oil 163 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$165</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · KADOYA</div>
+      <div class="card-name">Kadoya Sesame Oil 163Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$165</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🍱 JAPONESA · MISO</div>
+      <div class="card-name">Premium White Miso Paste</div>
+      <div class="card-bottom">
+        <div class="card-price">$158</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🍱 JAPONESA · MISO</div>
+      <div class="card-name">Natural Miso 375G Marukome</div>
+      <div class="card-bottom">
+        <div class="card-price">$158</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · KIKKOMAN</div>
+      <div class="card-name">Kikkoman Teriyaki Baste & Glaze</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🇰🇷 COREANA · KOREAN BBQ</div>
+      <div class="card-name">Ofoods Korean Bbq Sauce 840G</div>
+      <div class="card-bottom">
+        <div class="card-price">$145</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · KIKKOMAN</div>
+      <div class="card-name">Teriyaki Stir Fry Kikkoman</div>
+      <div class="card-bottom">
+        <div class="card-price">$145</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · AJINOMOTO</div>
+      <div class="card-name">Ajinomoto Hondashi 120 G</div>
+      <div class="card-bottom">
+        <div class="card-price">$145</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🇹🇭 TAILANDESA · MAEPLOY</div>
+      <div class="card-name">Maeploy Base Sopa Tom Yum</div>
+      <div class="card-bottom">
+        <div class="card-price">$140</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🇹🇭 TAILANDESA · MAEPLOY</div>
+      <div class="card-name">Base Para Sopa Massaman</div>
+      <div class="card-bottom">
+        <div class="card-price">$136</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🥢 ASIÁTICA FUSION</div>
+      <div class="card-name">Good & Gather Sweet Thai Chili Sauce  12 Fl Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🥢 ASIÁTICA FUSION</div>
+      <div class="card-name">Good & Gather Sesame Teriyaki Sauce  12 Fl Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🌶️ ASIÁTICA · CHILI GARLIC</div>
+      <div class="card-name">Hff Garlic Chili Sauce 18Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🐟 ASIÁTICA · FISH SAUCE</div>
+      <div class="card-name">Fish Sauce 700Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🇹🇭 TAILANDESA · MAEPLOY</div>
+      <div class="card-name">Maeploy Sweet Chili 350G</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🥢 ASIÁTICA FUSION</div>
+      <div class="card-name">Good & Gathe Mandarin Orange Sauce - 12Oz -</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🍛 JAPONESA · CURRY</div>
+      <div class="card-name">House Java Curry Instantaneo 200G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · KIKKOMAN</div>
+      <div class="card-name">Kikkoman Sweet&Sour Sauce 326G</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · WASABI</div>
+      <div class="card-name">Wasabi Sauce S&B 158Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · INSUMO</div>
+      <div class="card-name">Cathay Papel De Arroz 340G</div>
+      <div class="card-bottom">
+        <div class="card-price">$126</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · KIKKOMAN</div>
+      <div class="card-name">Kikkoman Anguila 335G</div>
+      <div class="card-bottom">
+        <div class="card-price">$125</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🇨🇳 CHINA · LEE KUM KEE</div>
+      <div class="card-name">Lee Kum Kee Char Su 240G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$125</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🍛 JAPONESA · CURRY</div>
+      <div class="card-name">House Kokumaro Curry Intantaneo 180G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$125</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🍛 JAPONESA · CURRY</div>
+      <div class="card-name">House Kokumaro Curry Pica</div>
+      <div class="card-bottom">
+        <div class="card-price">$125</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · MIZKAN</div>
+      <div class="card-name">Mizkan Mirin 354 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$125</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · JENGIBRE</div>
+      <div class="card-name">Jengibre Gari Toyo Pink 500</div>
+      <div class="card-bottom">
+        <div class="card-price">$120</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🇨🇳 CHINA · LEE KUM KEE</div>
+      <div class="card-name">Lee Kum Kee Mos Panda Man Orange 227G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$120</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · INSUMO</div>
+      <div class="card-name">Sesame Seed Oil Huile 185Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$119</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🇨🇳 CHINA · LEE KUM KEE</div>
+      <div class="card-name">Lee Kum Kee Peanut Sauce 226G</div>
+      <div class="card-bottom">
+        <div class="card-price">$115</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · KIKKOMAN</div>
+      <div class="card-name">Mirin Kikkoman 375Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$110</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🇨🇳 CHINA · LEE KUM KEE</div>
+      <div class="card-name">Lee Kum Hoisin Sauce  567G</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · PANKO</div>
+      <div class="card-name">Panko 500G</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🍱 JAPONESA · MISO</div>
+      <div class="card-name">Toyo Nagano  Miso 500G</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🐟 ASIÁTICA · FISH SAUCE</div>
+      <div class="card-name">Lucky Salsa De Pescado</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA</div>
+      <div class="card-name">Momoya Kikuchi No Moto 190G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$100</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · YOUKI</div>
+      <div class="card-name">Youki Ordshi Shoga Sazonador Jengibre 120G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$100</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · YOUKI</div>
+      <div class="card-name">Youki Ninniku Oroshi Sazonador Ajo 120G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$100</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA</div>
+      <div class="card-name">Ikari Okonomi Sauce Salsa 300G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$100</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · MIZKAN</div>
+      <div class="card-name">Mizkan Sushi 355Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🇨🇳 CHINA · LEE KUM KEE</div>
+      <div class="card-name">Lee Kum Mushroom Soy Sau 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · WASABI</div>
+      <div class="card-name">Wasabi Salsa Kokkoman 262G</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🍛 JAPONESA · CURRY</div>
+      <div class="card-name">Golden Curry 230G Picante</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🍛 JAPONESA · CURRY</div>
+      <div class="card-name">House Curry Ya Chukara 180G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$95</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · INSUMO</div>
+      <div class="card-name">Vinagre De Arroz Natural Mitsukan</div>
+      <div class="card-bottom">
+        <div class="card-price">$95</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · MIZKAN</div>
+      <div class="card-name">Mizkan Ponzu 354Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$92</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🍛 JAPONESA · CURRY</div>
+      <div class="card-name">House Curry Hayashi 180G</div>
+      <div class="card-bottom">
+        <div class="card-price">$90</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🇨🇳 CHINA · OYSTER SAUCE</div>
+      <div class="card-name">Kum Chun Oyster 480G</div>
+      <div class="card-bottom">
+        <div class="card-price">$90</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🇨🇳 CHINA · OYSTER SAUCE</div>
+      <div class="card-name">Lee Oyster Sauce Panda 255G</div>
+      <div class="card-bottom">
+        <div class="card-price">$90</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · KIKKOMAN</div>
+      <div class="card-name">Kikkoman Teriyaki 296Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$88</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🇹🇭 TAILANDESA · MAEPLOY</div>
+      <div class="card-name">Maeploy Pad Tahi Sauce 260G</div>
+      <div class="card-bottom">
+        <div class="card-price">$88</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🍣 JAPONESA · SALSA ANGUILA</div>
+      <div class="card-name">Salsa De Anguila  250Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$88</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · PANKO</div>
+      <div class="card-name">Panko Shirakiku 198G</div>
+      <div class="card-bottom">
+        <div class="card-price">$88</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🇰🇷 COREANA · KOREAN BBQ</div>
+      <div class="card-name">Ofood Korean Bbq Pork 280G</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🇰🇷 COREANA · KOREAN BBQ</div>
+      <div class="card-name">Ofood Korean Bbq Bulgogi 280G</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Chili Garlic Sauce 228G</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · KIKKOMAN</div>
+      <div class="card-name">Hoisin Sauce Kikkoman 267G</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Salsa Teriyaki Yamsa 296Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · KIKKOMAN</div>
+      <div class="card-name">Kikkoman Ponzu 296Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$79</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · KIKKOMAN</div>
+      <div class="card-name">Kikkoman Naranja 353G</div>
+      <div class="card-bottom">
+        <div class="card-price">$67</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🎌 JAPONESA · KIKKOMAN</div>
+      <div class="card-name">Kikkoman Oyster Red</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🌏 ASIÁTICA</div>
+      <div class="card-name">Sambal Chili Pasta 226G</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="asiatica">
+      <div class="card-origin">🌏 ASIÁTICA</div>
+      <div class="card-name">Agridulce Thai 320G</div>
+      <div class="card-bottom">
+        <div class="card-price">$55</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">🍗 BBQ & Wing Sauces</span>
+    <span class="sec-badge badge-amber">BWW · SWEET BABY RAY'S · JACK DANIEL'S · WHATABURGER · CHICK-FIL-A</span>
+    <span class="sec-count">61 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🍯 AMERICANA · MIKE'S HOT HONEY</div>
+      <div class="card-name">Mikes Hot Honey Chili</div>
+      <div class="card-bottom">
+        <div class="card-price">$320</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BBQ</div>
+      <div class="card-name">Frambuesa Asada Chipotle 1.13K Fisher & W</div>
+      <div class="card-bottom">
+        <div class="card-price">$255</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BBQ</div>
+      <div class="card-name">Salsa De Pinaasada Habanero 1.13K Roberth</div>
+      <div class="card-bottom">
+        <div class="card-price">$255</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BBQ</div>
+      <div class="card-name">Salsa De Miel Ajo Para Saltear 907G Fischer & W</div>
+      <div class="card-bottom">
+        <div class="card-price">$225</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · CHICK-FIL-A</div>
+      <div class="card-name">Chick-Fil-A Dipping Sauce, 24 Fl Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$220</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · JACK DANIEL'S</div>
+      <div class="card-name">Jack Daniels Sweet Spicy Bbq</div>
+      <div class="card-bottom">
+        <div class="card-price">$210</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · JACK DANIEL'S</div>
+      <div class="card-name">Jack Daniels Hoy Bbq 556G</div>
+      <div class="card-bottom">
+        <div class="card-price">$210</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · JACK DANIEL'S</div>
+      <div class="card-name">Jack Daniels Bbq Sauce</div>
+      <div class="card-bottom">
+        <div class="card-price">$210</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · SWEET BABY RAY'S</div>
+      <div class="card-name">Sweet Baby Rays</div>
+      <div class="card-bottom">
+        <div class="card-price">$205</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · WHATABURGER</div>
+      <div class="card-name">Whataburger Spicy Ketchup 40Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$185</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · CHICK-FIL-A</div>
+      <div class="card-name">Chick Fil A Polynenesian 16 Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$165</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · KC MASTERPIECE</div>
+      <div class="card-name">Salsa Barbecue Masterpiece</div>
+      <div class="card-bottom">
+        <div class="card-price">$165</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · A.1. SAUCE</div>
+      <div class="card-name">A1 Sauce Original Steak 15Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$165</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · WHATABURGER</div>
+      <div class="card-name">Whataburger Jalapeño Ranch</div>
+      <div class="card-bottom">
+        <div class="card-price">$160</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · WHATABURGER</div>
+      <div class="card-name">Whataburger Honey Butter Sauce</div>
+      <div class="card-bottom">
+        <div class="card-price">$160</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · WHATABURGER</div>
+      <div class="card-name">Whataburger Buttermilk Ranch</div>
+      <div class="card-bottom">
+        <div class="card-price">$160</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · WHATABURGER</div>
+      <div class="card-name">Whataburger Sauce 15 Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$160</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · WHATABURGER</div>
+      <div class="card-name">Whataburger Buffalo Sauce</div>
+      <div class="card-bottom">
+        <div class="card-price">$160</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BBQ</div>
+      <div class="card-name">Salsa Itto Con Chile 650G</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BBQ</div>
+      <div class="card-name">Ni Tan Macha Salsa Artesanal</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · HOOTERS</div>
+      <div class="card-name">Hooters Foods Hooters Wing Sauce, 12 Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · CHICK-FIL-A</div>
+      <div class="card-name">Chick Fil A 473Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · G HUGHES</div>
+      <div class="card-name">G Huhes Bbq Sugar Free</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · G HUGHES</div>
+      <div class="card-name">G Hughes Honey Mustard 18Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · SWEET BABY RAY'S</div>
+      <div class="card-name">Sweet Baby Ray Bbq 794</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · WHATABURGER</div>
+      <div class="card-name">Whatabueger Salsa Verde 15 Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$150</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · WHATABURGER</div>
+      <div class="card-name">Whataburger Honey Bbq</div>
+      <div class="card-bottom">
+        <div class="card-price">$150</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · WHATABURGER</div>
+      <div class="card-name">Whataburger Honey Mustard</div>
+      <div class="card-bottom">
+        <div class="card-price">$150</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · A.1. SAUCE</div>
+      <div class="card-name">A1 Steak Sauce 283G</div>
+      <div class="card-bottom">
+        <div class="card-price">$145</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BBQ</div>
+      <div class="card-name">Hickory Brown Sugar Sweet Baby</div>
+      <div class="card-bottom">
+        <div class="card-price">$140</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BUFFALO WILD WINGS</div>
+      <div class="card-name">Bww Southwetern Ranch 355Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Rays No Sugar Added Honey Mustard 20.5Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BUFFALO WILD WINGS</div>
+      <div class="card-name">Bww Asian Zing</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BUFFALO WILD WINGS</div>
+      <div class="card-name">Bww Medium Sauce 355Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BUFFALO WILD WINGS</div>
+      <div class="card-name">Bww Mango Habero Sauce 355Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · WHATABURGER</div>
+      <div class="card-name">Whataburger Fancy Ketchup</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BUFFALO WILD WINGS</div>
+      <div class="card-name">Bww Honey Bbq</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BUFFALO WILD WINGS</div>
+      <div class="card-name">Bww Hot</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BUFFALO WILD WINGS</div>
+      <div class="card-name">Bww Teriyaki 355Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BUFFALO WILD WINGS</div>
+      <div class="card-name">Bww Parmesan Garlic</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BUFFALO WILD WINGS</div>
+      <div class="card-name">Bww Sweet & Sour Sauce,12 Fl. Oz.</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BUFFALO WILD WINGS</div>
+      <div class="card-name">Bww Spicy Garlic</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · WHATABURGER</div>
+      <div class="card-name">Whataburger Spicy Ketchup</div>
+      <div class="card-bottom">
+        <div class="card-price">$130</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · SWEET BABY RAY'S</div>
+      <div class="card-name">Sweet Baby Rays Buffalo Sauce 16Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$125</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · SWEET BABY RAY'S</div>
+      <div class="card-name">Sweet Baby Rays Bbq Sauce Spicy 18Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$125</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BBQ</div>
+      <div class="card-name">Honey Teriyaki Sweet Baby</div>
+      <div class="card-bottom">
+        <div class="card-price">$115</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · WOLF BRAND</div>
+      <div class="card-name">Wolf Brand Chilli No Beans</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · WOLF BRAND</div>
+      <div class="card-name">Wolf Brand Chilli No Beans 15Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BBQ</div>
+      <div class="card-name">Bush Bourbon Grillin Beans</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BBQ</div>
+      <div class="card-name">Stagg Silverado Beef Chili</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · A.1. SAUCE</div>
+      <div class="card-name">A1 Bold Spicy&Sauce 283</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BBQ</div>
+      <div class="card-name">Barbecue Sauce</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · KRAFT</div>
+      <div class="card-name">Kraft Spicy Honey 510G</div>
+      <div class="card-bottom">
+        <div class="card-price">$79</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BBQ</div>
+      <div class="card-name">Fraft Hickory Smoke 496Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$79</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · KC MASTERPIECE</div>
+      <div class="card-name">Masterpiece 510G Bbqsweet</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BBQ</div>
+      <div class="card-name">Hot Dog Chili Sauce</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · KC MASTERPIECE</div>
+      <div class="card-name">Masterpiece Original 510G</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · KC MASTERPIECE</div>
+      <div class="card-name">Kc Masterpiece Brown Sugar</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BBQ</div>
+      <div class="card-name">Bbq Original Hunts 620G</div>
+      <div class="card-bottom">
+        <div class="card-price">$46</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · HEINZ</div>
+      <div class="card-name">Heinz Bbq Spicy</div>
+      <div class="card-bottom">
+        <div class="card-price">$45</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="bbq">
+      <div class="card-origin">🇺🇸 AMERICANA · BBQ</div>
+      <div class="card-name">Salsa Bbq Original</div>
+      <div class="card-bottom">
+        <div class="card-price">$33</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">🥗 Aderezos & Dips</span>
+    <span class="sec-badge badge-blue">KEWPIE · HIDDEN VALLEY · RANCH · TOSTITOS · MAYONESAS PREMIUM</span>
+    <span class="sec-count">103 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · HIDDEN VALLEY</div>
+      <div class="card-name">Hidden Valley Ranch Powder</div>
+      <div class="card-bottom">
+        <div class="card-price">$365</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🥚 MAYONESA PREMIUM</div>
+      <div class="card-name">Mayonesa Avo Chosen Food</div>
+      <div class="card-bottom">
+        <div class="card-price">$235</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🥚 MAYONESA PREMIUM</div>
+      <div class="card-name">Mayonesa Aceite De Agucate 946 Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$225</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · OLIVE GARDEN</div>
+      <div class="card-name">Olive Garden Italian Dressing 24Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$225</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · LITEHOUSE</div>
+      <div class="card-name">Litehouse Queso Azul 957G</div>
+      <div class="card-bottom">
+        <div class="card-price">$220</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇮🇹 ITALIANA · PESTO</div>
+      <div class="card-name">Pesto Albahaca Delico 624G</div>
+      <div class="card-bottom">
+        <div class="card-price">$220</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇬🇷 GRIEGA · TZATZIKI</div>
+      <div class="card-name">Tzatziki Dip 681G</div>
+      <div class="card-bottom">
+        <div class="card-price">$210</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · HIDDEN VALLEY</div>
+      <div class="card-name">Hidden Valley Ranch 1.18Lt</div>
+      <div class="card-bottom">
+        <div class="card-price">$199</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · TOSTITOS</div>
+      <div class="card-name">Tostitos Queso Blanco Dip</div>
+      <div class="card-bottom">
+        <div class="card-price">$175</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · TOSTITOS</div>
+      <div class="card-name">Tostitos Dip Restaurant Style</div>
+      <div class="card-bottom">
+        <div class="card-price">$175</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Lays Dip French Onion 425.2G</div>
+      <div class="card-bottom">
+        <div class="card-price">$175</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · TOSTITOS</div>
+      <div class="card-name">Tostitos Salsa Con Queso</div>
+      <div class="card-bottom">
+        <div class="card-price">$175</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · TOSTITOS</div>
+      <div class="card-name">Tostitos Chunky Mild</div>
+      <div class="card-bottom">
+        <div class="card-price">$175</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · TOSTITOS</div>
+      <div class="card-name">Tostitos Dip Sicy Queso</div>
+      <div class="card-bottom">
+        <div class="card-price">$175</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · TOSTITOS</div>
+      <div class="card-name">Tostitos Dip Nacho Cheese</div>
+      <div class="card-bottom">
+        <div class="card-price">$175</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · TOSTITOS</div>
+      <div class="card-name">Tostitos Dip Chunky Medium</div>
+      <div class="card-bottom">
+        <div class="card-price">$175</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🎌 JAPONESA · KEWPIE</div>
+      <div class="card-name">Kewpie Mayonnaise 500G</div>
+      <div class="card-bottom">
+        <div class="card-price">$175</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · RANCH</div>
+      <div class="card-name">Dip Lays Ranch 425.2G</div>
+      <div class="card-bottom">
+        <div class="card-price">$175</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · RANCH</div>
+      <div class="card-name">Hidden Ranch Pickle 20Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$175</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🎌 JAPONESA · KEWPIE</div>
+      <div class="card-name">Kewpie Mayonesa 400G</div>
+      <div class="card-bottom">
+        <div class="card-price">$167</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🫙 SALSA INGLESA</div>
+      <div class="card-name">Lea & Perrins Worcestershire 591Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$165</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · TOSTITOS</div>
+      <div class="card-name">Dip Tostitos Avo 425.2G</div>
+      <div class="card-bottom">
+        <div class="card-price">$165</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Zesty Apple Cider Vinaigrette Cfl</div>
+      <div class="card-bottom">
+        <div class="card-price">$165</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Whataburguer Pepper</div>
+      <div class="card-bottom">
+        <div class="card-price">$160</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · FRITOS DIP</div>
+      <div class="card-name">Fritos Bean Dip</div>
+      <div class="card-bottom">
+        <div class="card-price">$160</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · FRITOS DIP</div>
+      <div class="card-name">Fritos Jalapeño Cheddar Dip</div>
+      <div class="card-bottom">
+        <div class="card-price">$160</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · TOSTITOS</div>
+      <div class="card-name">Salsa Verde Tostitos</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🥗 ADEREZO · CAESAR</div>
+      <div class="card-name">Aderezo Caesar Johnnys</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · RANCH</div>
+      <div class="card-name">Aderezo Ranch Johnnys</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🎌 JAPONESA · KEWPIE</div>
+      <div class="card-name">Kewpie Mayonesa 355Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🎌 JAPONESA · KEWPIE</div>
+      <div class="card-name">Kewpie Sesame Dressing</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌍 MEDITERRÁNEA · HUMMUS</div>
+      <div class="card-name">Humus Oblea Chipotle 708G</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🎌 JAPONESA · KEWPIE</div>
+      <div class="card-name">Kewpie Mayonnaise 450G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · TOSTITOS</div>
+      <div class="card-name">Salsa Tostitos Chunky Habanero</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · HEINZ</div>
+      <div class="card-name">Heinz Mayoracha 16.6Pz</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Dijon Maile 865G</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · HEINZ</div>
+      <div class="card-name">Heinz Buffaranch 16.5Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🫙 SALSA INGLESA</div>
+      <div class="card-name">Lea & Perrins Worcestershire Sauce 444 Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$145</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · TOSTITOS</div>
+      <div class="card-name">Dip Tostitos Spinach</div>
+      <div class="card-bottom">
+        <div class="card-price">$145</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇰🇷 COREANA · KIMCHI</div>
+      <div class="card-name">Kimchi (Chile En Pasta) 500G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$140</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Lays Dip Jalapeño 425.2G</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🎌 JAPONESA · KEWPIE</div>
+      <div class="card-name">Kewpie Aderezo Yuzu Sin Aceite 380 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · TOSTITOS</div>
+      <div class="card-name">Tostitos Avocado Lime 266Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Yamaki Hanakatso 80G</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · RANCH</div>
+      <div class="card-name">Tostitos Fiesta Ranch 266Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · TOSTITOS</div>
+      <div class="card-name">Tostitos Red Chilli 266Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · BRIANNAS</div>
+      <div class="card-name">Aderezo Caesars Briannas</div>
+      <div class="card-bottom">
+        <div class="card-price">$129</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · BRIANNAS</div>
+      <div class="card-name">Dijon Honey Mustard Dressing Briannas 355 Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$129</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · BRIANNAS</div>
+      <div class="card-name">Vinagreta Vino Rosado Briannas 355 Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$129</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · RANCH</div>
+      <div class="card-name">Doritos Cool Ranch Dip</div>
+      <div class="card-bottom">
+        <div class="card-price">$125</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · DORITOS DIP</div>
+      <div class="card-name">Doritos Dip Spicy Nacho</div>
+      <div class="card-bottom">
+        <div class="card-price">$125</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🍵 FERMENTADO · KOMBUCHA</div>
+      <div class="card-name">Vinagre De Kombucha</div>
+      <div class="card-bottom">
+        <div class="card-price">$120</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🍵 FERMENTADO · KOMBUCHA</div>
+      <div class="card-name">Vinagre De Kombucha Jamaica</div>
+      <div class="card-bottom">
+        <div class="card-price">$120</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · KRAFT</div>
+      <div class="card-name">Kraft Real Mayo 30Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$115</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · KRAFT</div>
+      <div class="card-name">Kraft Blue Cheese</div>
+      <div class="card-bottom">
+        <div class="card-price">$108</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Wobers Horseradish</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌭 MOSTAZA</div>
+      <div class="card-name">Mostaza Con Miel Members Mark</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Hcf Tartar Sauce</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · RANCH</div>
+      <div class="card-name">Ranch Lite Kraft 473M</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇮🇹 ITALIANA · PESTO</div>
+      <div class="card-name">Pesto Vegano Heb 190Gr</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · KRAFT</div>
+      <div class="card-name">Kraft Tartar Sauce</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Salsa Tartara Reese 226 G</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Dip Alcachofa Conpa Delico 220G</div>
+      <div class="card-bottom">
+        <div class="card-price">$98</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Dip Alcachofa Jala Delico 220G</div>
+      <div class="card-bottom">
+        <div class="card-price">$96</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Aderezo Mil Islas Members Mark</div>
+      <div class="card-bottom">
+        <div class="card-price">$95</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Aderezo Cesar Members Mark 710 Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$95</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · RANCH</div>
+      <div class="card-name">Aderezo Ranch Members Mark</div>
+      <div class="card-bottom">
+        <div class="card-price">$95</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · RANCH</div>
+      <div class="card-name">Aderezo Ranch Light Members Mark 710 Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$95</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · KRAFT</div>
+      <div class="card-name">Kraft Thousand Island With Bacon</div>
+      <div class="card-bottom">
+        <div class="card-price">$89</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Dip Kale Delico 220G</div>
+      <div class="card-bottom">
+        <div class="card-price">$88</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Chimichurri Delico 250G</div>
+      <div class="card-bottom">
+        <div class="card-price">$88</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · KRAFT</div>
+      <div class="card-name">Kraft Balsamic Vinagrette</div>
+      <div class="card-bottom">
+        <div class="card-price">$88</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Dip Alcachofa Espina Delico 220G</div>
+      <div class="card-bottom">
+        <div class="card-price">$86</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · RANCH</div>
+      <div class="card-name">Salsa Ranch 473Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🥗 ADEREZO · CAESAR</div>
+      <div class="card-name">Caesar 473Ml Heb</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🫙 SALSA INGLESA</div>
+      <div class="card-name">Lea&Perrins Worcestershire Sauce148Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$84</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · TACO BELL</div>
+      <div class="card-name">Avocado Ranch Taco Bell 354Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · RANCH</div>
+      <div class="card-name">Creamy Spicy Ranchero 354Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Creamy Baja Sauce 354Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · KRAFT</div>
+      <div class="card-name">Kraft Italian Vinaigrette</div>
+      <div class="card-bottom">
+        <div class="card-price">$77</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇰🇷 COREANA · PASTA CHILE</div>
+      <div class="card-name">Kraft Ranch Classic</div>
+      <div class="card-bottom">
+        <div class="card-price">$76</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🥗 ADEREZO · CAESAR</div>
+      <div class="card-name">Creamy Caesar Great Value</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · RANCH</div>
+      <div class="card-name">Great Value Chipotle Ranch</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Creamy French Great Value 492G</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Honey Mustard Great Value 473M</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · HIDDEN VALLEY</div>
+      <div class="card-name">Hidden Valley Ranch 473Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · RANCH</div>
+      <div class="card-name">Ranch Great Value 473Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · TOSTITOS</div>
+      <div class="card-name">Tostitos Dip Queso Jalapeño</div>
+      <div class="card-bottom">
+        <div class="card-price">$68</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · TOSTITOS</div>
+      <div class="card-name">Tostitos Dip Cebolla</div>
+      <div class="card-bottom">
+        <div class="card-price">$68</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · TOSTITOS</div>
+      <div class="card-name">Tostitos Dip Queso</div>
+      <div class="card-bottom">
+        <div class="card-price">$68</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Mousse Atun Delico 200G</div>
+      <div class="card-bottom">
+        <div class="card-price">$68</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · RANCH</div>
+      <div class="card-name">Light Ranch Great Value</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Bean Dip Heb</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Blue Cheese Great Value</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Natures Heart Almond 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$58</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Nutures Heart No Sugar 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$58</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · PHILADELPHIA</div>
+      <div class="card-name">Philadelphia Dip Chipotle 235G</div>
+      <div class="card-bottom">
+        <div class="card-price">$55</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · PHILADELPHIA</div>
+      <div class="card-name">Philadelphia Dip Especias 235G</div>
+      <div class="card-bottom">
+        <div class="card-price">$55</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Jalapeño Bean Dip</div>
+      <div class="card-bottom">
+        <div class="card-price">$55</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · RANCH</div>
+      <div class="card-name">Hill Country Fare Aderezo Ranch</div>
+      <div class="card-bottom">
+        <div class="card-price">$48</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Black Sesame 75G</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🇺🇸 AMERICANA · RANCH</div>
+      <div class="card-name">Ranch Clemente</div>
+      <div class="card-bottom">
+        <div class="card-price">$33</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="aderezos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Mil Islas Selecto</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">🧂 Condimentos & Sazonadores</span>
+    <span class="sec-badge badge-gold">TONE'S · OLD BAY · MCCORMICK · KINDERS · ACEITES · PANKO</span>
+    <span class="sec-count">70 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Trufarome Black 250Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$580</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🧂 SAZONADOR · TONE'S</div>
+      <div class="card-name">Tone´S Taco Seasoning</div>
+      <div class="card-bottom">
+        <div class="card-price">$420</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🧂 SAZONADOR · TONE'S</div>
+      <div class="card-name">Tone'S Cajun Seasoning  23Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$420</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🧂 SAZONADOR · MCCORMICK</div>
+      <div class="card-name">Mccormick Grill Steak Seasoning</div>
+      <div class="card-bottom">
+        <div class="card-price">$270</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🫙 ACEITE IMPORTADO</div>
+      <div class="card-name">Aceite De Aguacate 1L</div>
+      <div class="card-bottom">
+        <div class="card-price">$255</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Grill Mates Nontreal Chicken Sazonador</div>
+      <div class="card-bottom">
+        <div class="card-price">$210</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🫙 VINAGRE BALSÁMICO</div>
+      <div class="card-name">Vinagre Balsamico 500Ml Heb</div>
+      <div class="card-bottom">
+        <div class="card-price">$189</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🧂 SAZONADOR · MCCORMICK</div>
+      <div class="card-name">Salad Toppins Mccormick 340G</div>
+      <div class="card-bottom">
+        <div class="card-price">$185</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🍱 JAPONESA · MISO</div>
+      <div class="card-name">Marukome Misso Blanco 1K.</div>
+      <div class="card-bottom">
+        <div class="card-price">$180</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🍱 JAPONESA · MISO</div>
+      <div class="card-name">Marukome Misso Rojo 1Kg.</div>
+      <div class="card-bottom">
+        <div class="card-price">$180</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🧂 SAZONADOR · MCCORMICK</div>
+      <div class="card-name">Mccormick Pumpkin Spice</div>
+      <div class="card-bottom">
+        <div class="card-price">$175</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Dressing Johnnys Ajo Parmesan 510G</div>
+      <div class="card-bottom">
+        <div class="card-price">$175</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🧂 SAZONADOR · OLD BAY</div>
+      <div class="card-name">Old Bay Seasing 170G</div>
+      <div class="card-bottom">
+        <div class="card-price">$170</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Great Value Organic Pumpkin Pie Spice, 1.65 Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$165</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🧂 SAZONADOR · KINDERS</div>
+      <div class="card-name">Kinders Sazonador Sal, Pimienta Y Ajo</div>
+      <div class="card-bottom">
+        <div class="card-price">$165</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🧂 SAZONADOR · KINDERS</div>
+      <div class="card-name">Kinders Sazonador Mantequilla</div>
+      <div class="card-bottom">
+        <div class="card-price">$165</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Heb Bagel Not Included Spice</div>
+      <div class="card-bottom">
+        <div class="card-price">$165</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🫙 ACEITE IMPORTADO</div>
+      <div class="card-name">Aceite De Aguacate Heb 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$162</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🫙 ACEITE IMPORTADO</div>
+      <div class="card-name">Olew Aceite De Aguacate 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$159</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🫙 ACEITE IMPORTADO</div>
+      <div class="card-name">Aceite De Oliva Memb Marks 1L</div>
+      <div class="card-bottom">
+        <div class="card-price">$157</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🫙 ACEITE IMPORTADO</div>
+      <div class="card-name">Aceite De Oliva Heb 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$156</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🫙 ACEITE IMPORTADO</div>
+      <div class="card-name">Aceite De Ajonjoli 500Ml Heb</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🫙 ACEITE IMPORTADO</div>
+      <div class="card-name">Aceite De Oliva Carapelli 750Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Avocare 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$152</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🧂 SAL PREMIUM</div>
+      <div class="card-name">Sal Del Himalaya Pragna 1 Kg</div>
+      <div class="card-bottom">
+        <div class="card-price">$150</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🫙 ACEITE IMPORTADO</div>
+      <div class="card-name">Aceite De Oliva 5100Ml Heb</div>
+      <div class="card-bottom">
+        <div class="card-price">$145</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🫙 ACEITE IMPORTADO</div>
+      <div class="card-name">Aceite De Oliva Borges 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$142</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🍳 SPRAY · COCINA</div>
+      <div class="card-name">Wilton Antiadherente Aerosol 170 Gr</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Weber Jalapeño Garlic 9Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Weber Hot Honey 9Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🧂 SAZONADOR · KINDERS</div>
+      <div class="card-name">Kinders Red</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🫙 ACEITE IMPORTADO</div>
+      <div class="card-name">Aceite De Ajonjoli Yukai 320Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$131</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🍳 SPRAY · COCINA</div>
+      <div class="card-name">Bakers Joy Baking Spray 5Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$125</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🧂 SAZONADOR · CAJUN</div>
+      <div class="card-name">La Fiesta Cajun Seasoning</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🍳 SPRAY · COCINA</div>
+      <div class="card-name">Pam Original 227 G</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Golde Curry 230G Medio Picante</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Great Value Pumpkin Pie Spice Seasoning</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🍳 SPRAY · COCINA</div>
+      <div class="card-name">Baking Flour Spray</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🫙 VINAGRE BALSÁMICO</div>
+      <div class="card-name">Vinagre Balsamico Pianello 1L</div>
+      <div class="card-bottom">
+        <div class="card-price">$98</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🫙 VINAGRE BALSÁMICO</div>
+      <div class="card-name">Vinagre Balsamico Carapelli 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$95</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Oleico Cartamo Natural 482 G</div>
+      <div class="card-bottom">
+        <div class="card-price">$92</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🫙 ACEITE IMPORTADO</div>
+      <div class="card-name">Aceite De Canola Kirkland 482 G</div>
+      <div class="card-bottom">
+        <div class="card-price">$92</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🍳 SPRAY · COCINA</div>
+      <div class="card-name">Pam Baking Flour 141G</div>
+      <div class="card-bottom">
+        <div class="card-price">$90</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🍳 SPRAY · COCINA</div>
+      <div class="card-name">Pam Coconut 141G</div>
+      <div class="card-bottom">
+        <div class="card-price">$88</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🍳 SPRAY · COCINA</div>
+      <div class="card-name">Pam Oliva 141G</div>
+      <div class="card-bottom">
+        <div class="card-price">$86</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Zatarains Crab Boil</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Pure Cirio 140G</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Ajo En Polvo 230G</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Crawfish, Shrimp & Crab Boil</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🍳 SPRAY · COCINA</div>
+      <div class="card-name">Butter Naturally Spray</div>
+      <div class="card-bottom">
+        <div class="card-price">$84</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🍳 SPRAY · COCINA</div>
+      <div class="card-name">Coconut Oil Spray</div>
+      <div class="card-bottom">
+        <div class="card-price">$84</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🍳 SPRAY · COCINA</div>
+      <div class="card-name">Grilling Oil Spray</div>
+      <div class="card-bottom">
+        <div class="card-price">$84</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🍳 SPRAY · COCINA</div>
+      <div class="card-name">Aceite Vegetal Spray</div>
+      <div class="card-bottom">
+        <div class="card-price">$82</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Sazon Goya 40G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🇺🇸 AMERICANA · TACO BELL</div>
+      <div class="card-name">Taco Bell Original Fajita Seasoning Mix</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🧂 SAZONADOR · CAJUN</div>
+      <div class="card-name">Cajun Two Step</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🇺🇸 AMERICANA · TACO BELL</div>
+      <div class="card-name">Taco Bell Original Taco Seasoning Mix</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🧂 SAL PREMIUM</div>
+      <div class="card-name">Sal Del Himalaya Entera Heb</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">La Crawfish Crab & Fish</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌮 SAZONADOR · TACO</div>
+      <div class="card-name">Old El Paso Original Seasoning Mix</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">25% Less Sodium Seasoning Mix</div>
+      <div class="card-bottom">
+        <div class="card-price">$70</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Red Start Quick Rise</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Hierbas Finas Molidas</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Red Start Active Dry</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🍳 SPRAY · COCINA</div>
+      <div class="card-name">Spray Aguacate Gv</div>
+      <div class="card-bottom">
+        <div class="card-price">$64</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🍳 SPRAY · COCINA</div>
+      <div class="card-name">Spray Coco Gv</div>
+      <div class="card-bottom">
+        <div class="card-price">$58</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Hoja De Oregano 54 G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$55</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌮 SAZONADOR · TACO</div>
+      <div class="card-name">Mild Taco Seasoning Mix 28G</div>
+      <div class="card-bottom">
+        <div class="card-price">$50</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Glutamato Monosodico 95G</div>
+      <div class="card-bottom">
+        <div class="card-price">$50</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="condimentos">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Paellero Carmencita 4G</div>
+      <div class="card-bottom">
+        <div class="card-price">$7</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">🍅 Salsas para Pasta & Cocina</span>
+    <span class="sec-badge badge-amber">BERTOLLI · RAO'S · RAGÚ · CAMPBELL'S · HEINZ · WORCESTERSHIRE</span>
+    <span class="sec-count">34 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍅 KETCHUP</div>
+      <div class="card-name">Melindas Chipotle Ketchup 397G</div>
+      <div class="card-bottom">
+        <div class="card-price">$160</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍅 PREMIUM · RAO'S</div>
+      <div class="card-name">Raos Marinara 22Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$155</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Salsa Passata Perini 720Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$145</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍅 PREMIUM · RAO'S</div>
+      <div class="card-name">Raos Alfredo 425G</div>
+      <div class="card-bottom">
+        <div class="card-price">$125</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Salsa Marinara Organica</div>
+      <div class="card-bottom">
+        <div class="card-price">$120</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍝 PASTA · RAGÚ</div>
+      <div class="card-name">Ragu Traditional Sauce</div>
+      <div class="card-bottom">
+        <div class="card-price">$120</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Queso Romano N Ricotta Members</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍝 PASTA · BERTOLLI</div>
+      <div class="card-name">Bertolli Alfredo Sauce 425G</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍝 PASTA · BERTOLLI</div>
+      <div class="card-name">Bertolli Olive Oil & Garlic 680G</div>
+      <div class="card-bottom">
+        <div class="card-price">$95</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍝 PASTA · BERTOLLI</div>
+      <div class="card-name">Bertolli 5 Cheese 680G</div>
+      <div class="card-bottom">
+        <div class="card-price">$95</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍝 PASTA · RAGÚ</div>
+      <div class="card-name">Ragu Chunky Garden Comb 680G</div>
+      <div class="card-bottom">
+        <div class="card-price">$95</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍝 PASTA · RAGÚ</div>
+      <div class="card-name">Ragu Double Cheddar 453G</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍝 PASTA · PANZANI</div>
+      <div class="card-name">Panzani Bolognese 425G</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍝 PASTA · RAGÚ</div>
+      <div class="card-name">Ragu Alfredo 453G</div>
+      <div class="card-bottom">
+        <div class="card-price">$85</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍲 AMERICANA · CAMPBELL'S</div>
+      <div class="card-name">Campbell'S  Cream Of Celery Soup, 10.5Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍲 AMERICANA · CAMPBELL'S</div>
+      <div class="card-name">Campbell'S  Cream Of Chicken Soup, 10.5Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍝 AMERICANA · CHEF BOYARDEE</div>
+      <div class="card-name">Beef Ravioli Chef Boyardee</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍝 PASTA · RAGÚ</div>
+      <div class="card-name">Ragu Traditional 396G</div>
+      <div class="card-bottom">
+        <div class="card-price">$75</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍲 AMERICANA · CAMPBELL'S</div>
+      <div class="card-name">Campbells Condensed Tomato Soup</div>
+      <div class="card-bottom">
+        <div class="card-price">$58</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Salsa Tomate Organca Kirkland</div>
+      <div class="card-bottom">
+        <div class="card-price">$55</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍝 AMERICANA · CHEF BOYARDEE</div>
+      <div class="card-name">Boyardee Lasagna Cup Pasta Intomato And Meat S</div>
+      <div class="card-bottom">
+        <div class="card-price">$48</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍝 AMERICANA · CHEF BOYARDEE</div>
+      <div class="card-name">Boyardee Lasagna Cup Pasta And Nealbaills</div>
+      <div class="card-bottom">
+        <div class="card-price">$48</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍝 AMERICANA · CHEF BOYARDEE</div>
+      <div class="card-name">Boyardee Lasagna Cup Pasta With Chuncky</div>
+      <div class="card-bottom">
+        <div class="card-price">$48</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍝 AMERICANA · CHEF BOYARDEE</div>
+      <div class="card-name">Boyardee Lasagna Cup In Pasta Sauce</div>
+      <div class="card-bottom">
+        <div class="card-price">$48</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍅 KETCHUP</div>
+      <div class="card-name">Tomato Ketchup Hunts 600G</div>
+      <div class="card-bottom">
+        <div class="card-price">$46</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Jugo Magi 100Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$38</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Salsa Tomate Organica 425G</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🌭 MOSTAZA</div>
+      <div class="card-name">Mostaza Original Frenchs 226G</div>
+      <div class="card-bottom">
+        <div class="card-price">$33</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🇺🇸 AMERICANA · HEINZ</div>
+      <div class="card-name">Ketchup Heinz 567G</div>
+      <div class="card-bottom">
+        <div class="card-price">$32</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🇺🇸 AMERICANA · HEINZ</div>
+      <div class="card-name">Ketchup Heinz 397G</div>
+      <div class="card-bottom">
+        <div class="card-price">$29</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🌎 IMPORTADA</div>
+      <div class="card-name">Pasta De Tomate Kirkland</div>
+      <div class="card-bottom">
+        <div class="card-price">$25</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍅 KETCHUP</div>
+      <div class="card-name">Salsa Catsup Del Monte</div>
+      <div class="card-bottom">
+        <div class="card-price">$25</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍅 KETCHUP</div>
+      <div class="card-name">Catsup Del Monte 320 G</div>
+      <div class="card-bottom">
+        <div class="card-price">$22</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="pasta">
+      <div class="card-origin">🍅 KETCHUP</div>
+      <div class="card-name">Salsa Catsup Clemente Jacques 320G</div>
+      <div class="card-bottom">
+        <div class="card-price">$22</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="wa-float">
+  <div class="wa-tip">Pedido rápido por WhatsApp</div>
+  <a class="wa-btn" href="https://wa.me/52TUNUMERO?text=Hola%2C+vi+el+cat%C3%A1logo+de+Casa+Market+y+me+interesa+hacer+un+pedido." target="_blank">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.862L.054 23.45a.5.5 0 00.607.606l5.647-1.464A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.667-.502-5.2-1.378l-.373-.216-3.863 1.002 1.024-3.772-.234-.384A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Hacer pedido
+  </a>
+</div>
+<footer>
+  <div class="footer-brand">Casa <span>Market</span></div>
+  <div class="footer-info">CATÁLOGO SALSAS · B2B 2026<br>ZAMORA, MICHOACÁN</div>
+</footer>
+<script>
+  const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.05});
+  document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+  function filterAll(){document.querySelectorAll('.card').forEach(c=>c.style.display='');}
+  function filterGroup(g){document.querySelectorAll('.card').forEach(c=>{c.style.display=c.dataset.group===g?'':'none';});}
+  function tabClick(el){document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('active'));el.classList.add('active');}
+</script>
+</body>
+</html>
