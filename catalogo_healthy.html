@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa Market B2B - Catalogo Healthy</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#0a0a0a;--dark:#0f1410;--card:#131a14;--white:#f0f0f0;--muted:rgba(240,240,240,0.45);--border:rgba(100,200,100,0.12);--accent:#00cc66;--neon:#00ff88;--gold:#ffd60a;--hot:#ff2d55;--blue:#0af;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--black);color:var(--white);font-family:"DM Sans",sans-serif;}
+  .topbar{background:var(--dark);border-bottom:1px solid var(--border);padding:12px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+  .back-link{font-family:"Space Mono",monospace;font-size:.65rem;letter-spacing:.15em;color:var(--muted);text-decoration:none;}
+  .back-link:hover{color:var(--white);}
+  .topbar-brand{font-family:"Bebas Neue",sans-serif;font-size:1.3rem;letter-spacing:.08em;}
+  .topbar-brand span{color:var(--gold);}
+  .topbar-cat{font-family:"Space Mono",monospace;font-size:.6rem;letter-spacing:.2em;color:var(--accent);background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.2);padding:4px 12px;border-radius:20px;}
+  .hero{padding:70px 40px 50px;max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end;}
+  .hero-eyebrow{font-family:"Space Mono",monospace;font-size:.65rem;letter-spacing:.3em;color:var(--accent);margin-bottom:12px;}
+  .hero-title{font-family:"Bebas Neue",sans-serif;font-size:clamp(4rem,10vw,8rem);line-height:.88;}
+  .hero-title .line2{color:var(--accent);}
+  .hero-desc{margin-top:20px;font-size:.95rem;font-weight:300;color:var(--muted);line-height:1.7;max-width:520px;}
+  .hero-stat-num{font-family:"Bebas Neue",sans-serif;font-size:3rem;color:var(--accent);line-height:1;}
+  .hero-stat-label{font-family:"Space Mono",monospace;font-size:.6rem;letter-spacing:.15em;color:var(--muted);margin-top:2px;}
+  .target-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;}
+  .target-pill{font-family:"Space Mono",monospace;font-size:.62rem;letter-spacing:.1em;padding:6px 14px;border:1px solid rgba(0,255,136,.25);border-radius:20px;color:rgba(0,255,136,.7);}
+  .price-banner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;background:rgba(255,214,10,.06);border:1px solid rgba(255,214,10,.2);border-radius:10px;padding:12px 20px;margin-bottom:28px;}
+  .price-banner-left{display:flex;align-items:center;gap:10px;font-family:"Space Mono",monospace;font-size:.7rem;color:rgba(240,240,240,.65);}
+  .price-banner-left strong{color:var(--white);}
+  .price-banner-left .disc{color:var(--gold);}
+  .price-banner a{font-family:"Space Mono",monospace;font-size:.65rem;color:var(--gold);text-decoration:none;border:1px solid rgba(255,214,10,.3);padding:6px 14px;border-radius:6px;white-space:nowrap;}
+  .filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:32px;}
+  .ftab{font-family:"Space Mono",monospace;font-size:.62rem;letter-spacing:.12em;padding:7px 14px;border:1px solid var(--border);border-radius:20px;color:var(--muted);cursor:pointer;background:transparent;transition:all .2s;}
+  .ftab:hover,.ftab.active{border-color:var(--accent);color:var(--accent);background:rgba(0,255,136,.06);}
+  .section{padding:0 40px 70px;max-width:1400px;margin:0 auto;}
+  .sec-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+  .sec-title{font-family:"Bebas Neue",sans-serif;font-size:2rem;letter-spacing:.05em;line-height:1;}
+  .sec-count{font-family:"Space Mono",monospace;font-size:.6rem;color:var(--muted);letter-spacing:.15em;margin-left:auto;}
+  .sec-badge{font-family:"Space Mono",monospace;font-size:.6rem;letter-spacing:.1em;padding:4px 10px;border-radius:20px;}
+  .badge-amber{background:rgba(255,149,0,.12);color:#ff9500;border:1px solid rgba(255,149,0,.3);}
+  .badge-neon{background:rgba(0,255,136,.08);color:var(--neon);border:1px solid rgba(0,255,136,.25);}
+  .badge-blue{background:rgba(0,170,255,.08);color:var(--blue);border:1px solid rgba(0,170,255,.25);}
+  .badge-hot{background:rgba(255,45,85,.08);color:var(--hot);border:1px solid rgba(255,45,85,.25);}
+  .badge-gold{background:rgba(255,214,10,.08);color:var(--gold);border:1px solid rgba(255,214,10,.25);}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px;}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px 18px;display:flex;flex-direction:column;gap:6px;transition:border-color .25s,transform .2s;}
+  .card:hover{border-color:rgba(0,255,136,.35);transform:translateY(-2px);}
+  .card-origin{font-family:"Space Mono",monospace;font-size:.58rem;letter-spacing:.2em;color:var(--muted);}
+  .card-name{font-size:.95rem;font-weight:500;line-height:1.35;color:var(--white);}
+  .card-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:14px;border-top:1px solid rgba(0,255,136,.08);}
+  .card-price{font-family:"Bebas Neue",sans-serif;font-size:1.9rem;color:var(--accent);line-height:1;}
+  .pill{font-family:"Space Mono",monospace;font-size:.55rem;letter-spacing:.08em;padding:4px 9px;border-radius:5px;}
+  .pill-stock{background:rgba(0,255,136,.1);color:var(--neon);}
+  .pill-gold{background:rgba(255,214,10,.1);color:var(--gold);}
+  .pill-hot{background:rgba(255,45,85,.1);color:var(--hot);}
+  .pill-blue{background:rgba(0,170,255,.1);color:var(--blue);}
+  .pill-amber{background:rgba(255,149,0,.1);color:#ff9500;}
+  .wa-float{position:fixed;bottom:24px;right:24px;z-index:999;display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+  .wa-tip{background:rgba(0,0,0,.8);color:#fff;font-family:"Space Mono",monospace;font-size:.62rem;padding:5px 10px;border-radius:6px;white-space:nowrap;}
+  .wa-btn{display:flex;align-items:center;gap:9px;background:#25D366;color:#fff;text-decoration:none;padding:13px 20px;border-radius:50px;font-family:"DM Sans",sans-serif;font-size:.9rem;font-weight:500;transition:transform .2s;}
+  .wa-btn:hover{transform:scale(1.04);}
+  .wa-btn svg{width:20px;height:20px;flex-shrink:0;}
+  footer{background:#050805;border-top:1px solid var(--border);padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .footer-brand{font-family:"Bebas Neue",sans-serif;font-size:1.4rem;letter-spacing:.08em;}
+  .footer-brand span{color:var(--gold);}
+  .footer-info{font-family:"Space Mono",monospace;font-size:.6rem;letter-spacing:.15em;color:rgba(240,240,240,.18);text-align:right;}
+  @media(max-width:700px){.topbar,.hero,.section{padding-left:16px;padding-right:16px;}.hero{grid-template-columns:1fr;}.grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));}.footer-info{text-align:left;}}
+  .fade-in{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div style="display:flex;align-items:center;gap:16px;">
+    <a class="back-link" href="index.html">&larr; Inicio</a>
+    <div class="topbar-brand">Casa <span>Market</span></div>
+  </div>
+  <span class="topbar-cat">HEALTHY &amp; FIT</span>
+</div>
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">CATALOGO B2B - HEALTHY &amp; FIT</div>
+    <h1 class="hero-title"><div>CATALOGO</div><div class="line2">HEALTHY</div></h1>
+    <p class="hero-desc">Bebidas prebioticas, proteinas, vitaminas, barritas fit, cereales proteicos, superfoods y mas. Ideal para estudios de yoga, gyms funcionales, espacios wellness y negocios health-oriented.</p>
+    <div class="target-row">
+      <span class="target-pill">Estudios de yoga</span>
+      <span class="target-pill">Gyms funcionales</span>
+      <span class="target-pill">Cafeterias wellness</span>
+      <span class="target-pill">Tiendas fit</span>
+      <span class="target-pill">Spas y studios</span>
+    </div>
+  </div>
+  <div>
+    <div class="hero-stat-num">141</div>
+    <div class="hero-stat-label">PRODUCTOS</div>
+  </div>
+</div>
+<div class="section">
+  <div class="filter-row">
+    <button class="ftab active" onclick="filterAll();tabClick(this)">Todos</button>
+    <button class="ftab" onclick="filterGroup('gut');tabClick(this)">Gut & Drinks</button>
+    <button class="ftab" onclick="filterGroup('proteina_beb');tabClick(this)">Proteina Bebidas</button>
+    <button class="ftab" onclick="filterGroup('protein_bars');tabClick(this)">Barras Proteina</button>
+    <button class="ftab" onclick="filterGroup('energy');tabClick(this)">Energy Healthy</button>
+    <button class="ftab" onclick="filterGroup('vitaminas');tabClick(this)">Vitaminas</button>
+    <button class="ftab" onclick="filterGroup('granolas');tabClick(this)">Granola & Superfoods</button>
+    <button class="ftab" onclick="filterGroup('cereales');tabClick(this)">Cereales</button>
+    <button class="ftab" onclick="filterGroup('harinas');tabClick(this)">Harinas Fit</button>
+    <button class="ftab" onclick="filterGroup('kitchen');tabClick(this)">Cocina Healthy</button>
+  </div>
+  <div class="price-banner">
+    <div class="price-banner-left">
+      <span style="font-size:16px;">&#127991;</span>
+      Precio por <strong>&nbsp;1 pieza&nbsp;</strong> &middot; Compra por caja: <strong class="disc">&nbsp;10% de descuento</strong>
+    </div>
+    <a href="https://wa.me/52TUNUMERO?text=Hola%2C+quiero+cotizar+un+pedido+healthy+de+Casa+Market." target="_blank">Cotizar por caja &rarr;</a>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">Gut & Healthy Drinks</span>
+    <span class="sec-badge badge-neon">POPPI - OLIPOP - KOMBUCHA - PREBIOTICAS</span>
+    <span class="sec-count">16 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="proteina_beb">
+      <div class="card-origin">PROTEINA - FAIRLIFE</div>
+      <div class="card-name">Fair Life Core Power Elite 414 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="proteina_beb">
+      <div class="card-origin">PROTEINA - FAIRLIFE</div>
+      <div class="card-name">Fairlife Protein Shake 26Gr</div>
+      <div class="card-bottom">
+        <div class="card-price">$135</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="proteina_beb">
+      <div class="card-origin">PROTEINA - SIX STAR</div>
+      <div class="card-name">Sixstar Protein Froot Loops</div>
+      <div class="card-bottom">
+        <div class="card-price">$119</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="proteina_beb">
+      <div class="card-origin">PROTEINA - PREMIER PROTEIN</div>
+      <div class="card-name">Premier Protein Chocolate</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="proteina_beb">
+      <div class="card-origin">PROTEINA - PREMIER PROTEIN</div>
+      <div class="card-name">Premier Indulgence White Chocolate Raspberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="proteina_beb">
+      <div class="card-origin">PROTEINA - PREMIER PROTEIN</div>
+      <div class="card-name">Premier Protein  Cafe Latte</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="proteina_beb">
+      <div class="card-origin">PROTEINA - PREMIER PROTEIN</div>
+      <div class="card-name">Premier Protein  Vainilla</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="proteina_beb">
+      <div class="card-origin">PROTEINA - PREMIER PROTEIN</div>
+      <div class="card-name">Premier Pumpkin 15 Ct</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="proteina_beb">
+      <div class="card-origin">PROTEINA - FAIRLIFE</div>
+      <div class="card-name">Fair Life Chocolate 340Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">Barras de Proteina</span>
+    <span class="sec-badge badge-gold">BAREBELLS - DAVID - QUEST - NATURE VALLEY</span>
+    <span class="sec-count">20 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="protein_bars">
+      <div class="card-origin">PROTEINA - BAREBELLS</div>
+      <div class="card-name">Barebells Protein Bars Peanut Butter 4 Pk</div>
+      <div class="card-bottom">
+        <div class="card-price">$370</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="protein_bars">
+      <div class="card-origin">PROTEINA - BAREBELLS</div>
+      <div class="card-name">Barebells Protein Bars Salty Peanut  4 Pk</div>
+      <div class="card-bottom">
+        <div class="card-price">$370</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="protein_bars">
+      <div class="card-origin">PROTEINA - DAVID</div>
+      <div class="card-name">Protein Bar David Fudge Brownie 4Ct</div>
+      <div class="card-bottom">
+        <div class="card-price">$370</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="protein_bars">
+      <div class="card-origin">PROTEINA - DAVID</div>
+      <div class="card-name">Protein Bar David Chocolate Chip 4Ct</div>
+      <div class="card-bottom">
+        <div class="card-price">$370</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="protein_bars">
+      <div class="card-origin">PROTEINA - BAREBELLS</div>
+      <div class="card-name">Barebells Protein Bars Lemon Pie 4 Pk</div>
+      <div class="card-bottom">
+        <div class="card-price">$370</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="protein_bars">
+      <div class="card-origin">PROTEINA - BAREBELLS</div>
+      <div class="card-name">Barebells Protein Bars  Cookies & Cream  4 Pk</div>
+      <div class="card-bottom">
+        <div class="card-price">$370</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="protein_bars">
+      <div class="card-origin">PROTEINA - BAREBELLS</div>
+      <div class="card-name">Barebells Protein Bars  Cookies & Caramel  4 Pk</div>
+      <div class="card-bottom">
+        <div class="card-price">$370</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="protein_bars">
+      <div class="card-origin">PROTEINA - BAREBELLS</div>
+      <div class="card-name">Barebells Protein Bar Cookies & Cream 4 Bars</div>
+      <div class="card-bottom">
+        <div class="card-price">$370</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="protein_bars">
+      <div class="card-origin">PROTEINA - BAREBELLS</div>
+      <div class="card-name">Barebells Protein Bar Caramel Cashew 4 Bars</div>
+      <div class="card-bottom">
+        <div class="card-price">$370</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="protein_bars">
+      <div class="card-origin">PROTEINA - DAVID</div>
+      <div class="card-name">David Protein Bar Peanut Butter 4Pk</div>
+      <div class="card-bottom">
+        <div class="card-price">$370</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="protein_bars">
+      <div class="card-origin">PROTEINA - QUEST</div>
+      <div class="card-name">Quest Bake Shop Muffins Blueberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$115</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="protein_bars">
+      <div class="card-origin">PROTEINA - QUEST</div>
+      <div class="card-name">Quest Bake Shop Muffins Chocolate Chip</div>
+      <div class="card-bottom">
+        <div class="card-price">$115</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="protein_bars">
+      <div class="card-origin">PROTEINA - BAREBELLS</div>
+      <div class="card-name">Barebells Peanut Butter Bar</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="protein_bars">
+      <div class="card-origin">PROTEINA - BAREBELLS</div>
+      <div class="card-name">Barebells Lime Pie</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="protein_bars">
+      <div class="card-origin">PROTEINA - BAREBELLS</div>
+      <div class="card-name">Barebells Chocolate Dough Bar</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="protein_bars">
+      <div class="card-origin">PROTEINA - BAREBELLS</div>
+      <div class="card-name">Barebells Caramel Cashew Bar</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="protein_bars">
+      <div class="card-origin">PROTEINA - DAVID</div>
+      <div class="card-name">David Protein Chocolate Chip 62G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="protein_bars">
+      <div class="card-origin">PROTEINA - BAREBELLS</div>
+      <div class="card-name">Barebells Cookies Caramel</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="protein_bars">
+      <div class="card-origin">PROTEINA - BAREBELLS</div>
+      <div class="card-name">Barebells Cookies Cream Bar</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="protein_bars">
+      <div class="card-origin">PROTEINA - BAREBELLS</div>
+      <div class="card-name">Barebells Salty Peanut</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">Energy Drinks Healthy</span>
+    <span class="sec-badge badge-amber">ALANI NU - CELSIUS - GHOST - BLOOM - PRIME</span>
+    <span class="sec-count">50 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - GHOST</div>
+      <div class="card-name">Ghost Energy Blue Rasberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - GHOST</div>
+      <div class="card-name">Ghost Energy Orange Cream 473Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - GHOST</div>
+      <div class="card-name">Ghost Energy Redberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - GHOST</div>
+      <div class="card-name">Ghost Energy Citrus</div>
+      <div class="card-bottom">
+        <div class="card-price">$101</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - GHOST</div>
+      <div class="card-name">Ghost Energy Tropical Mango</div>
+      <div class="card-bottom">
+        <div class="card-price">$101</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - CELSIUS</div>
+      <div class="card-name">Celsius Retro Vibe</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - CELSIUS</div>
+      <div class="card-name">Celsius Tropical Vibe</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - ALANI NU</div>
+      <div class="card-name">Alani Cherry Twist</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - CELSIUS</div>
+      <div class="card-name">Celsius Peach Vibe</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - ALANI NU</div>
+      <div class="card-name">Alani Orange Kiss</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - ALANI NU</div>
+      <div class="card-name">Alani Cosmic Stardust</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - ALANI NU</div>
+      <div class="card-name">Alani Peach</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - ALANI NU</div>
+      <div class="card-name">Alani Cheery Slush</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - ALANI NU</div>
+      <div class="card-name">Alani Breezeberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - ALANI NU</div>
+      <div class="card-name">Alani Pink Slish</div>
+      <div class="card-bottom">
+        <div class="card-price">$99</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - PRIME</div>
+      <div class="card-name">Prime Hd Strawberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$90</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - PRIME</div>
+      <div class="card-name">Prime Hd Blue Raspberry</div>
+      <div class="card-bottom">
+        <div class="card-price">$90</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - PRIME</div>
+      <div class="card-name">Prime Hd Lemonade</div>
+      <div class="card-bottom">
+        <div class="card-price">$90</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - BLOOM</div>
+      <div class="card-name">Bloom Raspberry Lemon</div>
+      <div class="card-bottom">
+        <div class="card-price">$89</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - BLOOM</div>
+      <div class="card-name">Bloom Peach Mango</div>
+      <div class="card-bottom">
+        <div class="card-price">$89</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - BLOOM</div>
+      <div class="card-name">Bloom Strawberry Watermelon</div>
+      <div class="card-bottom">
+        <div class="card-price">$89</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - PRIME</div>
+      <div class="card-name">Prime Ed Strawberry Watermelon</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - PRIME</div>
+      <div class="card-name">Prime Ed Iced Pop</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - PRIME</div>
+      <div class="card-name">Prime Ed Original</div>
+      <div class="card-bottom">
+        <div class="card-price">$80</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - PRIME</div>
+      <div class="card-name">Prime Frambuesa 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">HIDRATACION - GATORADE ZERO</div>
+      <div class="card-name">Gatorade Zero Frost Glacier Lemon Lime</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - PRIME</div>
+      <div class="card-name">Prime Powder Stick Blue Raspberry 9.8G</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">HIDRATACION - GATORADE ZERO</div>
+      <div class="card-name">Gatorade Zero Frost Glacier Cherry</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">HIDRATACION - GATORADE ZERO</div>
+      <div class="card-name">Gatorade Zero Fruit Punch</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - PRIME</div>
+      <div class="card-name">Prime Lemonade</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - PRIME</div>
+      <div class="card-name">Prime Ice Pop 9.7G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - PRIME</div>
+      <div class="card-name">Prime Ice Pop 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - PRIME</div>
+      <div class="card-name">Prime Glowberry 16.9Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - PRIME</div>
+      <div class="card-name">Prime Hd Strawberry Banana</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - PRIME</div>
+      <div class="card-name">Prime Meta Moon 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - PRIME</div>
+      <div class="card-name">Prime X 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - PRIME</div>
+      <div class="card-name">Prime Lemonade 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - PRIME</div>
+      <div class="card-name">Prime Powder Stick Lemon Lime</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - PRIME</div>
+      <div class="card-name">Prime Limonada 500Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - PRIME</div>
+      <div class="card-name">Prime Strawberry Watermelon 9.3G</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - PRIME</div>
+      <div class="card-name">Prime Powder Stick Tropical Punch</div>
+      <div class="card-bottom">
+        <div class="card-price">$65</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - PRIME</div>
+      <div class="card-name">Prime Ice Pop 355 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$55</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - PRIME</div>
+      <div class="card-name">Prime Berry Freeze 355 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$55</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">ENERGY - PRIME</div>
+      <div class="card-name">Prime Cherry Freeze 355Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$55</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">HIDRATACION - GATORADE ZERO</div>
+      <div class="card-name">Gatorade Zero Sugar Naranja</div>
+      <div class="card-bottom">
+        <div class="card-price">$39</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">HIDRATACION - GATORADE ZERO</div>
+      <div class="card-name">Gatorade Zero Sugar Glacier Freeze</div>
+      <div class="card-bottom">
+        <div class="card-price">$39</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">HIDRATACION - GATORADE ZERO</div>
+      <div class="card-name">Gatorade Zero Sugar Grape</div>
+      <div class="card-bottom">
+        <div class="card-price">$39</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">HIDRATACION - GATORADE ZERO</div>
+      <div class="card-name">Gatorade Zero Glacier Cherry 355Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">HIDRATACION - GATORADE ZERO</div>
+      <div class="card-name">Gatorade Zero Apple Burst 355Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="energy">
+      <div class="card-origin">HIDRATACION - GATORADE ZERO</div>
+      <div class="card-name">Gatorade Zero Wantermelon Splash 355Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-amber">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">Vitaminas y Suplementos</span>
+    <span class="sec-badge badge-hot">LEMME - BLOOM - SASCHA FIT - OLLY - NORDIC NATURALS</span>
+    <span class="sec-count">33 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - SASCHA FIT</div>
+      <div class="card-name">Sascha Restore</div>
+      <div class="card-bottom">
+        <div class="card-price">$1,550</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - SASCHA FIT</div>
+      <div class="card-name">Sascha Bliss</div>
+      <div class="card-bottom">
+        <div class="card-price">$1,550</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - SASCHA FIT</div>
+      <div class="card-name">Sascha Collagen Hydrolyzed</div>
+      <div class="card-bottom">
+        <div class="card-price">$1,550</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - SASCHA FIT</div>
+      <div class="card-name">Sascha Fit 9</div>
+      <div class="card-bottom">
+        <div class="card-price">$1,550</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - LEMME</div>
+      <div class="card-name">Lemme Purr Vaginal Probiotic Gummies 60 Gummies</div>
+      <div class="card-bottom">
+        <div class="card-price">$1,250</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - LEMME</div>
+      <div class="card-name">Lemme Tone Daily Metabolism 60 Gummies</div>
+      <div class="card-bottom">
+        <div class="card-price">$1,250</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - LEMME</div>
+      <div class="card-name">Lemme Fiber &Probiotic 60 Gummies</div>
+      <div class="card-bottom">
+        <div class="card-price">$1,200</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - LEMME</div>
+      <div class="card-name">Lemme Sleep Tight Vegan Gummies 60Gum</div>
+      <div class="card-bottom">
+        <div class="card-price">$1,150</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - BLOOM</div>
+      <div class="card-name">Bloom Colostrum 48Ct Colostrum & Collagen</div>
+      <div class="card-bottom">
+        <div class="card-price">$1,100</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - BLOOM</div>
+      <div class="card-name">Bloom Creatine Gummies 90</div>
+      <div class="card-bottom">
+        <div class="card-price">$1,100</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - LEMME</div>
+      <div class="card-name">Lemme Burn Metabolism Gummies 60Cap</div>
+      <div class="card-bottom">
+        <div class="card-price">$1,100</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - OM MUSHROOM</div>
+      <div class="card-name">Om Lion´S Mane 195 Capsule</div>
+      <div class="card-bottom">
+        <div class="card-price">$900</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - LEMME</div>
+      <div class="card-name">Lemme Chill De-Stress Gummies 60 Gum</div>
+      <div class="card-bottom">
+        <div class="card-price">$855</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - NORDIC NATURALS</div>
+      <div class="card-name">Nordic Naturals Ultimate Omega 100Ct</div>
+      <div class="card-bottom">
+        <div class="card-price">$820</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - BRAGG ACV</div>
+      <div class="card-name">Bragg Apple Cider Vinegrar  Supl 180Ct Capsules</div>
+      <div class="card-bottom">
+        <div class="card-price">$800</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - OLLY</div>
+      <div class="card-name">Olly Kids Chillax 114 Gummies</div>
+      <div class="card-bottom">
+        <div class="card-price">$780</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - OLLY</div>
+      <div class="card-name">Olly Kids Multi&Probiotic 160 Gummies</div>
+      <div class="card-bottom">
+        <div class="card-price">$750</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - OLLY</div>
+      <div class="card-name">Olly Mens</div>
+      <div class="card-bottom">
+        <div class="card-price">$750</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - OLLY</div>
+      <div class="card-name">Olly Probiotic+Prebiotic 70 Gummies</div>
+      <div class="card-bottom">
+        <div class="card-price">$750</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - OLLY</div>
+      <div class="card-name">Olly Womens</div>
+      <div class="card-bottom">
+        <div class="card-price">$750</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - YOUTHEORY</div>
+      <div class="card-name">Youtheory Ashwagandha 150Ct</div>
+      <div class="card-bottom">
+        <div class="card-price">$725</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - OLLY</div>
+      <div class="card-name">Olly Stress</div>
+      <div class="card-bottom">
+        <div class="card-price">$710</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - OLLY</div>
+      <div class="card-name">Olly Sleep</div>
+      <div class="card-bottom">
+        <div class="card-price">$710</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - NATURE BOUNTY</div>
+      <div class="card-name">Nature Bounty Magnesio Glycinate 180Capsule</div>
+      <div class="card-bottom">
+        <div class="card-price">$690</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">HEALTHY - IMPORTADO</div>
+      <div class="card-name">Nature Made Magnesium 400Mg 150</div>
+      <div class="card-bottom">
+        <div class="card-price">$680</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - MARY RUTH</div>
+      <div class="card-name">Mary Ruths Hair Support 650 Ml.</div>
+      <div class="card-bottom">
+        <div class="card-price">$655</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - MARY RUTH</div>
+      <div class="card-name">Mary Ruths Liq Morning Multivi</div>
+      <div class="card-bottom">
+        <div class="card-price">$655</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - MARY RUTH</div>
+      <div class="card-name">Mary Ruths Liq Nighttime Multivi</div>
+      <div class="card-bottom">
+        <div class="card-price">$655</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - OM MUSHROOM</div>
+      <div class="card-name">Oms Lions Mane Capusles 150 Ct</div>
+      <div class="card-bottom">
+        <div class="card-price">$620</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - FORCE FACTOR</div>
+      <div class="card-name">Force Factor Beets 90</div>
+      <div class="card-bottom">
+        <div class="card-price">$600</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - NATURE BOUNTY</div>
+      <div class="card-name">Natures Bounty  Hsn Gummies 230Ct</div>
+      <div class="card-bottom">
+        <div class="card-price">$530</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - LEMME</div>
+      <div class="card-name">Lemme Debloat Digestive Gummies 7 Days</div>
+      <div class="card-bottom">
+        <div class="card-price">$345</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="vitaminas">
+      <div class="card-origin">VITAMINAS - PROBIOTIC</div>
+      <div class="card-name">Probiotic Gummies Reoot Jelly</div>
+      <div class="card-bottom">
+        <div class="card-price">$232</div>
+        <span class="pill pill-hot">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">Granola Premium</span>
+    <span class="sec-badge badge-neon">NUTRAIL - CINNAMON - VANILLA ALMOND</span>
+    <span class="sec-count">2 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="granolas">
+      <div class="card-origin">GRANOLA - NUTRAIL</div>
+      <div class="card-name">Nutrail Granola Vanilla Almond 20 Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$455</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="granolas">
+      <div class="card-origin">GRANOLA - NUTRAIL</div>
+      <div class="card-name">Nutrail Granola  Cinnamon 22 Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$455</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">Super Foods</span>
+    <span class="sec-badge badge-neon">MATCHA - PUMPKIN SPICE - SUPERALIMENTOS</span>
+    <span class="sec-count">3 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="superfoods">
+      <div class="card-origin">SUPERALIMENTO - MATCHA</div>
+      <div class="card-name">Matcha Latte 800G</div>
+      <div class="card-bottom">
+        <div class="card-price">$435</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="superfoods">
+      <div class="card-origin">SUPERALIMENTO - NUPKI</div>
+      <div class="card-name">Pumpkin Spice Nupki 800G</div>
+      <div class="card-bottom">
+        <div class="card-price">$280</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="superfoods">
+      <div class="card-origin">PROTEINA - PREMIER PROTEIN</div>
+      <div class="card-name">Ajonjoli 300G Premier</div>
+      <div class="card-bottom">
+        <div class="card-price">$35</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">Cereales Proteicos</span>
+    <span class="sec-badge badge-blue">CATALINA CRUNCH - CHEERIOS PROTEIN - GLUTEN FREE</span>
+    <span class="sec-count">7 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="cereales">
+      <div class="card-origin">CEREAL - CATALINA CRUNCH</div>
+      <div class="card-name">Catalina Crunch Fruity Protein Cereal 8Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$225</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="cereales">
+      <div class="card-origin">CEREAL - CATALINA CRUNCH</div>
+      <div class="card-name">Catalina Crunch Protein Cereal Peanut Butter  9Oz8</div>
+      <div class="card-bottom">
+        <div class="card-price">$225</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="cereales">
+      <div class="card-origin">CEREAL - CATALINA CRUNCH</div>
+      <div class="card-name">Catalina Crunch Protein Cereal Cinnamon Toast  9Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$225</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="cereales">
+      <div class="card-origin">CEREAL - CHEERIOS PROTEIN</div>
+      <div class="card-name">Cheerios Protein Cookies & Creme 425G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$215</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="cereales">
+      <div class="card-origin">CEREAL - CHEERIOS PROTEIN</div>
+      <div class="card-name">Cheerios Protein Cinnamon 425G.</div>
+      <div class="card-bottom">
+        <div class="card-price">$215</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="cereales">
+      <div class="card-origin">CEREAL - GLUTEN FREE OAT</div>
+      <div class="card-name">Cheerios Oat Gluten Free 576 G</div>
+      <div class="card-bottom">
+        <div class="card-price">$205</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="cereales">
+      <div class="card-origin">CEREAL - GLUTEN FREE</div>
+      <div class="card-name">Fruity Pebbles Gluten Free Cereal</div>
+      <div class="card-bottom">
+        <div class="card-price">$175</div>
+        <span class="pill pill-blue">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">Harinas Fit y Keto</span>
+    <span class="sec-badge badge-gold">KODIAK PROTEIN - KETO - GLUTEN FREE</span>
+    <span class="sec-count">6 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="harinas">
+      <div class="card-origin">HARINA - KODIAK PROTEIN</div>
+      <div class="card-name">Kodiak Power Cakes 2.04Kg.</div>
+      <div class="card-bottom">
+        <div class="card-price">$350</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="harinas">
+      <div class="card-origin">HARINA - KETO</div>
+      <div class="card-name">Brich Benders Chocolate Chip Keto</div>
+      <div class="card-bottom">
+        <div class="card-price">$270</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="harinas">
+      <div class="card-origin">HARINA - KETO</div>
+      <div class="card-name">Birch Benders Pancake & Waffle Mix Keto</div>
+      <div class="card-bottom">
+        <div class="card-price">$270</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="harinas">
+      <div class="card-origin">HARINA - KETO</div>
+      <div class="card-name">Harina Morama Keto</div>
+      <div class="card-bottom">
+        <div class="card-price">$250</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="harinas">
+      <div class="card-origin">HARINA - KODIAK PROTEIN</div>
+      <div class="card-name">Kodiak Protein Packed Power Mix</div>
+      <div class="card-bottom">
+        <div class="card-price">$210</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="harinas">
+      <div class="card-origin">HARINA - GLUTEN FREE</div>
+      <div class="card-name">Bisquick Gluten Free</div>
+      <div class="card-bottom">
+        <div class="card-price">$145</div>
+        <span class="pill pill-gold">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-in">
+    <span class="sec-title">Cocina Healthy</span>
+    <span class="sec-badge badge-neon">SUGAR FREE - KETO - ORGANICO - TORANI</span>
+    <span class="sec-count">11 productos</span>
+  </div>
+  <div class="grid">
+    <div class="card fade-in" data-group="kitchen">
+      <div class="card-origin">JARABE - SUGAR FREE TORANI</div>
+      <div class="card-name">Torani Vainilla Sugar Free</div>
+      <div class="card-bottom">
+        <div class="card-price">$255</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="kitchen">
+      <div class="card-origin">JARABE - SUGAR FREE TORANI</div>
+      <div class="card-name">Torani Sugar Free Lavender Syrup</div>
+      <div class="card-bottom">
+        <div class="card-price">$225</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="kitchen">
+      <div class="card-origin">SPREAD - ORGANICO</div>
+      <div class="card-name">Crema De Cacahuate Organica Just 1.13Kg</div>
+      <div class="card-bottom">
+        <div class="card-price">$225</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="kitchen">
+      <div class="card-origin">JARABE - SUGAR FREE TORANI</div>
+      <div class="card-name">Torani Sugar Free Raspberry Syrup</div>
+      <div class="card-bottom">
+        <div class="card-price">$225</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="kitchen">
+      <div class="card-origin">HEALTHY - IMPORTADO</div>
+      <div class="card-name">Mermelada Fresa Organica Kirkland 1.19 Kg</div>
+      <div class="card-bottom">
+        <div class="card-price">$212</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="kitchen">
+      <div class="card-origin">ENDULZANTE - SUGAR FREE</div>
+      <div class="card-name">Smuckers Caramel Sugar Freee</div>
+      <div class="card-bottom">
+        <div class="card-price">$205</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="kitchen">
+      <div class="card-origin">ENDULZANTE - MAPLE SUGAR FREE</div>
+      <div class="card-name">Maple Syrup Sugar Free Favorite Day 24Oz</div>
+      <div class="card-bottom">
+        <div class="card-price">$125</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="kitchen">
+      <div class="card-origin">TOPPING - MATCHA</div>
+      <div class="card-name">Emperor Love Matcha 100G</div>
+      <div class="card-bottom">
+        <div class="card-price">$125</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="kitchen">
+      <div class="card-origin">HARINA - KETO</div>
+      <div class="card-name">Edsmith Keto Mermelada Fresa 375Ml</div>
+      <div class="card-bottom">
+        <div class="card-price">$115</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="kitchen">
+      <div class="card-origin">PROTEINA - PREMIER PROTEIN</div>
+      <div class="card-name">Premier Caramel Protein Shake</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+    <div class="card fade-in" data-group="kitchen">
+      <div class="card-origin">ENDULZANTE - SUGAR FREE</div>
+      <div class="card-name">Mg Cozy Cottage Maple Syrup Sugar Free</div>
+      <div class="card-bottom">
+        <div class="card-price">$105</div>
+        <span class="pill pill-stock">Disponible</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="wa-float">
+  <div class="wa-tip">Pedido rapido por WhatsApp</div>
+  <a class="wa-btn" href="https://wa.me/52TUNUMERO?text=Hola%2C+vi+el+catalogo+Healthy+de+Casa+Market+y+me+interesa+hacer+un+pedido." target="_blank">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.862L.054 23.45a.5.5 0 00.607.606l5.647-1.464A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.667-.502-5.2-1.378l-.373-.216-3.863 1.002 1.024-3.772-.234-.384A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Hacer pedido
+  </a>
+</div>
+<footer>
+  <div class="footer-brand">Casa <span>Market</span></div>
+  <div class="footer-info">CATALOGO HEALTHY &amp; FIT &middot; B2B 2026<br>ZAMORA, MICHOAC&Aacute;N</div>
+</footer>
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add("visible"); });
+  }, {threshold: 0.05});
+  document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+  function filterAll() {
+    document.querySelectorAll(".card").forEach(c => c.style.display = "");
+  }
+  function filterGroup(g) {
+    document.querySelectorAll(".card").forEach(c => {
+      c.style.display = (c.dataset.group === g) ? "" : "none";
+    });
+  }
+  function tabClick(el) {
+    document.querySelectorAll(".ftab").forEach(t => t.classList.remove("active"));
+    el.classList.add("active");
+  }
+</script>
+</body>
+</html>
